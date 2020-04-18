@@ -1,0 +1,262 @@
+<h1 id="introduction-to-tessellation">Introduction to Tessellation</h1>
+<blockquote>
+  <p>An introduction to tessellation. Python code is provided to run the visualisation.</p>
+</blockquote>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction-to-tessellation" id="markdown-toc-introduction-to-tessellation">Introduction to Tessellation</a>    <ol>
+      <li><a href="#what-is-tessellation" id="markdown-toc-what-is-tessellation">What is Tessellation</a></li>
+      <li><a href="#benefits-of-tessellation" id="markdown-toc-benefits-of-tessellation">Benefits of Tessellation</a></li>
+      <li><a href="#pipeline-stages" id="markdown-toc-pipeline-stages">Pipeline Stages</a></li>
+      <li><a href="#tessellation-factors" id="markdown-toc-tessellation-factors">Tessellation Factors</a>        <ol>
+          <li><a href="#inner-factors" id="markdown-toc-inner-factors">Inner Factors</a></li>
+          <li><a href="#outer-factors" id="markdown-toc-outer-factors">Outer Factors</a></li>
+        </ol>
+      </li>
+      <li><a href="#partition-type" id="markdown-toc-partition-type">Partition Type</a>        <ol>
+          <li><a href="#integer" id="markdown-toc-integer">Integer</a>            <ol>
+              <li><a href="#power-of-2" id="markdown-toc-power-of-2">Power of 2</a></li>
+            </ol>
+          </li>
+          <li><a href="#fractional" id="markdown-toc-fractional">Fractional</a>            <ol>
+              <li><a href="#odd" id="markdown-toc-odd">Odd</a></li>
+              <li><a href="#even" id="markdown-toc-even">Even</a></li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li><a href="#output-domains" id="markdown-toc-output-domains">Output Domains</a>        <ol>
+          <li><a href="#isoline" id="markdown-toc-isoline">Isoline</a></li>
+          <li><a href="#triangle" id="markdown-toc-triangle">Triangle</a>            <ol>
+              <li><a href="#barycentric-coordinates" id="markdown-toc-barycentric-coordinates">Barycentric Coordinates</a></li>
+            </ol>
+          </li>
+          <li><a href="#quadrilateral" id="markdown-toc-quadrilateral">Quadrilateral</a></li>
+        </ol>
+      </li>
+      <li><a href="#visualisation" id="markdown-toc-visualisation">Visualisation</a></li>
+      <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+    </ol>
+  </li>
+  <li><a href="#references" id="markdown-toc-references">References</a></li>
+</ol>
+
+<h2 id="what-is-tessellation">What is Tessellation</h2>
+
+<p>Tessellation is a feature that converts a low-detailed surface patch to a higher detailed surface patch dynamically on the Graphics Processing Unit (GPU). Using a low resolution model with a few polygons, tessellation makes rendering high levels of detail possible by subdividing each patch into smaller primitives.</p>
+
+<p>This blog post will outline how tessellation fits into the graphics pipeline and how to understand the various parameters needed for tessellation including tessellation factors, partition type, and output domain. Finally, I provide code to run a tessellation visualisation including an interactive widget so you can experiment with the various parameters.</p>
+
+<h2 id="benefits-of-tessellation">Benefits of Tessellation</h2>
+
+<p>According to <a href="https://docs.microsoft.com/en-us/windows/win32/direct3d11/direct3d-11-advanced-stages-tessellation">DX11 Tess Docs</a>, the benefits are:</p>
+
+<ol>
+  <li>Lower memory and bandwidth requirements.</li>
+  <li>Allows continuous or view dependent details to be calculated on the fly.</li>
+  <li>Improves performance by performing expensive computations at lower frequency (doing calculations on a lower-detail model). For instance, calculations for collision detection or soft body dynamics.</li>
+</ol>
+
+<p>A graphics pipeline is a series of functions that transforms inputs (primitive data such as points, lines or triangles) into outputs for rendering. Primitives refer to the atomic or irreducible objects the system can handle. 
+To add tessellation, the graphics pipeline requires three new stages.</p>
+
+<h2 id="pipeline-stages">Pipeline Stages</h2>
+
+<p>The <a href="https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-graphics-pipeline">DX11 graphics pipeline</a> consists of a series of stages shown in Figure 1.</p>
+
+<p><img src="/images/2020-02-26-introduction_to_tessellation/d3d11-pipeline-stages.jpg" alt="" title="Figure 1: DX11 graphics pipeline" width="40%" /></p>
+
+<p>A description of each stage is summarised in this itemised list:</p>
+<ol>
+  <li>Input-Assembler Stage
+    <blockquote>
+      <p>Read primitive data and assemble them into primitives for other stages (e.g. line lists, and triangle strips)</p>
+    </blockquote>
+  </li>
+  <li>Vertex Shader Stage
+    <blockquote>
+      <p>Processes the assembled vertices and applies operations such as transformations, skinning, morphing, and per-vertex lighting. &gt; Single input vertex and single output vertex.</p>
+    </blockquote>
+  </li>
+  <li>Tessellation Stages
+    <blockquote>
+      <p>Breaks up a patch of control points into smaller primitives and thus create higher detailed features.</p>
+    </blockquote>
+  </li>
+  <li>Geometry Shader Stage
+    <blockquote>
+      <p>Operates on vertices and can generate output vertices</p>
+    </blockquote>
+  </li>
+  <li>Stream-Output Stage
+    <blockquote>
+      <p>Continuously output vertex data from geometry shader to buffers</p>
+    </blockquote>
+  </li>
+  <li>Rasterizer Stage
+    <blockquote>
+      <p>Converts primitives into a raster image for displaying.</p>
+    </blockquote>
+  </li>
+  <li>Pixel Shader Stage
+    <blockquote>
+      <p>Operate on a per-pixel level and can change lighting, etc using the available constant variables, texture data, and others.</p>
+    </blockquote>
+  </li>
+  <li>Output-Merger Stage
+    <blockquote>
+      <p>Generates the final rendered pixel colour, determines which pixels are visible and blending pixel colours.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p>The tessellation stages consistes of three new stages which are:</p>
+
+<ul>
+  <li>Hull-Shader (HS) Stage
+    <blockquote>
+      <p>Computes patch constants (such as tessellation factors) and other parameters for the tessellation stage.
+Performs any special transformations on the input patch data.</p>
+    </blockquote>
+  </li>
+  <li>Tessellator (Tess) Stage
+    <blockquote>
+      <p>A fixed function that partitions a geometry into smaller primitives and outputs u,v coordinates of the vertices and assembly order.</p>
+    </blockquote>
+  </li>
+  <li>Domain-Shader (DS) Stage
+    <blockquote>
+      <p>Calculates vertex position that corresponds to the each u,v coordinate.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><a href="https://www.khronos.org/opengl/wiki/Tessellation">OpenGL</a> uses the names Tessellation Control Shader, Primitive Generator, and Tessellation Evaulation Shader to refer to the HS, Tess, and DS respectively.</p>
+
+<p>As an aside, the word “shader” refers to an operation that transforms four input numbers into four output numbers. Historically,  a shader was used to change the brightness of pixels (RGBA values) but now encompasses more general operations and the name has stuck.</p>
+
+<p>OpenGL and DX using different winding order. The winding order determines the order the vertex stream arrives and this information can be used to check if a patch is facing the screen or away from the screen.</p>
+
+<p>The parameters for the Tessellator stage are: winding order, tessellation factors, partitioning type, and primitive type.</p>
+
+<h2 id="tessellation-factors">Tessellation Factors</h2>
+
+<p>Tessellation factors specify how much each edge needs to be partitioned. For example, a tessellation factor of 1 means no partitioning and a tessellation factor of $n$ means partition that edge into $n$ parts. There are two types, inner and outer factors.</p>
+
+<h3 id="inner-factors">Inner Factors</h3>
+
+<p>The inner factor specifies how the interior is partitioned. When this factor is even, the centre of the output domain is a degenerate point. For example, an inner factor of 1 means no inner partitioning and a tessellation factor of $n$ partitions the output domain into $\text{floor}(n/2)$ smaller versions of the output domain shape.</p>
+
+<p><img src="/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png" alt="" title="Figure 2: Top left: no tessellation. Top right: degenerate triangle in the centre. Bottom left: one smaller triangle inside. Bottom right: two smaller triangles inside - one of them degenerate." /></p>
+
+<h3 id="outer-factors">Outer Factors</h3>
+<p>This specifies how the outer edges of the output domain are partitioned.</p>
+
+<p><img src="/images/2020-02-26-introduction_to_tessellation/TFs_eg2.png" alt="" title="Figure 3: Outer tessellation factors. The left, bottom, right, top edges have 1, 2, 3, and 4 segments." width="60%" /></p>
+
+<h2 id="partition-type">Partition Type</h2>
+
+<h3 id="integer">Integer</h3>
+<p>Integer refers to what values the tessellation factors can take. In this case, the valid values are $1,2,…,64$.</p>
+
+<h4 id="power-of-2">Power of 2</h4>
+<p>Same as integer but the valid tessellation factors are powers of two. That is $2^0,2^1,…,2^5,2^6$ with the maximum tessellation factor of 64.</p>
+
+<h3 id="fractional">Fractional</h3>
+<p>Fractional partitioning allows for a mix of normal and small segments and these correspond to the integer value and fractional value of a tessellation factor. Since each control patch consists of many primitives that can share sides and have a shared tessellation factor, the output primitives need to be <em>symmetric</em>. This symmetry brings about two cases which differ in the location where new verticies are generated: an odd and even parity.</p>
+
+<h4 id="odd">Odd</h4>
+<blockquote>
+  <p>New vertices are generated from the corners.</p>
+</blockquote>
+
+<p>The number of segments on an edge is always odd so a tessellation factor of 5 would give five equally spaced segments. If the tessellation factor was 5.1, there would be seven segments, two of which are small and near a corner.</p>
+
+<p><img src="/images/2020-02-26-introduction_to_tessellation/TFs_odd.png" alt="" title="Figure 4: Odd partitioning. Left: the inner factor 4 is rounded to the next odd integer - two new segments are generated from the corners. Middle: outer factor 2 is rounded to 3 and there are two smaller segments near the corners. The inner factor is rounded to 5 so there are two smaller versions of the triangle inside. Right: outer factor 1.5 is rounded to 3 and the bottom edge shows two very small segments near the edge. The inner quad is partitioned into two triangles." /></p>
+
+<h4 id="even">Even</h4>
+<blockquote>
+  <p>New vertices are generated from the midpoint.</p>
+</blockquote>
+
+<p>The number of segmenst on an edge is always even so a tessellation factor of 4 would give four equally spaced segments and if the tessellation factor was 4.1, there would be six segments, two of which are small and near the midpoint.</p>
+
+<p><img src="/images/2020-02-26-introduction_to_tessellation/TFs_even.png" alt="" title="Figure 5: Even partitioning. Left: three lines (not rounded up to next even integer!) and each line split into four equal segments. Middle: outer factor 1 rounded up to next even number 2. The bottom edge has a factor of 3 but has 4 segments, two of which are small near the midpoint. We can see a smaller triangle within and a second degenerate triangle at the centre. Right: new vertices are generated from the midpoint and the fractional partitioning also affects how the inside is partitioned." /></p>
+
+<h2 id="output-domains">Output Domains</h2>
+
+<p>We have already seen what the three types of output domain are: isoline, triangle, and quadrilateral. In the case of a quadrilateral, the output primitives can be triangles or quadrilaterals.</p>
+
+<h3 id="isoline">Isoline</h3>
+<p>For an isoline, the outer tessellation factor is rounded up to the next integer and fractional partitioning only affects the inner tessellation factor. The number of parallel lines is given by the outer tessellation factor while the partitioning of each segment is described by the inner tessellation factor. The outer and inner factor are also known as line density and line detail.</p>
+
+<h3 id="triangle">Triangle</h3>
+<p>For a triangle, barycentric coordinates represent a 2D position using three numbers ($\alpha, \beta, \gamma$) with the condition that $\alpha+\beta+\gamma = 1$. This means there are only two free parameters and is directly related to u, v coordinates using a coordinate transform. Barycentric coordinates allow the same partitioning strategy to be applied regardless of being a Triangle or Quadrilateral.</p>
+
+<h4 id="barycentric-coordinates">Barycentric Coordinates</h4>
+<p>Barycentric coordinates can be understood as a ratio of areas with $A$ representing the total area.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi><mo>=</mo><msub><mi>A</mi><mi>A</mi></msub><mi mathvariant="normal">/</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\alpha = A_A/A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathdefault">A</span></span></span></span></span>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>β</mi><mo>=</mo><msub><mi>A</mi><mi>B</mi></msub><mi mathvariant="normal">/</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\beta = A_B/A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathdefault">A</span></span></span></span></span>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>γ</mi><mo>=</mo><msub><mi>A</mi><mi>C</mi></msub><mi mathvariant="normal">/</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\gamma = A_C/A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.07153em;">C</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathdefault">A</span></span></span></span></span>
+
+<p>The coordinates ($\alpha, \beta, \gamma$) must sum to unity because the sum of each component subtriangle area must equal the total area of the original triangle. Furthermore, the coordinates are between 0 and 1 because the point $\mathbf{x}$ defines a point within the large triangle. If any of the coordinates are negative or greater than 1, this would corespond to a point outside the allowable triangle.</p>
+
+<p>$\mathbf{b-a}$ and $\mathbf{c-a}$ span an linearly independent vector space and are the basis vectors for a triangle with origin $\mathbf{a}$.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">x</mi><mo>=</mo><mi mathvariant="bold">a</mi><mo>+</mo><mi>β</mi><mo stretchy="false">(</mo><mrow><mi mathvariant="bold">b</mi><mo>−</mo><mi mathvariant="bold">a</mi></mrow><mo stretchy="false">)</mo><mo>+</mo><mi>γ</mi><mo stretchy="false">(</mo><mrow><mi mathvariant="bold">c</mi><mo>−</mo><mi mathvariant="bold">a</mi></mrow><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{x} = \mathbf{a} + \beta( \mathbf{b-a}  ) + \gamma(\mathbf{c-a})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.44444em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">x</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord mathbf">a</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">b</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathbf">a</span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mopen">(</span><span class="mord"><span class="mord mathbf">c</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord mathbf">a</span></span><span class="mclose">)</span></span></span></span></span>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>β</mi><mo>−</mo><mi>γ</mi><mo stretchy="false">)</mo><mi mathvariant="bold">a</mi><mo>+</mo><mi>β</mi><mi mathvariant="bold">b</mi><mo>+</mo><mi>γ</mi><mi mathvariant="bold">c</mi></mrow><annotation encoding="application/x-tex">= (1-\beta - \gamma) \mathbf{a} + \beta\mathbf{b} + \gamma\mathbf{c}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mclose">)</span><span class="mord"><span class="mord mathbf">a</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mord"><span class="mord mathbf">b</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mord"><span class="mord mathbf">c</span></span></span></span></span></span>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>α</mi><mi mathvariant="bold">a</mi><mo>+</mo><mi>β</mi><mi mathvariant="bold">b</mi><mo>+</mo><mi>γ</mi><mi mathvariant="bold">c</mi></mrow><annotation encoding="application/x-tex">= \alpha \mathbf{a} + \beta\mathbf{b} + \gamma\mathbf{c}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span><span class="mord"><span class="mord mathbf">a</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05278em;">β</span><span class="mord"><span class="mord mathbf">b</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.63888em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.05556em;">γ</span><span class="mord"><span class="mord mathbf">c</span></span></span></span></span></span>
+
+<p>So the “colour” coordinate at point $\mathbf{x}$ is some linear combination of the triangle vertices.</p>
+
+<p><img src="/images/2020-02-26-introduction_to_tessellation/bary_pic.png" alt="" title="Figure 6: Barycentric coordinates." /></p>
+
+<p>The DX11 Tessellation spec always returns two values: $u$ and $v$, to the third parameter needs to be computed using the unity condition of Barycentric coordinates - that is, $w=1-u-v$.</p>
+
+<h3 id="quadrilateral">Quadrilateral</h3>
+
+<p>For the quad output domain, the coordinates $u$, and $v$ represent the familar $x$ and $y$ axis of Cartesian space.</p>
+
+<h2 id="visualisation">Visualisation</h2>
+
+<p>I have taken the DX11 Spec for tessellation<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>, compiled it and made a python script<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> to run the C++ code with customisable parameters. 
+You can play around with the tessellation factors and output domain type and get a feel for how it all works.
+The steps are:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/YiweiMao/tessDX
+<span class="nb">cd </span>tessDX/
+make
+</code></pre></div></div>
+<p>Then in a python shell, execute the following:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pytess</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1"># for one instance of tessellation
+# if len(tfs)==2, isoline. elif len(tfs)==4, tri. elif len(tfs)==6, quad.
+</span><span class="n">Tessellator</span><span class="p">(</span><span class="n">partition</span><span class="o">=</span><span class="n">PART_INT</span><span class="p">,</span><span class="n">outputPrim</span><span class="o">=</span><span class="n">OUTPUT_TRIANGLE_CW</span><span class="p">,</span><span class="n">tfs</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span><span class="o">.</span><span class="n">doTess</span><span class="p">()</span>
+
+<span class="c1"># for interactivity. Change the sliders to see the updated tessellation
+</span><span class="n">interact</span><span class="p">(</span><span class="n">showTess</span><span class="p">,</span><span class="n">partition</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">outputPrim</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="n">outTF0</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span><span class="n">outTF1</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span>
+                 <span class="n">outTF2</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mf">0.01</span><span class="p">),</span><span class="n">outTF3</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span><span class="n">inTF0</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span><span class="n">inTF1</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mf">0.1</span><span class="p">))</span>
+</code></pre></div></div>
+<p><img src="/images/2020-02-26-introduction_to_tessellation/tess_interact_eg.png" alt="" title="Figure 7: Screenshot of tessellation Widget" width="50%" /></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Tessellation is a useful GPU feature that can dynamically increase the level of detail on a surface for rendering. We explored how the fixed function tessellator stage fits into the graphics pipeline and what the various parameters mean. We learned how to interpret inner and outer tessellation factors, integer and even/odd fractional partitioning, and isoline/triangle/quadrilateral output domains. Most importantly, I leave you with a tool which you can use to visualise the tessellated output for a given set of parameters.</p>
+
+<h1 id="references">References</h1>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>https://github.com/microsoft/DirectX-Specs/tree/master/d3d/archive/images/d3d11 <a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>https://github.com/YiweiMao/tessDX <a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
