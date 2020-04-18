@@ -29,7 +29,7 @@
   
       ,"page1": {
           "title": "About Me",
-          "content": "This is where you put the contents of your About page. Like all your pages, it’s in Markdown format. . This website is powered by fastpages 1. . a blogging platform that natively supports Jupyter notebooks in addition to other formats. &#8617; . |",
+          "content": "I am doing my PhD at the University of Sydney working on hyperspectral remote sensing. My interests lie in computer vision and machine learning. I am also a musician in my spare time playing the Euphonium in the Parramatta Salvation Army Brass Band. . Experience . Imagination Technologies Internship (2019 – 2020) . | University of Sydney Casual Academic Tutor (2018 – Current) . | CSIRO Astronomy and Space Science Summer Vacation Research Student (2017 – 2018) . | Sydney Academy of Chess Chess Coach (2015 – 2017) . | University . I studied Mechatronics Engineering and Advanced Science (majored in Physics and Maths) at the University of Sydney. . Academic Papers . Year Paper Title . 2020 | TweetS@: A 3D Printed CubeSat Tweeting From Space | .   | Australian Space Research Conference 2019 Proceedings | . Contact Details . Email: ewaymao@gmail.com Personal blog: https://yiweimao.github.io/blog/ .",
           "url": "https://yiweimao.github.io/blog/about/",
           "relUrl": "/about/",
           "date": ""
