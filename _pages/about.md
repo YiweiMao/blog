@@ -9,14 +9,15 @@ I am doing my PhD at the University of Sydney working on hyperspectral remote se
 I am also a musician in my spare time playing the Euphonium in the Parramatta Salvation Army Brass Band. 
 
 ## Experience
-
-1. Imagination Technologies<br>
+1. ARC Training Centre for CubeSats, UAVs & Their Applications and DST-Group<br>
+    > PhD internship (2020 -- Current)
+2. Imagination Technologies<br>
     > Internship (2019 -- 2020)
-2. University of Sydney<br>
+3. University of Sydney<br>
     > Casual Academic Tutor (2018 -- Current)
-3. CSIRO Astronomy and Space Science<br>
+4. CSIRO Astronomy and Space Science<br>
     > Summer Vacation Research Student (2017 -- 2018)
-4. Sydney Academy of Chess<br>
+5. Sydney Academy of Chess<br>
     > Chess Coach (2015 -- 2017)
 
 ## University
