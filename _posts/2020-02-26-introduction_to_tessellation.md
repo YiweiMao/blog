@@ -4,6 +4,9 @@ layout: post
 description: "An introduction to tessellation. Python code is provided to run the visualisation."
 categories: ["DX11","Tessellation","parity","visualisation"]
 title: "Understanding Tessellation"
+image: images/2020-02-26-introduction_to_tessellation/TFs_eg1.png
+badges: true
+comments: true
 ---
 
 # Understanding Tessellation

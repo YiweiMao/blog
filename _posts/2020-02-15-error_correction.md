@@ -4,6 +4,9 @@ layout: post
 description: "A walkthrough on Hamming codes."
 categories: ["error correction","Hamming code","Hamming distance"]
 title: "Hamming Code for Error Correction"
+image: images/2020-02-15-error_correction_files/cube.png
+badges: true
+comments: true
 ---
 
 # Introduction
