@@ -163,6 +163,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#Introduction-to-Hyperspectral-Imagery">Introduction to Hyperspectral Imagery </a></li>
 <li class="toc-entry toc-h1"><a href="#An-Open-Source-Dataset">An Open Source Dataset </a>
 <ul>
+<li class="toc-entry toc-h2"><a href="#Visualisation">Visualisation </a></li>
 <li class="toc-entry toc-h2"><a href="#Classification-Strategy-without-Spatial-Information">Classification Strategy without Spatial Information </a></li>
 </ul>
 </li>
@@ -191,7 +192,7 @@ window.onload = wrap_img;
 <a class="anchor" href="#Introduction-to-Hyperspectral-Imagery" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction to Hyperspectral Imagery<a class="anchor-link" href="#Introduction-to-Hyperspectral-Imagery"> </a>
 </h1>
 <p>Hyperspectral cameras simultaneously capture spatial and spectral information and produce hyperspectral image cubes. Each pixel in a hyperspectral image contains a spectrum from near infrared (NIR) to the visible; unlike cameras we are all familiar with on our phones which only capture red, green, and blue. These images are obtained by quick successive aquisitions of narrow contiguous spectral strips much like the line scanner in a photocopier. This is known as push broom scanning. Figure 1 shows an example of what a hyperspectral image cube looks like.</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/HyperspectralCube.jpg" alt="" title="Figure 1: A hyperspectral image cube.">{:width="50%"}</p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/4/48/HyperspectralCube.jpg" alt="" title="Figure 1: A hyperspectral image cube."></p>
 <p>Applications of hyperspectral imaging technology include object detection and classification by combining object shape and spectral signatures. It is the spectra that reveal chemical composition and provides a unique insight unobtainable from ordinary colour images.</p>
 <p>In this blog post, we will explore and visualise some of the features of hyperspectral images.</p>
 
@@ -281,6 +282,9 @@ This dataset contains 60 hyperspectral images with 81 spectral channels in the v
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Visualisation">
+<a class="anchor" href="#Visualisation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualisation<a class="anchor-link" href="#Visualisation"> </a>
+</h2>
 <p>Here is a subset of images in the <code>sRGB</code> format. These images contain scenes with vegetation, soil, water, sky, and signposts. However, they appear washed out---almost as if they've been taken with a sepia effect---and is definitely not colour accurate.</p>
 
 </div>
@@ -297,17 +301,14 @@ This dataset contains 60 hyperspectral images with 81 spectral channels in the v
 <span class="n">color_img_name</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s1">'color/'</span><span class="p">))[</span><span class="n">pic_num_offset</span><span class="p">:]</span> <span class="p">)</span>
 
 <span class="n">fig1</span><span class="p">,</span> <span class="n">f1_ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fig1</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mf">7.5</span><span class="p">)</span>
-<span class="n">fig1</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">set_figheight</span><span class="p">(</span><span class="mf">7.5</span><span class="p">);</span> <span class="n">fig1</span><span class="o">.</span><span class="n">set_figwidth</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nrows</span><span class="p">):</span>
   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">ncols</span><span class="p">):</span>
     <span class="n">ax</span> <span class="o">=</span> <span class="n">f1_ax</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">]</span>
     <span class="n">name</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">color_img_name</span><span class="p">)</span>
     <span class="n">im</span> <span class="o">=</span> <span class="n">PIL</span><span class="o">.</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">'color/'</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">name</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([]);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
 </pre></div>
 
     </div>
@@ -359,9 +360,7 @@ This dataset contains 60 hyperspectral images with 81 spectral channels in the v
 
 <span class="c1"># The basic line</span>
 <span class="n">line</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">interpolate</span><span class="o">=</span><span class="s1">'basis'</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s1">'wavelength (nm):Q'</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s1">'median pixel intensity:Q'</span><span class="p">,</span>
-    <span class="n">color</span><span class="o">=</span><span class="s1">'file:N'</span><span class="p">)</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">'wavelength (nm):Q'</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">'median pixel intensity:Q'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'file:N'</span><span class="p">)</span>
 
 <span class="c1"># Transparent selectors across the chart. This is what tells us</span>
 <span class="c1"># the x-value of the cursor</span>
@@ -458,7 +457,12 @@ This dataset contains 60 hyperspectral images with 81 spectral channels in the v
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that there is a trend common to all images with a peak at around 500--600 nm, a trough at 675 nm, and a few peaks at 695 nm and 720 nm. File <code>0065.mat</code> has a higher median pixel value over all channels because most of the is picture of a sunny sky. The common variation is possibly due to a lack of white balancing.</p>
+<p>We can see that there is a trend common to all images with a peak at around 500--600 nm, a trough at 675 nm, and a few peaks at 695 nm and 720 nm. File <code>0065.mat</code> has a higher median pixel value over all channels because most of the is picture of a sunny sky. 
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>The common variation is possibly due to a lack of white balancing. 
+</div>
 <h2 id="Classification-Strategy-without-Spatial-Information">
 <a class="anchor" href="#Classification-Strategy-without-Spatial-Information" aria-hidden="true"><span class="octicon octicon-link"></span></a>Classification Strategy without Spatial Information<a class="anchor-link" href="#Classification-Strategy-without-Spatial-Information"> </a>
 </h2>
