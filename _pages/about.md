@@ -6,7 +6,7 @@ permalink: /about/
 
 
 I am doing my PhD at the University of Sydney working on hyperspectral remote sensing. My interests lie in computer vision and machine learning. <br>
-I am also a musician in my spare time playing the Euphonium in the Parramatta Salvation Army Brass Band. 
+I am also a musician in my spare time playing the Euphonium in the Parramatta Salvation Army Brass Band.
 
 ## Experience
 1. ARC Training Centre for CubeSats, UAVs & Their Applications and DST-Group<br>
@@ -21,13 +21,13 @@ I am also a musician in my spare time playing the Euphonium in the Parramatta Sa
     > Chess Coach (2015 -- 2017)
 
 ## University
-I studied Mechatronics Engineering and Advanced Science (majored in Physics and Maths) at the University of Sydney. 
+I studied Mechatronics Engineering and Advanced Science (majored in Physics and Maths) at the University of Sydney.
 
 
 ### Academic Papers
 
 
-| Year | Paper Title |
+| Year | Paper Title &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
 | -: | :- |
 | 2020 | TweetS@: A 3D Printed CubeSat Tweeting From Space |
 |   | Australian Space Research Conference 2019 Proceedings |
