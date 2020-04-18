@@ -28,7 +28,7 @@ I studied Mechatronics Engineering and Advanced Science (majored in Physics and 
 
 
 | Year | Paper Title |
-| -: | :- |
+| - | - |
 | 2020 | TweetS@: A 3D Printed CubeSat Tweeting From Space |
 |   | Australian Space Research Conference 2019 Proceedings |
 
