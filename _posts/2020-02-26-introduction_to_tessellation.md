@@ -1,31 +1,35 @@
-# Introduction to Tessellation
-> An introduction to tessellation. Python code is provided to run the visualisation.
+---
+toc: true
+layout: post
+description: "An introduction to tessellation. Python code is provided to run the visualisation."
+categories: ["DX11","Tessellation","parity","visualisation"]
+title: "Understanding Tessellation"
+---
 
-1. TOC
-{:toc}
+# Understanding Tessellation
 
 ## What is Tessellation
 
-Tessellation is a feature that converts a low-detailed surface patch to a higher detailed surface patch dynamically on the Graphics Processing Unit (GPU). Using a low resolution model with a few polygons, tessellation makes rendering high levels of detail possible by subdividing each patch into smaller primitives. 
+Tessellation is a feature that converts a low-detailed surface patch to a higher detailed surface patch dynamically on the Graphics Processing Unit (GPU). Using a low resolution model with a few polygons, tessellation makes rendering high levels of detail possible by subdividing each patch into smaller primitives.
 
-This blog post will outline how tessellation fits into the graphics pipeline and how to understand the various parameters needed for tessellation including tessellation factors, partition type, and output domain. Finally, I provide code to run a tessellation visualisation including an interactive widget so you can experiment with the various parameters. 
+This blog post will outline how tessellation fits into the graphics pipeline and how to understand the various parameters needed for tessellation including tessellation factors, partition type, and output domain. Finally, I provide code to run a tessellation visualisation including an interactive widget so you can experiment with the various parameters.
 
 
 ## Benefits of Tessellation
 
 According to [DX11 Tess Docs](https://docs.microsoft.com/en-us/windows/win32/direct3d11/direct3d-11-advanced-stages-tessellation), the benefits are:
 
-1. Lower memory and bandwidth requirements. 
+1. Lower memory and bandwidth requirements.
 2. Allows continuous or view dependent details to be calculated on the fly.
 3. Improves performance by performing expensive computations at lower frequency (doing calculations on a lower-detail model). For instance, calculations for collision detection or soft body dynamics.
 
-A graphics pipeline is a series of functions that transforms inputs (primitive data such as points, lines or triangles) into outputs for rendering. Primitives refer to the atomic or irreducible objects the system can handle. 
-To add tessellation, the graphics pipeline requires three new stages. 
+A graphics pipeline is a series of functions that transforms inputs (primitive data such as points, lines or triangles) into outputs for rendering. Primitives refer to the atomic or irreducible objects the system can handle.
+To add tessellation, the graphics pipeline requires three new stages.
 
 
 ## Pipeline Stages
 
-The [DX11 graphics pipeline](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-graphics-pipeline) consists of a series of stages shown in Figure 1. 
+The [DX11 graphics pipeline](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-graphics-pipeline) consists of a series of stages shown in Figure 1.
 
 ![](/images/2020-02-26-introduction_to_tessellation/d3d11-pipeline-stages.jpg "Figure 1: DX11 graphics pipeline"){:width="40%"}
 
@@ -33,7 +37,7 @@ A description of each stage is summarised in this itemised list:
 1. Input-Assembler Stage
 > Read primitive data and assemble them into primitives for other stages (e.g. line lists, and triangle strips)
 2. Vertex Shader Stage
-> Processes the assembled vertices and applies operations such as transformations, skinning, morphing, and per-vertex lighting. > Single input vertex and single output vertex. 
+> Processes the assembled vertices and applies operations such as transformations, skinning, morphing, and per-vertex lighting. > Single input vertex and single output vertex.
 3. Tessellation Stages
 > Breaks up a patch of control points into smaller primitives and thus create higher detailed features.
 4. Geometry Shader Stage
@@ -63,7 +67,7 @@ As an aside, the word "shader" refers to an operation that transforms four input
 
 OpenGL and DX using different winding order. The winding order determines the order the vertex stream arrives and this information can be used to check if a patch is facing the screen or away from the screen.
 
-The parameters for the Tessellator stage are: winding order, tessellation factors, partitioning type, and primitive type. 
+The parameters for the Tessellator stage are: winding order, tessellation factors, partitioning type, and primitive type.
 
 ## Tessellation Factors
 
@@ -71,7 +75,7 @@ Tessellation factors specify how much each edge needs to be partitioned. For exa
 
 ### Inner Factors
 
-The inner factor specifies how the interior is partitioned. When this factor is even, the centre of the output domain is a degenerate point. For example, an inner factor of 1 means no inner partitioning and a tessellation factor of $n$ partitions the output domain into $\text{floor}(n/2)$ smaller versions of the output domain shape. 
+The inner factor specifies how the interior is partitioned. When this factor is even, the centre of the output domain is a degenerate point. For example, an inner factor of 1 means no inner partitioning and a tessellation factor of $n$ partitions the output domain into $\text{floor}(n/2)$ smaller versions of the output domain shape.
 
 ![](/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png "Figure 2: Top left: no tessellation. Top right: degenerate triangle in the centre. Bottom left: one smaller triangle inside. Bottom right: two smaller triangles inside - one of them degenerate.")
 
@@ -92,7 +96,7 @@ Integer refers to what values the tessellation factors can take. In this case, t
 Same as integer but the valid tessellation factors are powers of two. That is $2^0,2^1,...,2^5,2^6$ with the maximum tessellation factor of 64.
 
 ### Fractional
-Fractional partitioning allows for a mix of normal and small segments and these correspond to the integer value and fractional value of a tessellation factor. Since each control patch consists of many primitives that can share sides and have a shared tessellation factor, the output primitives need to be *symmetric*. This symmetry brings about two cases which differ in the location where new verticies are generated: an odd and even parity.  
+Fractional partitioning allows for a mix of normal and small segments and these correspond to the integer value and fractional value of a tessellation factor. Since each control patch consists of many primitives that can share sides and have a shared tessellation factor, the output primitives need to be *symmetric*. This symmetry brings about two cases which differ in the location where new verticies are generated: an odd and even parity.
 
 #### Odd
 > New vertices are generated from the corners.
@@ -103,7 +107,7 @@ The number of segments on an edge is always odd so a tessellation factor of 5 wo
 
 
 #### Even
-> New vertices are generated from the midpoint. 
+> New vertices are generated from the midpoint.
 
 The number of segmenst on an edge is always even so a tessellation factor of 4 would give four equally spaced segments and if the tessellation factor was 4.1, there would be six segments, two of which are small and near the midpoint.
 
@@ -112,33 +116,33 @@ The number of segmenst on an edge is always even so a tessellation factor of 4 w
 
 ## Output Domains
 
-We have already seen what the three types of output domain are: isoline, triangle, and quadrilateral. In the case of a quadrilateral, the output primitives can be triangles or quadrilaterals. 
+We have already seen what the three types of output domain are: isoline, triangle, and quadrilateral. In the case of a quadrilateral, the output primitives can be triangles or quadrilaterals.
 
 ### Isoline
-For an isoline, the outer tessellation factor is rounded up to the next integer and fractional partitioning only affects the inner tessellation factor. The number of parallel lines is given by the outer tessellation factor while the partitioning of each segment is described by the inner tessellation factor. The outer and inner factor are also known as line density and line detail. 
+For an isoline, the outer tessellation factor is rounded up to the next integer and fractional partitioning only affects the inner tessellation factor. The number of parallel lines is given by the outer tessellation factor while the partitioning of each segment is described by the inner tessellation factor. The outer and inner factor are also known as line density and line detail.
 
 
 ### Triangle
-For a triangle, barycentric coordinates represent a 2D position using three numbers ($\alpha, \beta, \gamma$) with the condition that $\alpha+\beta+\gamma = 1$. This means there are only two free parameters and is directly related to u, v coordinates using a coordinate transform. Barycentric coordinates allow the same partitioning strategy to be applied regardless of being a Triangle or Quadrilateral. 
+For a triangle, barycentric coordinates represent a 2D position using three numbers ($\alpha, \beta, \gamma$) with the condition that $\alpha+\beta+\gamma = 1$. This means there are only two free parameters and is directly related to u, v coordinates using a coordinate transform. Barycentric coordinates allow the same partitioning strategy to be applied regardless of being a Triangle or Quadrilateral.
 
 #### Barycentric Coordinates
-Barycentric coordinates can be understood as a ratio of areas with $A$ representing the total area. 
+Barycentric coordinates can be understood as a ratio of areas with $A$ representing the total area.
 
 $$
-\alpha = A_A/A 
-$$ 
-
-$$
-\beta = A_B/A 
+\alpha = A_A/A
 $$
 
 $$
-\gamma = A_C/A 
+\beta = A_B/A
 $$
 
-The coordinates ($\alpha, \beta, \gamma$) must sum to unity because the sum of each component subtriangle area must equal the total area of the original triangle. Furthermore, the coordinates are between 0 and 1 because the point $\mathbf{x}$ defines a point within the large triangle. If any of the coordinates are negative or greater than 1, this would corespond to a point outside the allowable triangle. 
+$$
+\gamma = A_C/A
+$$
 
-$\mathbf{b-a}$ and $\mathbf{c-a}$ span an linearly independent vector space and are the basis vectors for a triangle with origin $\mathbf{a}$. 
+The coordinates ($\alpha, \beta, \gamma$) must sum to unity because the sum of each component subtriangle area must equal the total area of the original triangle. Furthermore, the coordinates are between 0 and 1 because the point $\mathbf{x}$ defines a point within the large triangle. If any of the coordinates are negative or greater than 1, this would corespond to a point outside the allowable triangle.
+
+$\mathbf{b-a}$ and $\mathbf{c-a}$ span an linearly independent vector space and are the basis vectors for a triangle with origin $\mathbf{a}$.
 
 $$
 \mathbf{x} = \mathbf{a} + \beta( \mathbf{b-a}  ) + \gamma(\mathbf{c-a})
@@ -152,7 +156,7 @@ $$
 = \alpha \mathbf{a} + \beta\mathbf{b} + \gamma\mathbf{c}
 $$
 
-So the "colour" coordinate at point $\mathbf{x}$ is some linear combination of the triangle vertices. 
+So the "colour" coordinate at point $\mathbf{x}$ is some linear combination of the triangle vertices.
 
 
 ![](/images/2020-02-26-introduction_to_tessellation/bary_pic.png "Figure 6: Barycentric coordinates.")
@@ -164,14 +168,14 @@ The DX11 Tessellation spec always returns two values: $u$ and $v$, to the third 
 ### Quadrilateral
 
 
-For the quad output domain, the coordinates $u$, and $v$ represent the familar $x$ and $y$ axis of Cartesian space. 
+For the quad output domain, the coordinates $u$, and $v$ represent the familar $x$ and $y$ axis of Cartesian space.
 
 
 
 
 ## Visualisation
 
-I have taken the DX11 Spec for tessellation[^1], compiled it and made a python script[^2] to run the C++ code with customisable parameters. 
+I have taken the DX11 Spec for tessellation[^1], compiled it and made a python script[^2] to run the C++ code with customisable parameters.
 You can play around with the tessellation factors and output domain type and get a feel for how it all works.
 The steps are:
 ```bash
@@ -196,7 +200,7 @@ interact(showTess,partition=(0,3,1),outputPrim=(0,3,1),outTF0=(1,64,0.1),outTF1=
 
 ## Conclusion
 
-Tessellation is a useful GPU feature that can dynamically increase the level of detail on a surface for rendering. We explored how the fixed function tessellator stage fits into the graphics pipeline and what the various parameters mean. We learned how to interpret inner and outer tessellation factors, integer and even/odd fractional partitioning, and isoline/triangle/quadrilateral output domains. Most importantly, I leave you with a tool which you can use to visualise the tessellated output for a given set of parameters. 
+Tessellation is a useful GPU feature that can dynamically increase the level of detail on a surface for rendering. We explored how the fixed function tessellator stage fits into the graphics pipeline and what the various parameters mean. We learned how to interpret inner and outer tessellation factors, integer and even/odd fractional partitioning, and isoline/triangle/quadrilateral output domains. Most importantly, I leave you with a tool which you can use to visualise the tessellated output for a given set of parameters.
 
 
 

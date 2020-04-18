@@ -1,13 +1,14 @@
-
-# Hamming Code for Error Correction
-> A walkthrough on Hamming codes.
-
-1. TOC
-{:toc}
+---
+toc: true
+layout: post
+description: "A walkthrough on Hamming codes."
+categories: ["error correction","Hamming code","Hamming distance"]
+title: "Hamming Code for Error Correction"
+---
 
 # Introduction
 
-Digital communication relies on encoded bits that are transmitted across noisy channels which inevitably suffer from errors. This can be a huge problem for systems that cannot deal with errors. An example of this is interplanetary satellites with limited bandwidth and long communication time delays - by the time the effects of an error is detected, it may be too late to send correction commands. Such systems need to be able to detect errors and correct them if possible. A real application of error correcting codes was on the Mariner 9 mission which required pictures to be sent back from Mars[^1] (this used an error correcting Hadamard code). 
+Digital communication relies on encoded bits that are transmitted across noisy channels which inevitably suffer from errors. This can be a huge problem for systems that cannot deal with errors. An example of this is interplanetary satellites with limited bandwidth and long communication time delays - by the time the effects of an error is detected, it may be too late to send correction commands. Such systems need to be able to detect errors and correct them if possible. A real application of error correcting codes was on the Mariner 9 mission which required pictures to be sent back from Mars[^1] (this used an error correcting Hadamard code).
 
 This blog will investigate the encoder and decoder stage - how digital information is encoded with error correcting information using the power of numbers. The idea of redundancy and parity is introduced before the Hamming code is described. An example using `Hamming(7,4)` is given followed by the notion of the Hamming distance. The blog post will conclude with a brief outline of developments since Hamming's original paper in 1950.
 
@@ -19,12 +20,12 @@ The redundancy factor $R$ is defined to be
 $$
 R := \frac{n}{m}
 $$
-and this measures the efficiency of the encoding. 
+and this measures the efficiency of the encoding.
 Redundancy is also a method of generating sparse decompositions of signals and this is known as compressed sensing. This method has applications in computed tomography because image reconstruction can be formulated as a compressed sensing problem[^2].
 
 A core part of encoding information into the redundant bits is the idea of parity.
 
-# Parity                                                                
+# Parity
 
 In the context of binary numbers, parity refers to the number of 1's that appear in the binary representation. Parity can be encoded by a single bit, for instance the $n^{th}$ bit $b_n$, so that the whole bit string $b_n b_{n-1} \dots b_2 b_1$ contains an even number of 1's. The parity bit is set to 1 if there are an odd number of 1s in the preceding $n-1$ bits, and set to 0 otherwise:
 
@@ -72,17 +73,17 @@ Next, the second parity counts an *even* number of 1's in the positions 2,3,6, a
 
 ![](/images/2020-02-15-error_correction_files/c2bit.png "Figure 3: Second parity bit is checked."){:width="60%"}
 
-The third parity counts an *odd* number of 1's in the positions 4,5,6, and 7 so $c_3=1$. 
+The third parity counts an *odd* number of 1's in the positions 4,5,6, and 7 so $c_3=1$.
 
 ![](/images/2020-02-15-error_correction_files/c3bit.png "Figure 4: Third parity bit is checked."){:width="60%"}
 
 This gives a checking number $c_3 c_2 c_1= \texttt{101}$ which is position 5. Therefore, there is an error in position 5 which can be corrected by converting the `0` into a `1`.
 
-Another example of a Hamming code is triple repetition. Each bit is sent three times and majority rules is applied to decode the message. This is Hamming(3,1) and uses 2 parity bits. Using this code, single errors can be corrected *or* double errors can be detected but not corrected. This makes sense because if a single bit is flipped, the majority rule recovers the correct bit. However, if two bits are flipped, these errors can be detected but if correction is applied, the wrong bit will be reconstructed. The (7,4) code Hamming introduced in his paper can be extended to (8,4) allowing for single error correction *and* double error detection. 
+Another example of a Hamming code is triple repetition. Each bit is sent three times and majority rules is applied to decode the message. This is Hamming(3,1) and uses 2 parity bits. Using this code, single errors can be corrected *or* double errors can be detected but not corrected. This makes sense because if a single bit is flipped, the majority rule recovers the correct bit. However, if two bits are flipped, these errors can be detected but if correction is applied, the wrong bit will be reconstructed. The (7,4) code Hamming introduced in his paper can be extended to (8,4) allowing for single error correction *and* double error detection.
 
 ## Single Error Correction plus Double Error Detection
 
-Double error detection can be added by using another bit that represents the parity for positions, that when expressed in binary, have a 1 in the $4^{th}$ position. Then there exists three cases with the first being all parity checks pass. The second case is when there is a single error and the last parity check fails. The checking number then gives the position of the error with zero now meaning the error is in the last check position. The last case is then the last parity check is satisfied but the checking number indicates that there is an error. In this case, there is a double error. 
+Double error detection can be added by using another bit that represents the parity for positions, that when expressed in binary, have a 1 in the $4^{th}$ position. Then there exists three cases with the first being all parity checks pass. The second case is when there is a single error and the last parity check fails. The checking number then gives the position of the error with zero now meaning the error is in the last check position. The last case is then the last parity check is satisfied but the checking number indicates that there is an error. In this case, there is a double error.
 
 Hamming (1950) [^3] gives a way of determining what actions can be done (error detection or error correction) by introducing a metric.
 
@@ -90,7 +91,7 @@ Hamming (1950) [^3] gives a way of determining what actions can be done (error d
 
 The distance $D$ between two bit strings ${x}$ and ${y}$ is given by the Hamming distance.
 
-> The Hamming distance is given by the number of positions (or coordinates) where two bit strings differ. 
+> The Hamming distance is given by the number of positions (or coordinates) where two bit strings differ.
 
 This definition satisfies the conditions for a metric:
 $$
@@ -101,7 +102,7 @@ $$
     \end{split}
 $$
 
-Imagine each code being encoded by corners in a $2^n$ hypercube, then if each code has a distance of $r$ between a neighbouring code, the codes lie on the surface of a $r+1$ sphere centered on some origin. For example, a $r=2$ code with $n=3$ can be: `000`, `011`, `101`, `110`. Each code is a distance 2 apart and sit on the corners of a cube as depicted in Figure 5. 
+Imagine each code being encoded by corners in a $2^n$ hypercube, then if each code has a distance of $r$ between a neighbouring code, the codes lie on the surface of a $r+1$ sphere centered on some origin. For example, a $r=2$ code with $n=3$ can be: `000`, `011`, `101`, `110`. Each code is a distance 2 apart and sit on the corners of a cube as depicted in Figure 5.
 
 ![](/images/2020-02-15-error_correction_files/cube.png "Figure 5: 2 distance code on a cube."){:width="40%"}
 
@@ -130,15 +131,15 @@ From the table above, it can be seen that an extra Hamming distance of 2 is need
 
 More general codes can be made by constructing a parity check matrix which contains error correction abilities based on linear dependent columns[^4]. From there, the mapping between messages and code can be found using a generator matrix computed from the parity matrix[^5]. The example shown in this blog post relied on operations on a Galois (or finite) field with characteristic 2 (so addition and multiplication is done modulo 2). Other fields can also be used such $\mathbf{F}_{11}$ which is implemented in the User Datagram Protocol (UDP). UDP can also fix erasures - when bits are lost rather than flipped[^6]. There is also a family of Hamming codes which include extensions and shortenings that allow Hamming codes to perform better or improve the redundancy factor[^7].
 
-Multiple error correction codes can be done using Reed-Solomon (RS)[^8] and Bose-Chaudhuri-Hocquenghem (BCH)[^9] which can be hard to decode because the number of errors is not known beforehand. By using primitive polynomials for the Galois field, the coding can be done on Linear Feedback Shift Registers (LFSR)[^10]. The location of errors can be found by solving for the roots of an error locator polynomial[^11] given by the Massey algorithm[^12]. Roots of the locator polynomial are found using Chien search and the Forney formula gives a way of computing the values for erasures[^13]. Following this, Sugiyama invented a method for decoding Goppa codes based on the Euclidean algorithm and Kerlekamp's key equation, forgoing the need to find the locator polynomial[^14]. Other decoding methods include the Discrete Fourier Transform (DFT)[^15]. 
+Multiple error correction codes can be done using Reed-Solomon (RS)[^8] and Bose-Chaudhuri-Hocquenghem (BCH)[^9] which can be hard to decode because the number of errors is not known beforehand. By using primitive polynomials for the Galois field, the coding can be done on Linear Feedback Shift Registers (LFSR)[^10]. The location of errors can be found by solving for the roots of an error locator polynomial[^11] given by the Massey algorithm[^12]. Roots of the locator polynomial are found using Chien search and the Forney formula gives a way of computing the values for erasures[^13]. Following this, Sugiyama invented a method for decoding Goppa codes based on the Euclidean algorithm and Kerlekamp's key equation, forgoing the need to find the locator polynomial[^14]. Other decoding methods include the Discrete Fourier Transform (DFT)[^15].
 
-Many different types of codes exist including cyclic codes and convolutional or continuous codes. For instance, the Chinese remainder theorem is used to decode Fire codes[^16] which is a type of cyclic code. Convolutional codes can be decoded with the Viterbi algorithm[^17]. Applications of error correcting coding and decoding extend to public key encryption[^18] amongst others. 
+Many different types of codes exist including cyclic codes and convolutional or continuous codes. For instance, the Chinese remainder theorem is used to decode Fire codes[^16] which is a type of cyclic code. Convolutional codes can be decoded with the Viterbi algorithm[^17]. Applications of error correcting coding and decoding extend to public key encryption[^18] amongst others.
 
 
 
 # Conclusion
 
-The main ideas of error correction codes using the Hamming code were explored with the help of an example. Hamming distance was introduced which gives an indication of what actions can be done depending on the minimum Hamming distance. Finally, a brief overview of developments since Hamming's paper was given. 
+The main ideas of error correction codes using the Hamming code were explored with the help of an example. Hamming distance was introduced which gives an indication of what actions can be done depending on the minimum Hamming distance. Finally, a brief overview of developments since Hamming's paper was given.
 
 # References
 
