@@ -12,11 +12,11 @@
 <link rel="canonical" href="https://yiweimao.github.io/blog/6sv" />
 <meta property="og:url" content="https://yiweimao.github.io/blog/6sv" />
 <meta property="og:site_name" content="Yiwei Mao" />
-<meta property="og:image" content="https://yiweimao.github.io/blog/images/2020-05-18-6sv_files/6sv_vermote.png" />
+<meta property="og:image" content="https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-05-18T00:00:00-05:00" />
+<meta property="article:published_time" content="2020-06-14T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Introduction to 6SV2.1: A Radiative Transfer Model","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","datePublished":"2020-05-18T00:00:00-05:00","dateModified":"2020-05-18T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2020-05-18-6sv_files/6sv_vermote.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv"},"url":"https://yiweimao.github.io/blog/6sv","@context":"https://schema.org"}</script>
+{"headline":"Introduction to 6SV2.1: A Radiative Transfer Model","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","datePublished":"2020-06-14T00:00:00-05:00","dateModified":"2020-06-14T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv"},"url":"https://yiweimao.github.io/blog/6sv","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -34,11 +34,11 @@
 <link rel="canonical" href="https://yiweimao.github.io/blog/6sv" />
 <meta property="og:url" content="https://yiweimao.github.io/blog/6sv" />
 <meta property="og:site_name" content="Yiwei Mao" />
-<meta property="og:image" content="https://yiweimao.github.io/blog/images/2020-05-18-6sv_files/6sv_vermote.png" />
+<meta property="og:image" content="https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2020-05-18T00:00:00-05:00" />
+<meta property="article:published_time" content="2020-06-14T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Introduction to 6SV2.1: A Radiative Transfer Model","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","datePublished":"2020-05-18T00:00:00-05:00","dateModified":"2020-05-18T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2020-05-18-6sv_files/6sv_vermote.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv"},"url":"https://yiweimao.github.io/blog/6sv","@context":"https://schema.org"}</script>
+{"headline":"Introduction to 6SV2.1: A Radiative Transfer Model","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","datePublished":"2020-06-14T00:00:00-05:00","dateModified":"2020-06-14T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv"},"url":"https://yiweimao.github.io/blog/6sv","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -115,13 +115,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Introduction to 6SV2.1: A Radiative Transfer Model</h1><p class="page-description">A summary of the core theory behind 6SV2.1 for atmospheric correction.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-05-18T00:00:00-05:00" itemprop="datePublished">
-        May 18, 2020
+    <h1 class="post-title p-name" itemprop="name headline">Introduction to 6SV2.1: A Radiative Transfer Model</h1><p class="page-description">A summary of the core theory behind 6SV2.1 for atmospheric correction.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-06-14T00:00:00-05:00" itemprop="datePublished">
+        Jun 14, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      2 min read
     
 </span></p>
 
@@ -139,6 +139,30 @@ window.onload = wrap_img;
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#introduction">Introduction</a></li>
+<li class="toc-entry toc-h1"><a href="#background">Background</a></li>
+<li class="toc-entry toc-h1"><a href="#asorption">Asorption</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#exponential-band-models">Exponential Band Models</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#broadening-effects">Broadening Effects</a>
+<ul>
+<li class="toc-entry toc-h4"><a href="#lorentz-distribution">Lorentz Distribution</a></li>
+<li class="toc-entry toc-h4"><a href="#gaussian-distribution">Gaussian Distribution</a></li>
+<li class="toc-entry toc-h4"><a href="#voigz-distribution">Voigz Distribution</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h3"><a href="#goody">Goody</a></li>
+<li class="toc-entry toc-h3"><a href="#malkmus">Malkmus</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#scattering">Scattering</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#lambertian-surface">Lambertian Surface</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#stokes-vector">Stokes Vector</a></li>
 <li class="toc-entry toc-h1"><a href="#references">References</a></li>
 </ul><h1 id="introduction">
 <a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
@@ -146,15 +170,194 @@ window.onload = wrap_img;
 <p>In this blog post, I will cover the basics from the <a href="http://6s.ltdri.org/pages/manual.html">6SV2.1 manual</a>. 6S stands for “ <strong>S</strong>econd <strong>S</strong>imulation of a <strong>S</strong>atellite <strong>S</strong>ignal in the <strong>S</strong>olar <strong>S</strong>pectrum” and the V stands for <em>vectorised</em> meaning the polarisation of light is taken to account. This radiative transfer (RT) code is used to correct for atmospheric absorption and scattering. It also enables<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>:</p>
 
 <ul>
-  <li>accurate simulations of satellite and UAV observations,</li>
+  <li>accurate simulations of satellite, aircraft, and UAV observations,</li>
   <li>accounts for elevated targets,</li>
   <li>models a realistic atmospheric with aerosols and other molecules,</li>
   <li>and use of Lambertian and anisotropic ground surfaces.</li>
 </ul>
 
-<p>According to Vermote <em>et al.</em>, it is “one of the most widely used, rigorously validated, and heavily documented RT codes known in the scientific remote-sensing community.” Version 1 of the 6S code appeared in 1997 and now in the new version 2.1 release in 2015, it uses the method of successive orders of scattering for more accurate approximations that were previously too computationally taxing on old hardware. The code is written in Fortran which is very common for scientific libraries where speed is of primary concern.</p>
+<p>According to Vermote <em>et al.</em>, it is “one of the most widely used, rigorously validated, and heavily documented RT codes known in the scientific remote-sensing community.” Version 1 of the 6S code appeared in 1997 and now in the new version 2.1 release in 2015, it uses the method of successive orders of scattering for more accurate approximations that were previously too computationally taxing on old hardware. There are also more configurable settings. The code is written in <em>Fortran</em> which is very common for scientific libraries where speed is of primary concern. A comparison with other radiative transfer codes can be found in Kotchenova<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> (2008). The default <em>standard accuracy</em> settings will provide around 0.4–0.6% accuracy compared to standard benchmarks.</p>
 
-<p><img src="/images/2020-05-18-6sv_files/6sv_vermote.png" alt="" title="Figure 1: Atmospheric absorption and scattering[^1]." width="70%"></p>
+<h1 id="background">
+<a class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h1>
+
+<p><img src="images/2020-06-14-6sv_files/6sv_vermote.png" alt="" title="Figure 1: Atmospheric absorption and scattering (Vermote 2006)." width="70%"></p>
+
+<h1 id="asorption">
+<a class="anchor" href="#asorption" aria-hidden="true"><span class="octicon octicon-link"></span></a>Asorption</h1>
+
+<p>The majority of atmospheric asorption ha</p>
+<ul>
+  <li>water vapour H$_2$O</li>
+  <li>ozone O$_3$</li>
+  <li>oxygen O$_2$</li>
+  <li>carbon dioxide CO$_2$</li>
+  <li>methane CH$_4$</li>
+  <li>nitrous oxide N$_2$O</li>
+</ul>
+
+<h2 id="exponential-band-models">
+<a class="anchor" href="#exponential-band-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exponential Band Models</h2>
+
+<h3 id="broadening-effects">
+<a class="anchor" href="#broadening-effects" aria-hidden="true"><span class="octicon octicon-link"></span></a>Broadening Effects</h3>
+
+<h4 id="lorentz-distribution">
+<a class="anchor" href="#lorentz-distribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lorentz Distribution</h4>
+<p>pressure broadened</p>
+
+<h4 id="gaussian-distribution">
+<a class="anchor" href="#gaussian-distribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Gaussian Distribution</h4>
+<p>doppler from maxwellian</p>
+
+<h4 id="voigz-distribution">
+<a class="anchor" href="#voigz-distribution" aria-hidden="true"><span class="octicon octicon-link"></span></a>Voigz Distribution</h4>
+<p>convolution</p>
+
+<h3 id="goody">
+<a class="anchor" href="#goody" aria-hidden="true"><span class="octicon octicon-link"></span></a>Goody</h3>
+
+<h3 id="malkmus">
+<a class="anchor" href="#malkmus" aria-hidden="true"><span class="octicon octicon-link"></span></a>Malkmus</h3>
+<p>[Thermal Radiation Heat Transfer John R] pg 460</p>
+
+<h1 id="scattering">
+<a class="anchor" href="#scattering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scattering</h1>
+
+<h2 id="lambertian-surface">
+<a class="anchor" href="#lambertian-surface" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lambertian Surface</h2>
+<p>matte
+not specular
+he luminous intensity obeys Lambert’s cosine law.</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">L</mi><mo>⋅</mo><mover accent="true"><mi mathvariant="bold">n</mi><mo>^</mo></mover><mo>=</mo><mi>cos</mi><mo>⁡</mo><mi>α</mi></mrow><annotation encoding="application/x-tex">\mathbf{L}\cdot \mathbf{\hat{n}} = \cos \alpha</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">L</span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.70788em;vertical-align:0em;"></span><span class="mord"><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.70788em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathbf">n</span></span></span><span style="top:-3.01344em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;">^</span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mop">cos</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span></span>
+
+<h1 id="stokes-vector">
+<a class="anchor" href="#stokes-vector" aria-hidden="true"><span class="octicon octicon-link"></span></a>Stokes Vector</h1>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="bold">S</mi><mo>=</mo><mo stretchy="false">(</mo><mi>I</mi><mo separator="true">,</mo><mi>Q</mi><mo separator="true">,</mo><mi>U</mi><mo separator="true">,</mo><mi>V</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\mathbf{S} = (I,Q,U,V)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68611em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbf">S</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">Q</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="mclose">)</span></span></span></span></span>
+
+<p>where $I$ is intensity,</p>
+
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo>=</mo><msqrt><mrow><msup><mi>Q</mi><mn>2</mn></msup><mo>+</mo><msup><mi>U</mi><mn>2</mn></msup><mo>+</mo><msup><mi>V</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">I = \sqrt{Q^2 + U^2 + V^2}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">I</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.24em;vertical-align:-0.23329099999999992em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.006709em;"><span class="svg-align" style="top:-3.2em;"><span class="pstrut" style="height:3.2em;"></span><span class="mord" style="padding-left:1em;"><span class="mord"><span class="mord mathdefault">Q</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.22222em;">V</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-2.9667090000000003em;"><span class="pstrut" style="height:3.2em;"></span><span class="hide-tail" style="min-width:1.02em;height:1.28em;"><svg width="400em" height="1.28em" viewbox="0 0 400000 1296" preserveaspectratio="xMinYMin slice"><path d="M263,681c0.7,0,18,39.7,52,119
+c34,79.3,68.167,158.7,102.5,238c34.3,79.3,51.8,119.3,52.5,120
+c340,-704.7,510.7,-1060.3,512,-1067
+l0 -0
+c4.7,-7.3,11,-11,19,-11
+H40000v40H1012.3
+s-271.3,567,-271.3,567c-38.7,80.7,-84,175,-136,283c-52,108,-89.167,185.3,-111.5,232
+c-22.3,46.7,-33.8,70.3,-34.5,71c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1
+s-109,-253,-109,-253c-72.7,-168,-109.3,-252,-110,-252c-10.7,8,-22,16.7,-34,26
+c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26s76,-59,76,-59s76,-60,76,-60z
+M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.23329099999999992em;"><span></span></span></span></span></span></span></span></span></span>
+
+<p>This is The Stokes parameters {\displaystyle I}I, {\displaystyle Q}Q, {\displaystyle U}U, and {\displaystyle V}V, provide an alternative description of the polarization state which is experimentally convenient because each parameter corresponds to a sum or difference of measurable intensities.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Symbol</th>
+      <th style="text-align: left">Meaning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">$\rho*$</td>
+      <td style="text-align: left">Equivalent reflectance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$L$</td>
+      <td style="text-align: left">Measured radiance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$E_s$</td>
+      <td style="text-align: left">Solar flux at atmosphere top</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\theta_s$</td>
+      <td style="text-align: left">Sun zenith angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\phi_s$</td>
+      <td style="text-align: left">Sun azimuth angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\mu_s$</td>
+      <td style="text-align: left">$\cos(\theta_s)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\theta_v$</td>
+      <td style="text-align: left">Viewing zenith angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\phi_v$</td>
+      <td style="text-align: left">Viewing azimuth angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\mu_v$</td>
+      <td style="text-align: left">$\cos(\theta_v)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\tau$</td>
+      <td style="text-align: left">Optical thickness of atmosphere</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\rho_t$</td>
+      <td style="text-align: left">Reflectance of target</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$E^{dir}_{sol}$</td>
+      <td style="text-align: left">Direct solar flux attentuated by atmosphere</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: left">$\mu_s E_s \exp(-\tau/\mu_s)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$t_d(\theta_s)$</td>
+      <td style="text-align: left">Diffuse transmittance factor</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: left">$E^{dir}_{sol}(\theta_s) / (\mu_s E_s) $</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$E^{dir}_{sol} $</td>
+      <td style="text-align: left">Diffuse solar irradiance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$S$</td>
+      <td style="text-align: left">Spherical albedo of atmosphere</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$T(\theta_s)$</td>
+      <td style="text-align: left">Total transmittance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: left">$\exp(-\tau/\mu_s) + t_d(\theta_s)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\exp(-\tau/\mu_v)$</td>
+      <td style="text-align: left">Direct and diffuse solar radiance reflected by surface transmitted to sensor</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\Delta \omega$</td>
+      <td style="text-align: left">Field of view angular width</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\rho_a(\theta_s,\theta_v,\phi_s,\phi_v)</td>
+      <td style="text-align: left">Intrinsic atmospheric radiance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$t_d’(\theta_v)$</td>
+      <td style="text-align: left">Atmospheric diffuse transmittance (enviro reflected then scattered into sensor)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Assuming surface reflectance is Lambertian
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ρ</mi><mo>∗</mo><mo stretchy="false">(</mo><msub><mi>θ</mi><mi>s</mi></msub><mo separator="true">,</mo><msub><mi>θ</mi><mi>v</mi></msub><mo separator="true">,</mo><msub><mi>ϕ</mi><mi>s</mi></msub><mo separator="true">,</mo><msub><mi>ϕ</mi><mi>v</mi></msub><mo stretchy="false">)</mo><mo>=</mo><msub><mi>ρ</mi><mi>a</mi></msub><mo stretchy="false">(</mo><msub><mi>θ</mi><mi>s</mi></msub><mo separator="true">,</mo><msub><mi>θ</mi><mi>v</mi></msub><mo separator="true">,</mo><msub><mi>ϕ</mi><mi>s</mi></msub><mo separator="true">,</mo><msub><mi>ϕ</mi><mi>v</mi></msub><mo stretchy="false">)</mo><mo>+</mo><mfrac><mrow><mi>T</mi><mo stretchy="false">(</mo><msub><mi>θ</mi><mi>s</mi></msub><mo stretchy="false">)</mo></mrow><mrow><mn>1</mn><mo>−</mo><msub><mi>ρ</mi><mi>t</mi></msub><mi>S</mi></mrow></mfrac><mrow><mo fence="true">(</mo><msub><mi>ρ</mi><mi>t</mi></msub><msup><mi>e</mi><mrow><mo>−</mo><mi>t</mi><mi>a</mi><mi>u</mi><mi mathvariant="normal">/</mi><msub><mi>μ</mi><mi>v</mi></msub></mrow></msup><mo>+</mo><msub><mi>ρ</mi><mi>t</mi></msub><msubsup><mi>t</mi><mi>d</mi><mo mathvariant="normal" lspace="0em" rspace="0em">′</mo></msubsup><mo stretchy="false">(</mo><msub><mi>θ</mi><mi>v</mi></msub><mo stretchy="false">)</mo><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">\rho*(\theta_s,\theta_v,\phi_s,\phi_v)  = \rho_a(\theta_s,\theta_v,\phi_s,\phi_v) + \frac{T(\theta_s)}{1-\rho_t S} \left(  \rho_t e^{-tau/\mu_v} + \rho_t t_d'(\theta_v) \right)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6597200000000001em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">ρ</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">a</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">ϕ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.491108em;vertical-align:-0.481108em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">−</span><span class="mord mtight"><span class="mord mathdefault mtight">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.29634285714285713em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mord mathdefault mtight" style="margin-right:0.05764em;">S</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.485em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.13889em;">T</span><span class="mopen mtight">(</span><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:-0.02778em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight">s</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span><span class="mclose mtight">)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.481108em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">e</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">u</span><span class="mord mtight">/</span><span class="mord mtight"><span class="mord mathdefault mtight">μ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285719em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mord"><span class="mord mathdefault">ρ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-2.4168920000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">d</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2831079999999999em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">θ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">v</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mclose">)</span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span></p>
 
 <h1 id="references">
 <a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
@@ -163,6 +366,9 @@ window.onload = wrap_img;
   <ol>
     <li id="fn:1">
       <p>Vermote, E. F. T. D., Tanré, D., Deuzé, J. L., Herman, M., Morcrette, J. J., &amp; Kotchenova, S. Y. (2006). Second simulation of a satellite signal in the solar spectrum-vector (6SV). 6S User Guide Version, 3, 1-55. <a href="#fnref:1" class="reversefootnote">↩</a></p>
+    </li>
+    <li id="fn:2">
+      <p>Kotchenova, S. Y., Vermote, E. F., Levy, R., &amp; Lyapustin, A. (2008). Radiative transfer codes for atmospheric correction and aerosol retrieval: intercomparison study. Applied Optics, 47(13), 2215-2226. <a href="#fnref:2" class="reversefootnote">↩</a></p>
     </li>
   </ol>
 </div>
