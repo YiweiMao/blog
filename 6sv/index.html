@@ -182,17 +182,19 @@ window.onload = wrap_img;
 <h1 id="background">
 <a class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h1>
 
-<p><img src="images/2020-06-14-6sv_files/6sv_vermote.png" alt="" title="Figure 1: Atmospheric absorption and scattering (Vermote 2006)." width="70%"></p>
+<p><img src="/images/2020-06-14-6sv_files/6sv_vermote.png" alt="" title="Figure 1: Atmospheric absorption and scattering (Vermote 2006)." width="70%"></p>
 
 <p>There exists many words to describe <em>brightness</em> in the context of remote sensing so let’s sort this out now. 
-<img src="images/2020-06-14-6sv_files/reflect_defs.png" alt="" title="Figure 2: a) Flux b) Intensity c) Irradiance d) Radiance."></p>
+<img src="/images/2020-06-14-6sv_files/reflect_defs.png" alt="" title="Figure 2: a) Flux b) Intensity c) Irradiance d) Radiance."></p>
 
-<p>Flux $\Phi$ is energy per unit time. Measured in W. 
-Intensity $I=d\Phi/d\omega$ is power per unit solid angle. Measured in W$\cdot \text{sr}^{-1}$. 
-Irradiance $E=d\Phi/dA$ is power per unit area on a surface. Measured in W$\cdot$m$^{-2}$.
-Radiance $L=d^2\Phi/d\omega dA$ is power per unit area per unit solid angle. Measured in W$\cdot$m$^{-2}\cdot \text{sr}^{-1}$. (Intensity per area or irradiance per solid angle.)
-Albedo is fraction of <em>solar</em> energy reflected per irrandiance with 0 meaning totally dark, and 1 meaning totally bright. The etamology is from the latin world <em>albus</em> meaning white. 
-Reflectance $\rho=d\Phi_r/d\Phi_i$ (or $=L_r/L_i$?) is percentage of light energy that is reflected from a surface.</p>
+<ul>
+  <li>Flux $\Phi$ is energy per unit time. Measured in W.</li>
+  <li>Intensity $I=d\Phi/d\omega$ is power per unit solid angle. Measured in W$\cdot \text{sr}^{-1}$.</li>
+  <li>Irradiance $E=d\Phi/dA$ is power per unit area on a surface. Measured in W$\cdot$m$^{-2}$.</li>
+  <li>Radiance $L=d^2\Phi/d\omega dA$ is power per unit area per unit solid angle. Measured in W$\cdot$m$^{-2}\cdot \text{sr}^{-1}$. (Intensity per area or irradiance per solid angle.)</li>
+  <li>Albedo is fraction of <em>solar</em> energy reflected per irrandiance with 0 meaning totally dark, and 1 meaning totally bright. The etamology is from the latin world <em>albus</em> meaning white.</li>
+  <li>Reflectance $\rho=d\Phi_r/d\Phi_i$ (or $=L_r/L_i$?) is percentage of light energy that is reflected from a surface.</li>
+</ul>
 
 <h1 id="absorption">
 <a class="anchor" href="#absorption" aria-hidden="true"><span class="octicon octicon-link"></span></a>Absorption</h1>
@@ -239,7 +241,7 @@ Reflectance $\rho=d\Phi_r/d\Phi_i$ (or $=L_r/L_i$?) is percentage of light energ
 <h1 id="scattering">
 <a class="anchor" href="#scattering" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scattering</h1>
 
-<p><img src="images/2020-06-14-6sv_files/reflect_type_defs.png" alt="" title="Figure 3: a) Diffuse (Lambertian) b) Specular c) Mixed."></p>
+<p><img src="/images/2020-06-14-6sv_files/reflect_type_defs.png" alt="" title="Figure 3: a) Diffuse (Lambertian) b) Specular c) Mixed."></p>
 
 <h2 id="lambertian-surface">
 <a class="anchor" href="#lambertian-surface" aria-hidden="true"><span class="octicon octicon-link"></span></a>Lambertian Surface</h2>
@@ -268,34 +270,112 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
 
 <p>The Stokes parameters I, Q, U, and V, provide an alternative description of the polarization state which is experimentally convenient because each parameter corresponds to a sum or difference of measurable intensities.</p>
 
-<p><img src="images/2020-06-14-6sv_files/rt_components.png" alt="" title="Figure 4: Diagrams from (Vermote 2006). a) Definitions of polar and azimuth angles b) Downward direct solar flux attenuated by the atmosphere $E^{dir}_{sol}$ c) Diffuse transmittance factor $t_d(\theta_s)$ d) Successive reflections and scattering between the surface and the atmosphere $T(\theta_s)$ e) Solar radiation reflected by the surface and directly transmitted from the surface to the sensor $\exp(-\tau/\mu_v)$ f) intrinsic atmospheric radiance $\rho_a$ g) atmospheric diffuse transmittance $t'_d(\theta_v)$."></p>
+<p><img src="/images/2020-06-14-6sv_files/rt_components.png" alt="" title="Figure 4: Diagrams from (Vermote 2006). a) Definitions of polar and azimuth angles b) Downward direct solar flux attenuated by the atmosphere $E^{dir}_{sol}$ c) Diffuse transmittance factor $t_d(\theta_s)$ d) Successive reflections and scattering between the surface and the atmosphere $T(\theta_s)$ e) Solar radiation reflected by the surface and directly transmitted from the surface to the sensor $\exp(-\tau/\mu_v)$ f) intrinsic atmospheric radiance $\rho_a$ g) atmospheric diffuse transmittance $t'_d(\theta_v)$."></p>
 
-<p>A summary of all the symbols can be found in this table.
-| Symbol | Meaning                                                                                                             |
-| -: | :- |
-| $\rho*$ | Equivalent reflectance |
-| $L$ | Measured radiance |
-| $E_s$ | Solar flux at atmosphere top |
-| $\theta_s$ | Sun zenith angle | 
-| $\phi_s$ | Sun azimuth angle | 
-| $\mu_s$ | $\cos(\theta_s)$ |
-| $\theta_v$ | Viewing zenith angle | 
-| $\phi_v$ | Viewing azimuth angle | 
-| $\mu_v$ | $\cos(\theta_v)$ |
-| $\tau$ | Optical thickness of atmosphere | 
-| $\rho_t$ | Reflectance of target | 
-| $E^{dir}<em>{sol}$ | Direct solar flux attentuated by atmosphere |
-| | $\mu_s E_s \exp(-\tau/\mu_s)$ |
-| $t_d(\theta_s)$ | Diffuse transmittance factor | 
-| | $E^{dir}</em>{sol}(\theta_s) / (\mu_s E_s) $ | 
-| $E^{dir}_{sol} $ | Diffuse solar irradiance | 
-| $S$ | Spherical albedo of atmosphere | 
-| $T(\theta_s)$ |  Total transmittance |
-|  | $\exp(-\tau/\mu_s) + t_d(\theta_s)$ |
-| $\exp(-\tau/\mu_v)$ |  Direct and diffuse solar radiance reflected by surface transmitted to sensor | 
-| $\Delta \omega$ |  Field of view angular width | 
-| $\rho_a(\theta_s,\theta_v,\phi_s,\phi_v)$ | Intrinsic atmospheric radiance | 
-| $t’_d(\theta_v)$ | Atmospheric diffuse transmittance (enviro reflected then scattered into sensor) |</p>
+<p>A summary of all the symbols can be found in this table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">Symbol</th>
+      <th style="text-align: left">Meaning                                                                                                            </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">$\rho*$</td>
+      <td style="text-align: left">Equivalent reflectance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$L$</td>
+      <td style="text-align: left">Measured radiance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$E_s$</td>
+      <td style="text-align: left">Solar flux at atmosphere top</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\theta_s$</td>
+      <td style="text-align: left">Sun zenith angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\phi_s$</td>
+      <td style="text-align: left">Sun azimuth angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\mu_s$</td>
+      <td style="text-align: left">$\cos(\theta_s)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\theta_v$</td>
+      <td style="text-align: left">Viewing zenith angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\phi_v$</td>
+      <td style="text-align: left">Viewing azimuth angle</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\mu_v$</td>
+      <td style="text-align: left">$\cos(\theta_v)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\tau$</td>
+      <td style="text-align: left">Optical thickness of atmosphere</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\rho_t$</td>
+      <td style="text-align: left">Reflectance of target</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$E^{dir}_{sol}$</td>
+      <td style="text-align: left">Direct solar flux attentuated by atmosphere</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: left">$\mu_s E_s \exp(-\tau/\mu_s)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$t_d(\theta_s)$</td>
+      <td style="text-align: left">Diffuse transmittance factor</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: left">$E^{dir}_{sol}(\theta_s) / (\mu_s E_s) $</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$E^{dir}_{sol} $</td>
+      <td style="text-align: left">Diffuse solar irradiance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$S$</td>
+      <td style="text-align: left">Spherical albedo of atmosphere</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$T(\theta_s)$</td>
+      <td style="text-align: left">Total transmittance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right"> </td>
+      <td style="text-align: left">$\exp(-\tau/\mu_s) + t_d(\theta_s)$</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\exp(-\tau/\mu_v)$</td>
+      <td style="text-align: left">Direct and diffuse solar radiance reflected by surface transmitted to sensor</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\Delta \omega$</td>
+      <td style="text-align: left">Field of view angular width</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$\rho_a(\theta_s,\theta_v,\phi_s,\phi_v)$</td>
+      <td style="text-align: left">Intrinsic atmospheric radiance</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">$t’_d(\theta_v)$</td>
+      <td style="text-align: left">Atmospheric diffuse transmittance (enviro reflected then scattered into sensor)</td>
+    </tr>
+  </tbody>
+</table>
 
 <p>Assuming surface reflectance is Lambertian</p>
 
