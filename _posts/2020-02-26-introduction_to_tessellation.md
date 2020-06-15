@@ -7,7 +7,7 @@ title: "Understanding Tessellation"
 image: images/2020-02-26-introduction_to_tessellation/TFs_eg1.png
 badges: true
 comments: true
-permalink: tessellation
+permalink: /tessellation/
 ---
 
 # Understanding Tessellation

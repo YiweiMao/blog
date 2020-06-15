@@ -9,7 +9,7 @@ I am doing my PhD at the University of Sydney working on hyperspectral remote se
 I am also a musician in my spare time playing the Euphonium in the Parramatta Salvation Army Brass Band.
 
 ## Experience
-1. ARC Training Centre for CubeSats, UAVs & Their Applications and DST-Group<br>
+1. ARC Training Centre for CubeSats, UAVs & Their Applications<br>
     > PhD internship (2020 -- Current)
 2. Imagination Technologies<br>
     > Internship (2019 -- 2020)
@@ -27,7 +27,7 @@ I studied Mechatronics Engineering and Advanced Science (majored in Physics and 
 ### Academic Papers
 
 
-| Year | Paper Title &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
+| Year | Paper Title &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
 | -: | :- |
 | 2020 | TweetS@: A 3D Printed CubeSat Tweeting From Space |
 |   | Australian Space Research Conference 2019 Proceedings |
