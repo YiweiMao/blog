@@ -9,14 +9,14 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A walkthrough on Hamming codes." />
 <meta property="og:description" content="A walkthrough on Hamming codes." />
-<link rel="canonical" href="https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html" />
-<meta property="og:url" content="https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html" />
+<link rel="canonical" href="https://yiweimao.github.io/blog/hamming/" />
+<meta property="og:url" content="https://yiweimao.github.io/blog/hamming/" />
 <meta property="og:site_name" content="Yiwei Mao" />
 <meta property="og:image" content="https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-15T00:00:00-06:00" />
 <script type="application/ld+json">
-{"headline":"Hamming Code for Error Correction","description":"A walkthrough on Hamming codes.","datePublished":"2020-02-15T00:00:00-06:00","dateModified":"2020-02-15T00:00:00-06:00","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html"},"url":"https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html","@context":"https://schema.org"}</script>
+{"headline":"Hamming Code for Error Correction","description":"A walkthrough on Hamming codes.","datePublished":"2020-02-15T00:00:00-06:00","dateModified":"2020-02-15T00:00:00-06:00","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/hamming/"},"url":"https://yiweimao.github.io/blog/hamming/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -31,14 +31,14 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="A walkthrough on Hamming codes." />
 <meta property="og:description" content="A walkthrough on Hamming codes." />
-<link rel="canonical" href="https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html" />
-<meta property="og:url" content="https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html" />
+<link rel="canonical" href="https://yiweimao.github.io/blog/hamming/" />
+<meta property="og:url" content="https://yiweimao.github.io/blog/hamming/" />
 <meta property="og:site_name" content="Yiwei Mao" />
 <meta property="og:image" content="https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-15T00:00:00-06:00" />
 <script type="application/ld+json">
-{"headline":"Hamming Code for Error Correction","description":"A walkthrough on Hamming codes.","datePublished":"2020-02-15T00:00:00-06:00","dateModified":"2020-02-15T00:00:00-06:00","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html"},"url":"https://yiweimao.github.io/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html","@context":"https://schema.org"}</script>
+{"headline":"Hamming Code for Error Correction","description":"A walkthrough on Hamming codes.","datePublished":"2020-02-15T00:00:00-06:00","dateModified":"2020-02-15T00:00:00-06:00","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/hamming/"},"url":"https://yiweimao.github.io/blog/hamming/","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -280,19 +280,19 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
 <p>Consider a 7 bit string $\mathrm{b_7b_6b_5b_4b_3b_2b_1}=\texttt{0111100}$ which encodes a bit string ${\mathrm{m_4 m_3 m_2 m_1} = \texttt{b1011} = 11}$ and check bits $\mathrm{k_3 k_2 k_1} = \texttt{b001}$. This is the Hamming(7,4) code meaning $n=7$ and $m=4$.</p>
 
 <p>The original bit string:
-<img src="/images/2020-02-15-error_correction_files/origbits.png" alt="" title="Figure 1: Original bit string." width="50%"></p>
+<img src="/blog/images/2020-02-15-error_correction_files/origbits.png" alt="" title="Figure 1: Original bit string." width="50%"></p>
 
 <p>Suppose the bit $\mathrm{m_2}$ in position 5 has an error so instead of the original 1, it is now 0. The checking number $\mathrm{c_3 c_2 c_1}$ can be computed. In Figure 1, the first parity counts an <em>odd</em> number of 1’s in positions 1,3,5, and 7 so $c_1=1$.</p>
 
-<p><img src="/images/2020-02-15-error_correction_files/c1bit.png" alt="" title="Figure 2: Bit string with bit 5 corrupted. First parity bit is checked." width="60%"></p>
+<p><img src="/blog/images/2020-02-15-error_correction_files/c1bit.png" alt="" title="Figure 2: Bit string with bit 5 corrupted. First parity bit is checked." width="60%"></p>
 
 <p>Next, the second parity counts an <em>even</em> number of 1’s in the positions 2,3,6, and 7 so $c_2=0$.</p>
 
-<p><img src="/images/2020-02-15-error_correction_files/c2bit.png" alt="" title="Figure 3: Second parity bit is checked." width="60%"></p>
+<p><img src="/blog/images/2020-02-15-error_correction_files/c2bit.png" alt="" title="Figure 3: Second parity bit is checked." width="60%"></p>
 
 <p>The third parity counts an <em>odd</em> number of 1’s in the positions 4,5,6, and 7 so $c_3=1$.</p>
 
-<p><img src="/images/2020-02-15-error_correction_files/c3bit.png" alt="" title="Figure 4: Third parity bit is checked." width="60%"></p>
+<p><img src="/blog/images/2020-02-15-error_correction_files/c3bit.png" alt="" title="Figure 4: Third parity bit is checked." width="60%"></p>
 
 <p>This gives a checking number $c_3 c_2 c_1= \texttt{101}$ which is position 5. Therefore, there is an error in position 5 which can be corrected by converting the <code class="highlighter-rouge">0</code> into a <code class="highlighter-rouge">1</code>.</p>
 
@@ -324,11 +324,11 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
 
 <p>Imagine each code being encoded by corners in a $2^n$ hypercube, then if each code has a distance of $r$ between a neighbouring code, the codes lie on the surface of a $r+1$ sphere centered on some origin. For example, a $r=2$ code with $n=3$ can be: <code class="highlighter-rouge">000</code>, <code class="highlighter-rouge">011</code>, <code class="highlighter-rouge">101</code>, <code class="highlighter-rouge">110</code>. Each code is a distance 2 apart and sit on the corners of a cube as depicted in Figure 5.</p>
 
-<p><img src="/images/2020-02-15-error_correction_files/cube.png" alt="" title="Figure 5: 2 distance code on a cube." width="40%"></p>
+<p><img src="/blog/images/2020-02-15-error_correction_files/cube.png" alt="" title="Figure 5: 2 distance code on a cube." width="40%"></p>
 
 <p>When there is a distance of 2 between the codes, then a single error will convert a point on the cube to a coordinate that is meaningless. This corresponds to single error detection. However, this error cannot be corrected since the false code is equidistant to a number of other true codes. A 3 distance code for $n = 3$ can be: <code class="highlighter-rouge">000</code>, and <code class="highlighter-rouge">111</code>. This is shown in Figure 6.</p>
 
-<p><img src="/images/2020-02-15-error_correction_files/cube2.png" alt="" title="Figure 6: 3 distance code on a cube." width="40%"></p>
+<p><img src="/blog/images/2020-02-15-error_correction_files/cube2.png" alt="" title="Figure 6: 3 distance code on a cube." width="40%"></p>
 
 <p>When there is a single error, the error can be corrected because the false code will be closer to the correct code than the others. A more detailed list of actions is summarised in the following table.</p>
 
@@ -461,7 +461,7 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/blog/error%20correction/hamming%20code/hamming%20distance/2020/02/15/error_correction.html" hidden></a>
+</script><a class="u-url" href="/blog/hamming/" hidden></a>
 </article>
       </div>
     </main><footer class="site-footer h-card">
@@ -480,7 +480,7 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
         </p>
       </div>
       <div class="footer-col">
-        <p>A set of interesting topics I find interesting.</p>
+        <p>A set of topics I find interesting.</p>
       </div>
     </div>
 
