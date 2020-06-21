@@ -35,7 +35,7 @@ To add tessellation, the graphics pipeline requires three new stages.
 
 The [DX11 graphics pipeline](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-graphics-pipeline) consists of a series of stages shown in Figure 1.
 
-![](/images/2020-02-26-introduction_to_tessellation/d3d11-pipeline-stages.jpg "Figure 1: DX11 graphics pipeline"){:width="40%"}
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/d3d11-pipeline-stages.jpg "Figure 1: DX11 graphics pipeline"){:width="40%"}
 
 A description of each stage is summarised in this itemised list:
 1. Input-Assembler Stage
@@ -81,13 +81,13 @@ Tessellation factors specify how much each edge needs to be partitioned. For exa
 
 The inner factor specifies how the interior is partitioned. When this factor is even, the centre of the output domain is a degenerate point. For example, an inner factor of 1 means no inner partitioning and a tessellation factor of $n$ partitions the output domain into $\text{floor}(n/2)$ smaller versions of the output domain shape.
 
-![](/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png "Figure 2: Top left: no tessellation. Top right: degenerate triangle in the centre. Bottom left: one smaller triangle inside. Bottom right: two smaller triangles inside - one of them degenerate.")
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png "Figure 2: Top left: no tessellation. Top right: degenerate triangle in the centre. Bottom left: one smaller triangle inside. Bottom right: two smaller triangles inside - one of them degenerate.")
 
 
 ### Outer Factors
 This specifies how the outer edges of the output domain are partitioned.
 
-![](/images/2020-02-26-introduction_to_tessellation/TFs_eg2.png "Figure 3: Outer tessellation factors. The left, bottom, right, top edges have 1, 2, 3, and 4 segments."){:width="60%"}
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/TFs_eg2.png "Figure 3: Outer tessellation factors. The left, bottom, right, top edges have 1, 2, 3, and 4 segments."){:width="60%"}
 
 
 ## Partition Type
@@ -107,7 +107,7 @@ Fractional partitioning allows for a mix of normal and small segments and these 
 
 The number of segments on an edge is always odd so a tessellation factor of 5 would give five equally spaced segments. If the tessellation factor was 5.1, there would be seven segments, two of which are small and near a corner.
 
-![](/images/2020-02-26-introduction_to_tessellation/TFs_odd.png "Figure 4: Odd partitioning. Left: the inner factor 4 is rounded to the next odd integer - two new segments are generated from the corners. Middle: outer factor 2 is rounded to 3 and there are two smaller segments near the corners. The inner factor is rounded to 5 so there are two smaller versions of the triangle inside. Right: outer factor 1.5 is rounded to 3 and the bottom edge shows two very small segments near the edge. The inner quad is partitioned into two triangles.")
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/TFs_odd.png "Figure 4: Odd partitioning. Left: the inner factor 4 is rounded to the next odd integer - two new segments are generated from the corners. Middle: outer factor 2 is rounded to 3 and there are two smaller segments near the corners. The inner factor is rounded to 5 so there are two smaller versions of the triangle inside. Right: outer factor 1.5 is rounded to 3 and the bottom edge shows two very small segments near the edge. The inner quad is partitioned into two triangles.")
 
 
 #### Even
@@ -115,7 +115,7 @@ The number of segments on an edge is always odd so a tessellation factor of 5 wo
 
 The number of segmenst on an edge is always even so a tessellation factor of 4 would give four equally spaced segments and if the tessellation factor was 4.1, there would be six segments, two of which are small and near the midpoint.
 
-![](/images/2020-02-26-introduction_to_tessellation/TFs_even.png "Figure 5: Even partitioning. Left: three lines (not rounded up to next even integer!) and each line split into four equal segments. Middle: outer factor 1 rounded up to next even number 2. The bottom edge has a factor of 3 but has 4 segments, two of which are small near the midpoint. We can see a smaller triangle within and a second degenerate triangle at the centre. Right: new vertices are generated from the midpoint and the fractional partitioning also affects how the inside is partitioned.")
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/TFs_even.png "Figure 5: Even partitioning. Left: three lines (not rounded up to next even integer!) and each line split into four equal segments. Middle: outer factor 1 rounded up to next even number 2. The bottom edge has a factor of 3 but has 4 segments, two of which are small near the midpoint. We can see a smaller triangle within and a second degenerate triangle at the centre. Right: new vertices are generated from the midpoint and the fractional partitioning also affects how the inside is partitioned.")
 
 
 ## Output Domains
@@ -163,7 +163,7 @@ $$
 So the "colour" coordinate at point $\mathbf{x}$ is some linear combination of the triangle vertices.
 
 
-![](/images/2020-02-26-introduction_to_tessellation/bary_pic.png "Figure 6: Barycentric coordinates.")
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/bary_pic.png "Figure 6: Barycentric coordinates.")
 
 The DX11 Tessellation spec always returns two values: $u$ and $v$, to the third parameter needs to be computed using the unity condition of Barycentric coordinates - that is, $w=1-u-v$.
 
@@ -199,7 +199,7 @@ Tessellator(partition=PART_INT,outputPrim=OUTPUT_TRIANGLE_CW,tfs=[1,2,3,4]).doTe
 interact(showTess,partition=(0,3,1),outputPrim=(0,3,1),outTF0=(1,64,0.1),outTF1=(-1,64,0.1),
                  outTF2=(-1,64,0.01),outTF3=(-1,64,0.1),inTF0=(1,64,0.1),inTF1=(-1,64,0.1))
 ```
-![](/images/2020-02-26-introduction_to_tessellation/tess_interact_eg.png "Figure 7: Screenshot of tessellation Widget"){:width="50%"}
+![]({{site.baseurl}}/images/2020-02-26-introduction_to_tessellation/tess_interact_eg.png "Figure 7: Screenshot of tessellation Widget"){:width="50%"}
 
 
 ## Conclusion

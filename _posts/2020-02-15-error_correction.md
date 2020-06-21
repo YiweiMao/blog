@@ -7,6 +7,7 @@ title: "Hamming Code for Error Correction"
 image: images/2020-02-15-error_correction_files/cube.png
 badges: true
 comments: true
+permalink: /hamming/
 ---
 
 # Introduction
@@ -66,19 +67,19 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
 Consider a 7 bit string $\mathrm{b_7b_6b_5b_4b_3b_2b_1}=\texttt{0111100}$ which encodes a bit string ${\mathrm{m_4 m_3 m_2 m_1} = \texttt{b1011} = 11}$ and check bits $\mathrm{k_3 k_2 k_1} = \texttt{b001}$. This is the Hamming(7,4) code meaning $n=7$ and $m=4$.
 
 The original bit string:
-![](/images/2020-02-15-error_correction_files/origbits.png "Figure 1: Original bit string."){:width="50%"}
+![]({{site.baseurl}}/images/2020-02-15-error_correction_files/origbits.png "Figure 1: Original bit string."){:width="50%"}
 
 Suppose the bit $\mathrm{m_2}$ in position 5 has an error so instead of the original 1, it is now 0. The checking number $\mathrm{c_3 c_2 c_1}$ can be computed. In Figure 1, the first parity counts an *odd* number of 1's in positions 1,3,5, and 7 so $c_1=1$.
 
-![](/images/2020-02-15-error_correction_files/c1bit.png "Figure 2: Bit string with bit 5 corrupted. First parity bit is checked."){:width="60%"}
+![]({{site.baseurl}}/images/2020-02-15-error_correction_files/c1bit.png "Figure 2: Bit string with bit 5 corrupted. First parity bit is checked."){:width="60%"}
 
 Next, the second parity counts an *even* number of 1's in the positions 2,3,6, and 7 so $c_2=0$.
 
-![](/images/2020-02-15-error_correction_files/c2bit.png "Figure 3: Second parity bit is checked."){:width="60%"}
+![]({{site.baseurl}}/images/2020-02-15-error_correction_files/c2bit.png "Figure 3: Second parity bit is checked."){:width="60%"}
 
 The third parity counts an *odd* number of 1's in the positions 4,5,6, and 7 so $c_3=1$.
 
-![](/images/2020-02-15-error_correction_files/c3bit.png "Figure 4: Third parity bit is checked."){:width="60%"}
+![]({{site.baseurl}}/images/2020-02-15-error_correction_files/c3bit.png "Figure 4: Third parity bit is checked."){:width="60%"}
 
 This gives a checking number $c_3 c_2 c_1= \texttt{101}$ which is position 5. Therefore, there is an error in position 5 which can be corrected by converting the `0` into a `1`.
 
@@ -107,11 +108,11 @@ $$
 
 Imagine each code being encoded by corners in a $2^n$ hypercube, then if each code has a distance of $r$ between a neighbouring code, the codes lie on the surface of a $r+1$ sphere centered on some origin. For example, a $r=2$ code with $n=3$ can be: `000`, `011`, `101`, `110`. Each code is a distance 2 apart and sit on the corners of a cube as depicted in Figure 5.
 
-![](/images/2020-02-15-error_correction_files/cube.png "Figure 5: 2 distance code on a cube."){:width="40%"}
+![]({{site.baseurl}}/images/2020-02-15-error_correction_files/cube.png "Figure 5: 2 distance code on a cube."){:width="40%"}
 
 When there is a distance of 2 between the codes, then a single error will convert a point on the cube to a coordinate that is meaningless. This corresponds to single error detection. However, this error cannot be corrected since the false code is equidistant to a number of other true codes. A 3 distance code for $n = 3$ can be: `000`, and `111`. This is shown in Figure 6.
 
-![](/images/2020-02-15-error_correction_files/cube2.png "Figure 6: 3 distance code on a cube."){:width="40%"}
+![]({{site.baseurl}}/images/2020-02-15-error_correction_files/cube2.png "Figure 6: 3 distance code on a cube."){:width="40%"}
 
 
 When there is a single error, the error can be corrected because the false code will be closer to the correct code than the others. A more detailed list of actions is summarised in the following table.
