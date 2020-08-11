@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-15T00:00:00-06:00" />
 <script type="application/ld+json">
-{"headline":"Hamming Code for Error Correction","description":"A walkthrough on Hamming codes.","datePublished":"2020-02-15T00:00:00-06:00","dateModified":"2020-02-15T00:00:00-06:00","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/hamming/"},"url":"https://yiweimao.github.io/blog/hamming/","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-15T00:00:00-06:00","headline":"Hamming Code for Error Correction","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","description":"A walkthrough on Hamming codes.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/hamming/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/hamming/","dateModified":"2020-02-15T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -38,7 +38,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-15T00:00:00-06:00" />
 <script type="application/ld+json">
-{"headline":"Hamming Code for Error Correction","description":"A walkthrough on Hamming codes.","datePublished":"2020-02-15T00:00:00-06:00","dateModified":"2020-02-15T00:00:00-06:00","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/hamming/"},"url":"https://yiweimao.github.io/blog/hamming/","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-15T00:00:00-06:00","headline":"Hamming Code for Error Correction","image":"https://yiweimao.github.io/blog/images/2020-02-15-error_correction_files/cube.png","description":"A walkthrough on Hamming codes.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/hamming/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/hamming/","dateModified":"2020-02-15T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -160,7 +160,7 @@ window.onload = wrap_img;
 </ul><h1 id="introduction">
 <a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>Digital communication relies on encoded bits that are transmitted across noisy channels which inevitably suffer from errors. This can be a huge problem for systems that cannot deal with errors. An example of this is interplanetary satellites with limited bandwidth and long communication time delays - by the time the effects of an error is detected, it may be too late to send correction commands. Such systems need to be able to detect errors and correct them if possible. A real application of error correcting codes was on the Mariner 9 mission which required pictures to be sent back from Mars<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> (this used an error correcting Hadamard code).</p>
+<p>Digital communication relies on encoded bits that are transmitted across noisy channels which inevitably suffer from errors. This can be a huge problem for systems that cannot deal with errors. An example of this is interplanetary satellites with limited bandwidth and long communication time delays - by the time the effects of an error is detected, it may be too late to send correction commands. Such systems need to be able to detect errors and correct them if possible. A real application of error correcting codes was on the Mariner 9 mission which required pictures to be sent back from Mars<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup> (this used an error correcting Hadamard code).</p>
 
 <p>This blog will investigate the encoder and decoder stage - how digital information is encoded with error correcting information using the power of numbers. The idea of redundancy and parity is introduced before the Hamming code is described. An example using <code class="highlighter-rouge">Hamming(7,4)</code> is given followed by the notion of the Hamming distance. The blog post will conclude with a brief outline of developments since Hamming’s original paper in 1950.</p>
 
@@ -172,7 +172,7 @@ window.onload = wrap_img;
 <p>The redundancy factor $R$ is defined to be
 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo>:</mo><mo>=</mo><mfrac><mi>n</mi><mi>m</mi></mfrac></mrow><annotation encoding="application/x-tex">R := \frac{n}{m}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span></span><span class="base"><span class="strut" style="height:0.36687em;vertical-align:0em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.040392em;vertical-align:-0.345em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.695392em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">m</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span>
 and this measures the efficiency of the encoding.
-Redundancy is also a method of generating sparse decompositions of signals and this is known as compressed sensing. This method has applications in computed tomography because image reconstruction can be formulated as a compressed sensing problem<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>.</p>
+Redundancy is also a method of generating sparse decompositions of signals and this is known as compressed sensing. This method has applications in computed tomography because image reconstruction can be formulated as a compressed sensing problem<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup>.</p>
 
 <p>A core part of encoding information into the redundant bits is the idea of parity.</p>
 
@@ -303,7 +303,7 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
 
 <p>Double error detection can be added by using another bit that represents the parity for positions, that when expressed in binary, have a 1 in the $4^{th}$ position. Then there exists three cases with the first being all parity checks pass. The second case is when there is a single error and the last parity check fails. The checking number then gives the position of the error with zero now meaning the error is in the last check position. The last case is then the last parity check is satisfied but the checking number indicates that there is an error. In this case, there is a double error.</p>
 
-<p>Hamming (1950) <sup id="fnref:3"><a href="#fn:3" class="footnote">3</a></sup> gives a way of determining what actions can be done (error detection or error correction) by introducing a metric.</p>
+<p>Hamming (1950) <sup id="fnref:3" role="doc-noteref"><a href="#fn:3" class="footnote">3</a></sup> gives a way of determining what actions can be done (error detection or error correction) by introducing a metric.</p>
 
 <h1 id="hamming-distance">
 <a class="anchor" href="#hamming-distance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Hamming Distance</h1>
@@ -380,11 +380,11 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
 <h1 id="developments-in-error-correction-codes">
 <a class="anchor" href="#developments-in-error-correction-codes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Developments in Error Correction Codes</h1>
 
-<p>More general codes can be made by constructing a parity check matrix which contains error correction abilities based on linear dependent columns<sup id="fnref:4"><a href="#fn:4" class="footnote">4</a></sup>. From there, the mapping between messages and code can be found using a generator matrix computed from the parity matrix<sup id="fnref:5"><a href="#fn:5" class="footnote">5</a></sup>. The example shown in this blog post relied on operations on a Galois (or finite) field with characteristic 2 (so addition and multiplication is done modulo 2). Other fields can also be used such $\mathbf{F}_{11}$ which is implemented in the User Datagram Protocol (UDP). UDP can also fix erasures - when bits are lost rather than flipped<sup id="fnref:6"><a href="#fn:6" class="footnote">6</a></sup>. There is also a family of Hamming codes which include extensions and shortenings that allow Hamming codes to perform better or improve the redundancy factor<sup id="fnref:7"><a href="#fn:7" class="footnote">7</a></sup>.</p>
+<p>More general codes can be made by constructing a parity check matrix which contains error correction abilities based on linear dependent columns<sup id="fnref:4" role="doc-noteref"><a href="#fn:4" class="footnote">4</a></sup>. From there, the mapping between messages and code can be found using a generator matrix computed from the parity matrix<sup id="fnref:5" role="doc-noteref"><a href="#fn:5" class="footnote">5</a></sup>. The example shown in this blog post relied on operations on a Galois (or finite) field with characteristic 2 (so addition and multiplication is done modulo 2). Other fields can also be used such $\mathbf{F}_{11}$ which is implemented in the User Datagram Protocol (UDP). UDP can also fix erasures - when bits are lost rather than flipped<sup id="fnref:6" role="doc-noteref"><a href="#fn:6" class="footnote">6</a></sup>. There is also a family of Hamming codes which include extensions and shortenings that allow Hamming codes to perform better or improve the redundancy factor<sup id="fnref:7" role="doc-noteref"><a href="#fn:7" class="footnote">7</a></sup>.</p>
 
-<p>Multiple error correction codes can be done using Reed-Solomon (RS)<sup id="fnref:8"><a href="#fn:8" class="footnote">8</a></sup> and Bose-Chaudhuri-Hocquenghem (BCH)<sup id="fnref:9"><a href="#fn:9" class="footnote">9</a></sup> which can be hard to decode because the number of errors is not known beforehand. By using primitive polynomials for the Galois field, the coding can be done on Linear Feedback Shift Registers (LFSR)<sup id="fnref:10"><a href="#fn:10" class="footnote">10</a></sup>. The location of errors can be found by solving for the roots of an error locator polynomial<sup id="fnref:11"><a href="#fn:11" class="footnote">11</a></sup> given by the Massey algorithm<sup id="fnref:12"><a href="#fn:12" class="footnote">12</a></sup>. Roots of the locator polynomial are found using Chien search and the Forney formula gives a way of computing the values for erasures<sup id="fnref:13"><a href="#fn:13" class="footnote">13</a></sup>. Following this, Sugiyama invented a method for decoding Goppa codes based on the Euclidean algorithm and Kerlekamp’s key equation, forgoing the need to find the locator polynomial<sup id="fnref:14"><a href="#fn:14" class="footnote">14</a></sup>. Other decoding methods include the Discrete Fourier Transform (DFT)<sup id="fnref:15"><a href="#fn:15" class="footnote">15</a></sup>.</p>
+<p>Multiple error correction codes can be done using Reed-Solomon (RS)<sup id="fnref:8" role="doc-noteref"><a href="#fn:8" class="footnote">8</a></sup> and Bose-Chaudhuri-Hocquenghem (BCH)<sup id="fnref:9" role="doc-noteref"><a href="#fn:9" class="footnote">9</a></sup> which can be hard to decode because the number of errors is not known beforehand. By using primitive polynomials for the Galois field, the coding can be done on Linear Feedback Shift Registers (LFSR)<sup id="fnref:10" role="doc-noteref"><a href="#fn:10" class="footnote">10</a></sup>. The location of errors can be found by solving for the roots of an error locator polynomial<sup id="fnref:11" role="doc-noteref"><a href="#fn:11" class="footnote">11</a></sup> given by the Massey algorithm<sup id="fnref:12" role="doc-noteref"><a href="#fn:12" class="footnote">12</a></sup>. Roots of the locator polynomial are found using Chien search and the Forney formula gives a way of computing the values for erasures<sup id="fnref:13" role="doc-noteref"><a href="#fn:13" class="footnote">13</a></sup>. Following this, Sugiyama invented a method for decoding Goppa codes based on the Euclidean algorithm and Kerlekamp’s key equation, forgoing the need to find the locator polynomial<sup id="fnref:14" role="doc-noteref"><a href="#fn:14" class="footnote">14</a></sup>. Other decoding methods include the Discrete Fourier Transform (DFT)<sup id="fnref:15" role="doc-noteref"><a href="#fn:15" class="footnote">15</a></sup>.</p>
 
-<p>Many different types of codes exist including cyclic codes and convolutional or continuous codes. For instance, the Chinese remainder theorem is used to decode Fire codes<sup id="fnref:16"><a href="#fn:16" class="footnote">16</a></sup> which is a type of cyclic code. Convolutional codes can be decoded with the Viterbi algorithm<sup id="fnref:17"><a href="#fn:17" class="footnote">17</a></sup>. Applications of error correcting coding and decoding extend to public key encryption<sup id="fnref:18"><a href="#fn:18" class="footnote">18</a></sup> amongst others.</p>
+<p>Many different types of codes exist including cyclic codes and convolutional or continuous codes. For instance, the Chinese remainder theorem is used to decode Fire codes<sup id="fnref:16" role="doc-noteref"><a href="#fn:16" class="footnote">16</a></sup> which is a type of cyclic code. Convolutional codes can be decoded with the Viterbi algorithm<sup id="fnref:17" role="doc-noteref"><a href="#fn:17" class="footnote">17</a></sup>. Applications of error correcting coding and decoding extend to public key encryption<sup id="fnref:18" role="doc-noteref"><a href="#fn:18" class="footnote">18</a></sup> amongst others.</p>
 
 <h1 id="conclusion">
 <a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h1>
@@ -394,61 +394,61 @@ The $i^{th}$ check bit records the parity of bit positions which have a 1 in the
 <h1 id="references">
 <a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
 
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>Brian J Thompson, Robert Rennie Shannon, et al. Space Optics: Proceedings of the Ninth International Congress of the International Commission for Optics (ico IX), volume 9. National Academies, 1974. <a href="#fnref:1" class="reversefootnote">↩</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>Brian J Thompson, Robert Rennie Shannon, et al. Space Optics: Proceedings of the Ninth International Congress of the International Commission for Optics (ico IX), volume 9. National Academies, 1974. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:2">
-      <p>Hengyong Yu and Ge Wang. Compressed sensing based interior tomography. Physics in medicine &amp; biology, 54(9):2791, 2009. <a href="#fnref:2" class="reversefootnote">↩</a></p>
+    <li id="fn:2" role="doc-endnote">
+      <p>Hengyong Yu and Ge Wang. Compressed sensing based interior tomography. Physics in medicine &amp; biology, 54(9):2791, 2009. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:3">
-      <p>Richard W Hamming. Error detecting and error correcting codes. The Bell system technical journal, 29(2):147–160, 1950. <a href="#fnref:3" class="reversefootnote">↩</a></p>
+    <li id="fn:3" role="doc-endnote">
+      <p>Richard W Hamming. Error detecting and error correcting codes. The Bell system technical journal, 29(2):147–160, 1950. <a href="#fnref:3" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:4">
-      <p>Robert Gallager. Low-density parity-check codes. IRE Transactions on information theory, 8(1):21–28, 1962. <a href="#fnref:4" class="reversefootnote">↩</a></p>
+    <li id="fn:4" role="doc-endnote">
+      <p>Robert Gallager. Low-density parity-check codes. IRE Transactions on information theory, 8(1):21–28, 1962. <a href="#fnref:4" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:5">
-      <p>David JC MacKay and Radford M Neal. Near shannon limit performance of low density parity check codes. Electronics letters, 32(18):1645–1646, 1996. <a href="#fnref:5" class="reversefootnote">↩</a></p>
+    <li id="fn:5" role="doc-endnote">
+      <p>David JC MacKay and Radford M Neal. Near shannon limit performance of low density parity check codes. Electronics letters, 32(18):1645–1646, 1996. <a href="#fnref:5" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:6">
-      <p>Jon Postel. User datagram protocol. Isi, 1980. <a href="#fnref:6" class="reversefootnote">↩</a></p>
+    <li id="fn:6" role="doc-endnote">
+      <p>Jon Postel. User datagram protocol. Isi, 1980. <a href="#fnref:6" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:7">
-      <p>Victor K Wei. Generalized hamming weights for linear codes. IEEE Transactions on information theory, 37(5):1412–1418, 1991. <a href="#fnref:7" class="reversefootnote">↩</a></p>
+    <li id="fn:7" role="doc-endnote">
+      <p>Victor K Wei. Generalized hamming weights for linear codes. IEEE Transactions on information theory, 37(5):1412–1418, 1991. <a href="#fnref:7" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:8">
-      <p>Stephen B Wicker and Vijay K Bhargava. Reed-Solomon codes and their applications. John Wiley &amp; Sons, 1999. <a href="#fnref:8" class="reversefootnote">↩</a></p>
+    <li id="fn:8" role="doc-endnote">
+      <p>Stephen B Wicker and Vijay K Bhargava. Reed-Solomon codes and their applications. John Wiley &amp; Sons, 1999. <a href="#fnref:8" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:9">
-      <p>Robert Chien. Cyclic decoding procedures for bose-chaudhuri-hocquenghem codes. IEEE Transactions on information theory, 10(4):357–363, 1964.9 <a href="#fnref:9" class="reversefootnote">↩</a></p>
+    <li id="fn:9" role="doc-endnote">
+      <p>Robert Chien. Cyclic decoding procedures for bose-chaudhuri-hocquenghem codes. IEEE Transactions on information theory, 10(4):357–363, 1964.9 <a href="#fnref:9" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:10">
-      <p>Sybille Hellebrand, Janusz Rajski, Steffen Tarnick, Srikanth Venkataraman, and Bernard Courtois. Built-in test for circuits with scan based on reseeding of multiple-polynomial linear feedback shift registers. IEEE Transactions on Computers, 44(2):223–233, 1995. <a href="#fnref:10" class="reversefootnote">↩</a></p>
+    <li id="fn:10" role="doc-endnote">
+      <p>Sybille Hellebrand, Janusz Rajski, Steffen Tarnick, Srikanth Venkataraman, and Bernard Courtois. Built-in test for circuits with scan based on reseeding of multiple-polynomial linear feedback shift registers. IEEE Transactions on Computers, 44(2):223–233, 1995. <a href="#fnref:10" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:11">
-      <p>T-K Truong, J-H Jeng, and Irving S Reed. Fast algorithm for computing the roots of error locator polynomials up to degree 11 in reed-solomon decoders. IEEE Transactions on Communications, 49(5):779–783, 2001. <a href="#fnref:11" class="reversefootnote">↩</a></p>
+    <li id="fn:11" role="doc-endnote">
+      <p>T-K Truong, J-H Jeng, and Irving S Reed. Fast algorithm for computing the roots of error locator polynomials up to degree 11 in reed-solomon decoders. IEEE Transactions on Communications, 49(5):779–783, 2001. <a href="#fnref:11" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:12">
-      <p>G-L Feng and Kenneth K Tzeng. A generalization of the berlekamp-massey algorithm for multisequence shift-register synthesis with applications to decoding cyclic codes. IEEE Transactions on Information Theory, 37(5):1274–1287, 1991. <a href="#fnref:12" class="reversefootnote">↩</a></p>
+    <li id="fn:12" role="doc-endnote">
+      <p>G-L Feng and Kenneth K Tzeng. A generalization of the berlekamp-massey algorithm for multisequence shift-register synthesis with applications to decoding cyclic codes. IEEE Transactions on Information Theory, 37(5):1274–1287, 1991. <a href="#fnref:12" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:13">
-      <p>Douglas A Leonard. A generalized forney formula for algebraic-geometric codes. IEEE Transactions on Information Theory, 42(4):1263–1268, 1996. <a href="#fnref:13" class="reversefootnote">↩</a></p>
+    <li id="fn:13" role="doc-endnote">
+      <p>Douglas A Leonard. A generalized forney formula for algebraic-geometric codes. IEEE Transactions on Information Theory, 42(4):1263–1268, 1996. <a href="#fnref:13" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:14">
-      <p>Yasuo Sugiyama, Masao Kasahara, Shigeichi Hirasawa, and Toshihiko Namekawa. A method for solving key equation for decoding goppa codes. Information and Control, 27(1):87–99, 1975. <a href="#fnref:14" class="reversefootnote">↩</a></p>
+    <li id="fn:14" role="doc-endnote">
+      <p>Yasuo Sugiyama, Masao Kasahara, Shigeichi Hirasawa, and Toshihiko Namekawa. A method for solving key equation for decoding goppa codes. Information and Control, 27(1):87–99, 1975. <a href="#fnref:14" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:15">
-      <p>Richard E. Blahut. Transform techniques for error control codes. IBM Journal of Research and development, 23(3):299–315, 1979. <a href="#fnref:15" class="reversefootnote">↩</a></p>
+    <li id="fn:15" role="doc-endnote">
+      <p>Richard E. Blahut. Transform techniques for error control codes. IBM Journal of Research and development, 23(3):299–315, 1979. <a href="#fnref:15" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:16">
-      <p>R Chien. Burst-correcting codes with high-speed decoding. IEEE Transactions on Information Theory, 15(1):109–113, 1969. <a href="#fnref:16" class="reversefootnote">↩</a></p>
+    <li id="fn:16" role="doc-endnote">
+      <p>R Chien. Burst-correcting codes with high-speed decoding. IEEE Transactions on Information Theory, 15(1):109–113, 1969. <a href="#fnref:16" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:17">
-      <p>G David Forney. The viterbi algorithm. Proceedings of the IEEE, 61(3):268–278, 1973. <a href="#fnref:17" class="reversefootnote">↩</a></p>
+    <li id="fn:17" role="doc-endnote">
+      <p>G David Forney. The viterbi algorithm. Proceedings of the IEEE, 61(3):268–278, 1973. <a href="#fnref:17" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:18">
-      <p>Yuan Xing Li, Robert H Deng, and Xin Mei Wang. On the equivalence of mceliece’s and niederreiter’s public-key cryptosystems. IEEE Transactions on Information Theory, 40(1):271–273, 1994. <a href="#fnref:18" class="reversefootnote">↩</a></p>
+    <li id="fn:18" role="doc-endnote">
+      <p>Yuan Xing Li, Robert H Deng, and Xin Mei Wang. On the equivalence of mceliece’s and niederreiter’s public-key cryptosystems. IEEE Transactions on Information Theory, 40(1):271–273, 1994. <a href="#fnref:18" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
   </ol>
 </div>

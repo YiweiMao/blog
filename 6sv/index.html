@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-06-14T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Introduction to 6SV2.1: A Radiative Transfer Model","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","datePublished":"2020-06-14T00:00:00-05:00","dateModified":"2020-06-14T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv/"},"url":"https://yiweimao.github.io/blog/6sv/","@context":"https://schema.org"}</script>
+{"datePublished":"2020-06-14T00:00:00-05:00","headline":"Introduction to 6SV2.1: A Radiative Transfer Model","image":"https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/6sv/","dateModified":"2020-06-14T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -38,7 +38,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-06-14T00:00:00-05:00" />
 <script type="application/ld+json">
-{"headline":"Introduction to 6SV2.1: A Radiative Transfer Model","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","datePublished":"2020-06-14T00:00:00-05:00","dateModified":"2020-06-14T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv/"},"url":"https://yiweimao.github.io/blog/6sv/","@context":"https://schema.org"}</script>
+{"datePublished":"2020-06-14T00:00:00-05:00","headline":"Introduction to 6SV2.1: A Radiative Transfer Model","image":"https://yiweimao.github.io/blog/images/2020-06-14-6sv_files/6sv_vermote.png","description":"A summary of the core theory behind 6SV2.1 for atmospheric correction.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/6sv/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/6sv/","dateModified":"2020-06-14T00:00:00-05:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -168,7 +168,7 @@ window.onload = wrap_img;
 </ul><h1 id="introduction">
 <a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>In this blog post, I will cover the basics from the <a href="http://6s.ltdri.org/pages/manual.html">6SV2.1 manual</a>. 6S stands for “ <strong>S</strong>econd <strong>S</strong>imulation of a <strong>S</strong>atellite <strong>S</strong>ignal in the <strong>S</strong>olar <strong>S</strong>pectrum” and the V stands for <em>vectorised</em> meaning the polarisation of light is taken to account. This radiative transfer (RT) code is used to correct for atmospheric absorption and scattering. It also enables<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup>:</p>
+<p>In this blog post, I will cover the basics from the <a href="http://6s.ltdri.org/pages/manual.html">6SV2.1 manual</a>. 6S stands for “ <strong>S</strong>econd <strong>S</strong>imulation of a <strong>S</strong>atellite <strong>S</strong>ignal in the <strong>S</strong>olar <strong>S</strong>pectrum” and the V stands for <em>vectorised</em> meaning the polarisation of light is taken to account. This radiative transfer (RT) code is used to correct for atmospheric absorption and scattering. It also enables<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote">1</a></sup>:</p>
 
 <ul>
   <li>accurate simulations of satellite, aircraft, and UAV observations,</li>
@@ -177,7 +177,7 @@ window.onload = wrap_img;
   <li>and use of Lambertian and anisotropic ground surfaces.</li>
 </ul>
 
-<p>According to Vermote <em>et al.</em>, it is “one of the most widely used, rigorously validated, and heavily documented RT codes known in the scientific remote-sensing community.” Version 1 of the 6S code appeared in 1997 and now in the new version 2.1 release in 2015, it uses the method of successive orders of scattering for more accurate approximations that were previously too computationally taxing on old hardware. There are also more configurable settings. The code is written in <em>Fortran</em> which is very common for scientific libraries where speed is of primary concern. A comparison with other radiative transfer codes can be found in Kotchenova<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup> (2008). The default <em>standard accuracy</em> settings will provide around 0.4–0.6% accuracy compared to standard benchmarks.</p>
+<p>According to Vermote <em>et al.</em>, it is “one of the most widely used, rigorously validated, and heavily documented RT codes known in the scientific remote-sensing community.” Version 1 of the 6S code appeared in 1997 and now in the new version 2.1 release in 2015, it uses the method of successive orders of scattering for more accurate approximations that were previously too computationally taxing on old hardware. There are also more configurable settings. The code is written in <em>Fortran</em> which is very common for scientific libraries where speed is of primary concern. A comparison with other radiative transfer codes can be found in Kotchenova<sup id="fnref:2" role="doc-noteref"><a href="#fn:2" class="footnote">2</a></sup> (2008). The default <em>standard accuracy</em> settings will provide around 0.4–0.6% accuracy compared to standard benchmarks.</p>
 
 <h1 id="background">
 <a class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h1>
@@ -406,13 +406,13 @@ M1001 80h400000v40h-400000z"></path></svg></span></span></span><span class="vlis
 <h1 id="references">
 <a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
 
-<div class="footnotes">
+<div class="footnotes" role="doc-endnotes">
   <ol>
-    <li id="fn:1">
-      <p>Vermote, E. F. T. D., Tanré, D., Deuzé, J. L., Herman, M., Morcrette, J. J., &amp; Kotchenova, S. Y. (2006). Second simulation of a satellite signal in the solar spectrum-vector (6SV). 6S User Guide Version, 3, 1-55. <a href="#fnref:1" class="reversefootnote">↩</a></p>
+    <li id="fn:1" role="doc-endnote">
+      <p>Vermote, E. F. T. D., Tanré, D., Deuzé, J. L., Herman, M., Morcrette, J. J., &amp; Kotchenova, S. Y. (2006). Second simulation of a satellite signal in the solar spectrum-vector (6SV). 6S User Guide Version, 3, 1-55. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
-    <li id="fn:2">
-      <p>Kotchenova, S. Y., Vermote, E. F., Levy, R., &amp; Lyapustin, A. (2008). Radiative transfer codes for atmospheric correction and aerosol retrieval: intercomparison study. Applied Optics, 47(13), 2215-2226. <a href="#fnref:2" class="reversefootnote">↩</a></p>
+    <li id="fn:2" role="doc-endnote">
+      <p>Kotchenova, S. Y., Vermote, E. F., Levy, R., &amp; Lyapustin, A. (2008). Radiative transfer codes for atmospheric correction and aerosol retrieval: intercomparison study. Applied Optics, 47(13), 2215-2226. <a href="#fnref:2" class="reversefootnote" role="doc-backlink">↩</a></p>
     </li>
   </ol>
 </div>
