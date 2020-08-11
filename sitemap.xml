@@ -1,39 +1,105 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url>
-<loc>https://yiweimao.github.io/blog/hamming/</loc>
-<lastmod>2020-02-15T00:00:00-06:00</lastmod>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/tessellation/</loc>
-<lastmod>2020-02-26T00:00:00-06:00</lastmod>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/hyperspectral/2020/04/18/Exploring_Hyperspectral.html</loc>
-<lastmod>2020-04-18T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/2020/04/27/Basics_of_Radiometric_Correction</loc>
-<lastmod>2020-04-27T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/mri/</loc>
-<lastmod>2020-06-13T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/6sv/</loc>
-<lastmod>2020-06-14T00:00:00-05:00</lastmod>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/about/</loc>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/</loc>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/search/</loc>
-</url>
-<url>
-<loc>https://yiweimao.github.io/blog/categories/</loc>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/6sv/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/mri/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/2020/04/27/Basics_of_Radiometric_Correction</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/hyperspectral/2020/04/18/Exploring_Hyperspectral.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/tessellation/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/hamming/</loc>
+  </url>
+  
+  
+
+
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/404.html</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/about/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/assets/js/search-data.json</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/search/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/assets/js/search.js</loc>
+  </url>
+  
+  
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/categories/</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/assets/css/style.css</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/feed.xml</loc>
+  </url>
+  
+  
+  
+  <url>
+    <loc>https://yiweimao.github.io/robots.txt</loc>
+  </url>
+  
+  
 </urlset>
