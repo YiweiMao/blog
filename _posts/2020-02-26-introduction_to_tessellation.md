@@ -1,9 +1,9 @@
 ---
 toc: true
 layout: post
-description: "An introduction to tessellation. Python code is provided to run the visualisation."
+description: "An introduction to GPU tessellation. Python code is provided to run the visualisation."
 categories: ["DX11","Tessellation","parity","visualisation"]
-title: "Understanding Tessellation"
+title: "Understanding GPU Tessellation"
 image: images/2020-02-26-introduction_to_tessellation/TFs_eg1.png
 badges: true
 comments: true
