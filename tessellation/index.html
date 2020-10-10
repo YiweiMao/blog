@@ -3,12 +3,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Understanding Tessellation | Yiwei Mao</title>
+<title>Understanding GPU Tessellation | Yiwei Mao</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Understanding Tessellation" />
+<meta property="og:title" content="Understanding GPU Tessellation" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="An introduction to tessellation. Python code is provided to run the visualisation." />
-<meta property="og:description" content="An introduction to tessellation. Python code is provided to run the visualisation." />
+<meta name="description" content="An introduction to GPU tessellation. Python code is provided to run the visualisation." />
+<meta property="og:description" content="An introduction to GPU tessellation. Python code is provided to run the visualisation." />
 <link rel="canonical" href="https://yiweimao.github.io/blog/tessellation/" />
 <meta property="og:url" content="https://yiweimao.github.io/blog/tessellation/" />
 <meta property="og:site_name" content="Yiwei Mao" />
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-26T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2020-02-26T00:00:00-06:00","headline":"Understanding Tessellation","image":"https://yiweimao.github.io/blog/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png","description":"An introduction to tessellation. Python code is provided to run the visualisation.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/tessellation/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/tessellation/","dateModified":"2020-02-26T00:00:00-06:00","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-26T00:00:00-06:00","headline":"Understanding GPU Tessellation","image":"https://yiweimao.github.io/blog/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png","description":"An introduction to GPU tessellation. Python code is provided to run the visualisation.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/tessellation/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/tessellation/","dateModified":"2020-02-26T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -25,12 +25,12 @@
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-61578211-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
 
 <link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Understanding Tessellation | Yiwei Mao</title>
+<title>Understanding GPU Tessellation | Yiwei Mao</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Understanding Tessellation" />
+<meta property="og:title" content="Understanding GPU Tessellation" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="An introduction to tessellation. Python code is provided to run the visualisation." />
-<meta property="og:description" content="An introduction to tessellation. Python code is provided to run the visualisation." />
+<meta name="description" content="An introduction to GPU tessellation. Python code is provided to run the visualisation." />
+<meta property="og:description" content="An introduction to GPU tessellation. Python code is provided to run the visualisation." />
 <link rel="canonical" href="https://yiweimao.github.io/blog/tessellation/" />
 <meta property="og:url" content="https://yiweimao.github.io/blog/tessellation/" />
 <meta property="og:site_name" content="Yiwei Mao" />
@@ -38,7 +38,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-02-26T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2020-02-26T00:00:00-06:00","headline":"Understanding Tessellation","image":"https://yiweimao.github.io/blog/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png","description":"An introduction to tessellation. Python code is provided to run the visualisation.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/tessellation/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/tessellation/","dateModified":"2020-02-26T00:00:00-06:00","@context":"https://schema.org"}</script>
+{"datePublished":"2020-02-26T00:00:00-06:00","headline":"Understanding GPU Tessellation","image":"https://yiweimao.github.io/blog/images/2020-02-26-introduction_to_tessellation/TFs_eg1.png","description":"An introduction to GPU tessellation. Python code is provided to run the visualisation.","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/tessellation/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/tessellation/","dateModified":"2020-02-26T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -115,7 +115,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Understanding Tessellation</h1><p class="page-description">An introduction to tessellation. Python code is provided to run the visualisation.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-26T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Understanding GPU Tessellation</h1><p class="page-description">An introduction to GPU tessellation. Python code is provided to run the visualisation.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-26T00:00:00-06:00" itemprop="datePublished">
         Feb 26, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -459,7 +459,7 @@ make
         </p>
       </div>
       <div class="footer-col">
-        <p>A set of topics I find interesting.</p>
+        <p>Teaching my past self and reminding my future self.</p>
       </div>
     </div>
 
