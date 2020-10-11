@@ -1,15 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2020-10-10T18:56:54-05:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Why PhD Students Self-sabotage: An Opinionated Guide to PhD Writing</title><link href="https://yiweimao.github.io/blog/phd_writing/" rel="alternate" type="text/html" title="Why PhD Students Self-sabotage: An Opinionated Guide to PhD Writing" /><published>2020-10-30T00:00:00-05:00</published><updated>2020-10-30T00:00:00-05:00</updated><id>https://yiweimao.github.io/blog/phd_guide</id><content type="html" xml:base="https://yiweimao.github.io/blog/phd_writing/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2020-10-11T05:55:08-05:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Why PhD Students Self-sabotage: An Opinionated Guide to PhD Writing</title><link href="https://yiweimao.github.io/blog/phd_writing/" rel="alternate" type="text/html" title="Why PhD Students Self-sabotage: An Opinionated Guide to PhD Writing" /><published>2020-10-30T00:00:00-05:00</published><updated>2020-10-30T00:00:00-05:00</updated><id>https://yiweimao.github.io/blog/phd_guide</id><content type="html" xml:base="https://yiweimao.github.io/blog/phd_writing/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
-&lt;p&gt;As a PhD student or academic, writing is a core element of the job. In order to succeed, you need to be productive writers. However, many things get in the way. Sometimes people think they should write when they are “ready” and need to read endlessly or conduct more experiments. Ironically, this makes them less likely to write and more confused. And sometimes people think they should understand the material first and then write but in practice, after writing, they find that there were inconsistencies and certain parts didn’t flow well - signs that they didn’t understand the material coherently in the first place. As &lt;a href=&quot;https://www.nature.com/articles/nj7354-129a&quot;&gt;Gardiner and Kearns&lt;/a&gt; says,&lt;/p&gt;
+&lt;p&gt;As a PhD student or academic, writing is a core element of the job. In order to succeed, you need to be a productive writer. However, completing a PhD is by no means easy and I can attest to some of the self-sabotaging behaviours that will be mentioned in this post. Half of the reason I wrote this is to summarise a bunch of tips I’ve come across for my future self because I know I will need to be reminded of them. The other half is to put this out for other PhD students and academics in the hopes it is useful.&lt;/p&gt;
+
+&lt;p&gt;Sometimes people think they should write when they are “ready” and need to read endlessly or conduct more experiments. Ironically, this makes them less likely to write and more confused. And sometimes people think they should understand the material first and then write but in practice, after writing, they find that there were inconsistencies and certain parts didn’t flow well - signs that they didn’t understand the material coherently in the first place. According to this &lt;a href=&quot;https://www.nature.com/articles/nj7354-129a&quot;&gt;Nature article&lt;/a&gt;,&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;In fact, writing clarifies your thinking. Writing is not recording - you don’t just take a photocopy of what is in your head and put it on the page. It is a far more creative and interactive process. As you write, you develop your thoughts. Writing is, in fact, rigorous thinking.&lt;/p&gt;
+  &lt;p&gt;In fact, writing clarifies your thinking. Writing is not recording - you don’t just take a photocopy of what is in your head and put it on the page. It is a far more creative and interactive process. As you write, you develop your thoughts. Writing is, in fact, rigorous thinking. Writing means putting new words on the page or substantially rewriting old words.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Many of the barriers that prevent me from writing&lt;/p&gt;
-
-&lt;p&gt;This post is a summary of writing tips I’ve picked up over the years.&lt;/p&gt;
-
-&lt;p&gt;Lower level of stress and improved ability to complete&lt;/p&gt;
+&lt;h1 id=&quot;self-sabotaging-behaviours&quot;&gt;Self-Sabotaging Behaviours&lt;/h1&gt;
+&lt;p&gt;Kearns &lt;sup id=&quot;fnref-1&quot; class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn-1&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;overcommitting&quot;&gt;Overcommitting&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -45,6 +44,38 @@
 &lt;blockquote&gt;
   &lt;p&gt;Trying to work in a busy or unsuitable location or situation&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;h2 id=&quot;binge-writing-or-snack-writing&quot;&gt;Binge Writing or Snack Writing&lt;/h2&gt;
+
+&lt;p&gt;When possible,
+try snack writing first thing in the morning.
+Our experience suggests that this increases the
+chances of success by minimizing distractions
+and ensuring that you have sufficient energy to
+write clever things. However, for snack writing
+to lead to really high-quality results, you also
+need to write in a very specific way.&lt;/p&gt;
+
+&lt;p&gt;Big blocks hardly ever come, and when they do, usually not get used productively. 
+and that research shows that getting into the habit of writing regularly in small chunks (as Gardiner and Kearns calls “snack writing”) increases productivity.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-writing-is-not&quot;&gt;What Writing Is Not&lt;/h1&gt;
+&lt;p&gt;Writing isn’t editing: you should not spend
+your brief snack-writing time trying to find
+the perfect word or getting your grammar
+right. Writing isn’t reading journal articles for
+research: write first and read afterwards, so
+that your writing shows you what you need
+to read. Writing isn’t referencing: when you
+make that killer argument and want to reference Smith and Brown (2006; or maybe it
+was 2007?), don’t stop and look it up. Write
+“Smith &amp;amp; Brown (200??)” and keep going.
+You can look up the reference later. Furthermore, writing is not formatting, literature
+searching, photocopying, e-mailing or
+nosing around on Facebook. Writing — at
+least for your snack-writing sessions —
+means putting new words on the page or
+substantially rewriting existing words.&lt;/p&gt;
 
 &lt;h1 id=&quot;ergonomics&quot;&gt;Ergonomics&lt;/h1&gt;
 
@@ -97,7 +128,9 @@ progress bars.&lt;/p&gt;
 
 &lt;p&gt;“You’re out of excuses. Now go write.”&lt;/p&gt;
 
-&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;</content><author><name></name></author><summary type="html">Introduction</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://yiweimao.github.io/blog/images/2020-10-30-phd_guide_files/sab_bike.png" /><media:content medium="image" url="https://yiweimao.github.io/blog/images/2020-10-30-phd_guide_files/sab_bike.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introduction to 6SV2.1: A Radiative Transfer Model</title><link href="https://yiweimao.github.io/blog/6sv/" rel="alternate" type="text/html" title="Introduction to 6SV2.1: A Radiative Transfer Model" /><published>2020-06-14T00:00:00-05:00</published><updated>2020-06-14T00:00:00-05:00</updated><id>https://yiweimao.github.io/blog/6sv</id><content type="html" xml:base="https://yiweimao.github.io/blog/6sv/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+&lt;h1 id=&quot;references&quot;&gt;References&lt;/h1&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;&lt;p id=&quot;fn-1&quot;&gt;1. Kearns, H., Gardiner, M. and Marshall, K., 2008. Innovation in PhD completion: The hardy shall succeed (and be happy!). Higher Education Research &amp;amp; Development, 27(1), pp.77-89.&lt;a href=&quot;#fnref-1&quot; class=&quot;footnote footnotes&quot;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;</content><author><name></name></author><summary type="html">Introduction</summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://yiweimao.github.io/blog/images/2020-10-30-phd_guide_files/sab_bike.png" /><media:content medium="image" url="https://yiweimao.github.io/blog/images/2020-10-30-phd_guide_files/sab_bike.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Introduction to 6SV2.1: A Radiative Transfer Model</title><link href="https://yiweimao.github.io/blog/6sv/" rel="alternate" type="text/html" title="Introduction to 6SV2.1: A Radiative Transfer Model" /><published>2020-06-14T00:00:00-05:00</published><updated>2020-06-14T00:00:00-05:00</updated><id>https://yiweimao.github.io/blog/6sv</id><content type="html" xml:base="https://yiweimao.github.io/blog/6sv/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;In this blog post, I will cover the basics from the &lt;a href=&quot;http://6s.ltdri.org/pages/manual.html&quot;&gt;6SV2.1 manual&lt;/a&gt;. 6S stands for “ &lt;strong&gt;S&lt;/strong&gt;econd &lt;strong&gt;S&lt;/strong&gt;imulation of a &lt;strong&gt;S&lt;/strong&gt;atellite &lt;strong&gt;S&lt;/strong&gt;ignal in the &lt;strong&gt;S&lt;/strong&gt;olar &lt;strong&gt;S&lt;/strong&gt;pectrum” and the V stands for &lt;em&gt;vectorised&lt;/em&gt; meaning the polarisation of light is taken to account. This radiative transfer (RT) code is used to correct for atmospheric absorption and scattering. It also enables&lt;sup id=&quot;fnref:1&quot; role=&quot;doc-noteref&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
 
