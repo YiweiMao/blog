@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2020-10-15T20:06:05-05:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Defeating Self-sabotage: An Opinionated Guide to PhD Writing</title><link href="https://yiweimao.github.io/blog/phd_writing/" rel="alternate" type="text/html" title="Defeating Self-sabotage: An Opinionated Guide to PhD Writing" /><published>2020-10-30T00:00:00-05:00</published><updated>2020-10-30T00:00:00-05:00</updated><id>https://yiweimao.github.io/blog/phd_guide</id><content type="html" xml:base="https://yiweimao.github.io/blog/phd_writing/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2020-10-15T20:25:29-05:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Defeating Self-sabotage: An Opinionated Guide to PhD Writing</title><link href="https://yiweimao.github.io/blog/phd_writing/" rel="alternate" type="text/html" title="Defeating Self-sabotage: An Opinionated Guide to PhD Writing" /><published>2020-10-30T00:00:00-05:00</published><updated>2020-10-30T00:00:00-05:00</updated><id>https://yiweimao.github.io/blog/phd_guide</id><content type="html" xml:base="https://yiweimao.github.io/blog/phd_writing/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;As a PhD student or academic, writing is a core element of the job. In order to succeed, you need to be a productive writer. However, completing a PhD is by no means easy and I can attest to some of the self-sabotaging behaviours that will be mentioned in this post. Half of the reason I wrote this is to summarise a bunch of tips I’ve come across for my future self because I know I will need to be reminded of them. The other half is to put this out for other PhD students and academics in the hope that it is useful.&lt;/p&gt;
 
@@ -43,7 +43,7 @@ make that killer argument and want to reference Smith and Brown (2006; or maybe 
       &lt;p&gt;Not practising or trying very hard&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
-  &lt;li&gt;Choosing Performace Debilitating Circumstances
+  &lt;li&gt;Choosing Performance Debilitating Circumstances
     &lt;blockquote&gt;
       &lt;p&gt;Trying to work in a busy or unsuitable location or situation&lt;/p&gt;
     &lt;/blockquote&gt;
@@ -71,15 +71,15 @@ I trained by going through a dictionary and typing &lt;em&gt;many&lt;/em&gt; wor
 
 &lt;p&gt;As a side note, I don’t remember what some of my passwords are because it’s in muscle memory! My fingers know what it is and to work it out (say if I needed the password on my phone), I have to visualise a keyboard and play back where my fingers go.&lt;/p&gt;
 
-&lt;p&gt;It’s bizzare that I still see academics hunt and peck as they type. For a job that requires writing papers and answering many emails, I think it’s definitely a good investment to increase your typing speed.&lt;/p&gt;
+&lt;p&gt;It’s bizarre that I still see academics hunt and peck as they type. For a job that requires writing papers and answering many emails, I think it’s definitely a good investment to increase your typing speed.&lt;/p&gt;
 
 &lt;h2 id=&quot;back-up-your-work-regularly-and-use-version-control&quot;&gt;Back Up Your Work Regularly and Use Version Control&lt;/h2&gt;
 
-&lt;p&gt;I remember a day in the past, I lost a day of work because I forgot to save a Word document. I was devestated for about 10 minutes before smashing the report out again because it was due that day. That was stressful! You don’t want this to happen to you when writing your thesis so back up your work regularly.&lt;/p&gt;
+&lt;p&gt;I remember a day in the past, I lost a day of work because I forgot to save a Word document. I was devastated stated for about 10 minutes before smashing the report out again because it was due that day. That was stressful! You don’t want this to happen to you when writing your thesis so back up your work regularly.&lt;/p&gt;
 
 &lt;p&gt;I now use Overleaf to write my reports/papers and it saves &lt;em&gt;as you type&lt;/em&gt; so you don’t lose a second of work. It’s the Google Docs for LaTeX and also integrates with git for version control.&lt;/p&gt;
 
-&lt;p&gt;For software projects, I use GitHub and this is great for text files (since you check a diff for every commit) but also works for saving binary files. The advantage of using a version control system is the ability to roll back changes, and try experiments in a separate branch before merging with the master branch. This is great for collaboration where your team may be working on the same code base but separate modules.&lt;/p&gt;
+&lt;p&gt;For software projects, I use GitHub and this is great for text files (since you check a diff for every commit) but also works for saving binary files. The advantage of using a version control system is the ability to roll back changes and try experiments in a separate branch before merging with the master branch. This is great for collaboration where your team may be working on the same code base but separate modules.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/images/2020-10-30-phd_guide_files/git_merge.png&quot; alt=&quot;&quot; title=&quot;Figure 2: A relatable meme for those scared to git merge.&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
@@ -98,7 +98,7 @@ I trained by going through a dictionary and typing &lt;em&gt;many&lt;/em&gt; wor
 
 &lt;p&gt;&lt;img src=&quot;/blog/images/2020-10-30-phd_guide_files/abcde.png&quot; alt=&quot;&quot; title=&quot;Figure 3: The ABCDEs of Writing.&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The most striking realisation I had from reading this paper (Gardiner and Kearns, 2012) was that the best motivator for writing &lt;em&gt;is writing itself&lt;/em&gt;. They challenge other misbeliefs about writing like “it won’t be good enough”, “I’m not ready yet”, and “I don’t have enough time” and offer evidence based tips for writing. This paper gave me the reason to writing this blog post so I think it’s definitely worth reading.&lt;/p&gt;
+&lt;p&gt;The most striking realisation I had from reading this paper (Gardiner and Kearns, 2012) was that the best motivator for writing &lt;em&gt;is writing itself&lt;/em&gt;. They challenge other misbeliefs about writing like “it won’t be good enough”, “I’m not ready yet”, and “I don’t have enough time” and offer evidence based tips for writing. This paper gave me the reason to writing this blog post, so I think it’s well worth reading.&lt;/p&gt;
 
 &lt;h1 id=&quot;form-a-writing-group&quot;&gt;Form A Writing Group&lt;/h1&gt;
 
@@ -107,11 +107,11 @@ I trained by going through a dictionary and typing &lt;em&gt;many&lt;/em&gt; wor
   &lt;p&gt;National Novel Writing Month is an annual Internet-based creative writing project that takes place during the month of November. Participants attempt to write a 50,000-word manuscript between November 1 and November 30.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;Writing with others creates some accountability and with the mutual encouragement, it should also help you put words down no matter if it’s good or not. To start, I would recommend to go for a smaller goal like 100 words/day so by the end of the month, you will have 3000 more words that you never had before.&lt;/p&gt;
+&lt;p&gt;Writing with others creates some accountability and with the mutual encouragement, it should also help you put words down no matter if it’s good or not. To start, I would recommend going for a smaller goal like 100 words/day so by the end of the month, you will have 3000 more words that you never had before.&lt;/p&gt;
 
-&lt;p&gt;When starting a writing group, I need to stress it is &lt;em&gt;not&lt;/em&gt; a competition (that is a &lt;em&gt;scarcity&lt;/em&gt; mindset which is founded on the idea that if someone is successful, it means you lose). You should instead have a &lt;em&gt;abundance&lt;/em&gt; mindset - that is there are enough resources and successes for everyone so you can celebrate the success of others. It is worth a segway to take a look at Stephen Covey’s &lt;a href=&quot;https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People&quot;&gt;The 7 Habits of Highly Effective People&lt;/a&gt;&lt;sup id=&quot;fnref-4&quot; class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn-4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; and apply some of the &lt;em&gt;interdependence&lt;/em&gt; tips to your writing group.&lt;/p&gt;
+&lt;p&gt;When starting a writing group, I need to stress it is &lt;em&gt;not&lt;/em&gt; a competition (that is a &lt;em&gt;scarcity&lt;/em&gt; mindset which is founded on the idea that if someone is successful, it means you lose). You should instead have a &lt;em&gt;abundance&lt;/em&gt; mindset - that is there are enough resources and successes for everyone so you can celebrate the success of others. It is worth a segue to take a look at Stephen Covey’s &lt;a href=&quot;https://en.wikipedia.org/wiki/The_7_Habits_of_Highly_Effective_People&quot;&gt;The 7 Habits of Highly Effective People&lt;/a&gt;&lt;sup id=&quot;fnref-4&quot; class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn-4&quot;&gt;4&lt;/a&gt;&lt;/sup&gt; and apply some of the &lt;em&gt;interdependence&lt;/em&gt; tips to your writing group.&lt;/p&gt;
 
-&lt;h2 id=&quot;segway-the-7-habits-of-highly-effective-people&quot;&gt;Segway: The 7 Habits of Highly Effective People&lt;/h2&gt;
+&lt;h2 id=&quot;segue-the-7-habits-of-highly-effective-people&quot;&gt;Segue: The 7 Habits of Highly Effective People&lt;/h2&gt;
 &lt;p&gt;In summary, there are three stages of increasing maturity: dependence, independence, and interdependence - and the 7 habits are designed to get you to interdependence and being good leaders and team players that can combine talents.&lt;/p&gt;
 
 &lt;h3 id=&quot;dependence-rightarrow-independence&quot;&gt;Dependence $\rightarrow$ Independence&lt;/h3&gt;
@@ -119,21 +119,19 @@ I trained by going through a dictionary and typing &lt;em&gt;many&lt;/em&gt; wor
 &lt;ol&gt;
   &lt;li&gt;Don’t be reactive. Be proactive.&lt;/li&gt;
   &lt;li&gt;Begin with the end in mind. Don’t just act, thinking first about the end goal and consequences as you plan towards you goal.&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;First things first. Do what is important first.&lt;/p&gt;
-
-    &lt;p&gt;You can categorise tasks into four quadrants shown in this image:
- ![](https://upload.wikimedia.org/wikipedia/commons/3/33/7_habits_decision-making_matrix.png “”){:width=”50%”}.&lt;/p&gt;
-
-    &lt;ul&gt;
-      &lt;li&gt;Quadrant I. Urgent and important (Do) - important deadlines: crises, deadline driven projects, meetings, and preparations&lt;/li&gt;
-      &lt;li&gt;Quadrant II. Not urgent but important (Plan) - long term development: prevention, value clarification, relationship building, empowerment&lt;/li&gt;
-      &lt;li&gt;Quadrant III. Urgent but not important (Delegate) - distractions with deadlines: interruptions, some phone calls, some emails and reports, some meetings&lt;/li&gt;
-      &lt;li&gt;Quadrant IV. Not urgent and not important (Eliminate) - frivolous distractions: trivia, junk email, some phone calls, time wasters, “escape” activities
- The ideal quadrant to work in is II. That means starting on papers and assignments early and minimising time spent on distractions. As a PhD student, you are often delegated tutoring roles by lecturers and while you can learn a lot about communicating ideas and gauging understanding while solidifying your own understanding, know that it can be a distraction. So if money is not an issue, it is up to your own judgement as to what works for you - remember habit 2: begin with the end in mind.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
+  &lt;li&gt;First things first. Do what is important first.&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;You can categorise tasks into four quadrants shown in Figure 4.
+&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/3/33/7_habits_decision-making_matrix.png&quot; alt=&quot;&quot; title=&quot;Figure 4: Decision making matrix&quot; width=&quot;50%&quot; /&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;- Quadrant I. Urgent and important (Do) - important deadlines: crises, deadline driven projects, meetings, and preparations
+- Quadrant II. Not urgent but important (Plan) - long term development: prevention, value clarification, relationship building, empowerment
+- Quadrant III. Urgent but not important (Delegate) - distractions with deadlines: interruptions, some phone calls, some emails and reports, some meetings
+- Quadrant IV. Not urgent and not important (Eliminate) - frivolous distractions: trivia, junk email, some phone calls, time wasters, &quot;escape&quot; activities
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The ideal quadrant to work in is II. That means starting on papers and assignments early and minimising time spent on distractions. As a PhD student, you are often delegated tutoring roles by lecturers and while you can learn a lot about communicating ideas and gauging understanding while solidifying your own understanding, know that it can be a distraction. So, if money is not an issue, it is up to your own judgement as to what works for you - remember habit 2: begin with the end in mind.&lt;/p&gt;
 
 &lt;h3 id=&quot;independence-rightarrow-interdependence&quot;&gt;Independence $\rightarrow$ Interdependence&lt;/h3&gt;
 
@@ -144,8 +142,15 @@ I trained by going through a dictionary and typing &lt;em&gt;many&lt;/em&gt; wor
 &lt;/ol&gt;
 
 &lt;h3 id=&quot;continual-improvement&quot;&gt;Continual Improvement&lt;/h3&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;The final habit is to 7. Sharpen the Saw; Growth: Learn, commit, do. &amp;gt; Balance and renew your resources, energy and health to create a sustainable, long-term, effective lifestyle. 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;The final habit is to&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Sharpen the Saw; Growth: Learn, commit, do.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Balance and renew your resources, energy and health to create a sustainable, long-term, effective lifestyle.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h1 id=&quot;solving-the-issue-of-being-unsure-of-what-to-write&quot;&gt;Solving The Issue Of Being Unsure Of What To Write&lt;/h1&gt;
 
@@ -161,22 +166,22 @@ I trained by going through a dictionary and typing &lt;em&gt;many&lt;/em&gt; wor
  or facing a difficult problem&lt;/p&gt;
 
 &lt;h2 id=&quot;thinking-walks-and-exercise&quot;&gt;Thinking Walks and Exercise&lt;/h2&gt;
-&lt;p&gt;When you still feel stuck after a session of rubber duck debugging, try going on a short walk and let your subconcious do the work in the background. Working on something difficult? Go for a jog and clear you mind. Doing exercise regularly is also good for your health and subsequently, good for increasing productivity.&lt;/p&gt;
+&lt;p&gt;When you still feel stuck after a session of rubber duck debugging, try going on a short walk and let your subconscious do the work in the background. Working on something difficult? Go for a jog and clear you mind. Doing exercise regularly is also good for your health and subsequently, good for increasing productivity.&lt;/p&gt;
 
 &lt;h2 id=&quot;run-a-series-of-seminars-on-the-topic&quot;&gt;Run A Series of Seminars On The Topic&lt;/h2&gt;
-&lt;p&gt;Not sure where I read this tip from (maybe from this &lt;a href=&quot;http://www.cs.virginia.edu/~robins/YouAndYourResearch.html&quot;&gt;long post&lt;/a&gt;?) This is trick that some professors use apparently. Having trouble understanding the background needed to solve an important problem? Teach it, run seminars, write a blog about it, …. Doing so will force you to get to grips with the topic and express the concepts clearly.&lt;/p&gt;
+&lt;p&gt;Not sure where I read this tip from (maybe from this &lt;a href=&quot;http://www.cs.virginia.edu/~robins/YouAndYourResearch.html&quot;&gt;long seminar transcript&lt;/a&gt;?) This is trick that some professors use apparently. Having trouble understanding the background needed to solve an important problem? Teach it, run seminars, write a blog about it, …. Doing so will force you to get to grips with the topic and express the concepts clearly.&lt;/p&gt;
 
 &lt;h2 id=&quot;know-when-to-switch-writing-tasks&quot;&gt;Know When To Switch Writing Tasks&lt;/h2&gt;
 &lt;p&gt;Inspired by this &lt;a href=&quot;http://joschu.net/blog/opinionated-guide-ml-research.html&quot;&gt;post&lt;/a&gt; and reframing it for writing tasks:&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;switching [writing tasks] too frequently (and giving up on promising ideas) is a more common failure mode than not switching enough. Often, while you’re engaged in the long slog towards getting your current idea to work, another promising idea will come along, and you’ll want to jump to that idea. If your idea is quick to try and the potential upside is large, then go ahead and do it. But more commonly, your initial results on the new idea will be disappointing, and it’ll take a more sustained effort to yield significant results. One strategy, which I haven’t tried personally but makes a lot of sense upon reflection, is to devote some fixed time budget to trying out new ideas that diverge from your main line of work. Say, spend one day per week on something totally different from your main project. This would constitute a kind of epsilon-greedy exploration, and it would also help to broaden your knowledge.&lt;/p&gt;
+  &lt;p&gt;switching [writing tasks] too frequently (and giving up on promising ideas) is a more common failure mode than not switching enough. Often, while you’re engaged in the long slog towards getting your current idea to work, another promising idea will come along, and you’ll want to jump to that idea. If your idea is quick to try and the potential upside is large, then go ahead and do it. But more commonly, your initial results on the new idea will be disappointing, and it’ll take a more sustained effort to yield significant results.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;personal-development-and-working-on-important-problems&quot;&gt;Personal Development and Working On Important Problems&lt;/h2&gt;
 &lt;p&gt;Don’t just writing your thesis, take the time to learn something new and writing about it. 
 As this &lt;a href=&quot;http://joschu.net/blog/opinionated-guide-ml-research.html&quot;&gt;post&lt;/a&gt; says:&lt;/p&gt;
 &lt;blockquote&gt;
-  &lt;p&gt;If you don’t allocate this time, then your knowledge is likely to plateau after you learn the basics that you need for your day-to-day work. It’s easy to settle into a comfort zone of methods you understand well—you may need to expend active effort to expand this zone.&lt;/p&gt;
+  &lt;p&gt;If you don’t allocate this time, then your knowledge is likely to plateau after you learn the basics that you need for your day-to-day work. It’s easy to settle into a comfort zone of methods you understand well—you may need to expend active effort to expand this zone. … One strategy, which I haven’t tried personally but makes a lot of sense upon reflection, is to devote some fixed time budget to trying out new ideas that diverge from your main line of work. Say, spend one day per week on something totally different from your main project. This would constitute a kind of epsilon-greedy exploration, and it would also help to broaden your knowledge.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;If your research is in some niche application of machine learning, broaden your knowledge and read textbooks and papers outside your field. You never know when something your learned will spark a new idea.&lt;/p&gt;
@@ -213,7 +218,7 @@ As this &lt;a href=&quot;http://joschu.net/blog/opinionated-guide-ml-research.ht
   &lt;li&gt;No More Zero Days
 A zero day is when you make no contribution to what you are doing. Make sure you every day a non-zero day.
     &lt;blockquote&gt;
-      &lt;p&gt;Didn’t do anthing all day and it’s 11:58 pm? Write one sentence. One pushup. Read one page of that chapter. One. Because one is non zero.Turning into productivity ultimate master of the universe doesn’t happen from the vortex. It happens from a massive string of CONSISTENT NON ZEROS.&lt;/p&gt;
+      &lt;p&gt;Didn’t do anything all day and it’s 11:58 pm? Write one sentence. One pushup. Read one page of that chapter. One. Because one is non zero. Turning into productivity ultimate master of the universe doesn’t happen from the vortex. It happens from a massive string of CONSISTENT NON ZEROS.&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
   &lt;li&gt;Be Grateful To Your Three Selves
@@ -224,7 +229,7 @@ Your three selves refer to the past you, the present you, and the future you.
   &lt;/li&gt;
   &lt;li&gt;Forgive Yourself
     &lt;blockquote&gt;
-      &lt;p&gt;Maybe you got all the know-how, money, ability, strength and talent to do whatever is you wanna do. But lets say you still didn’t do it. Now you’re giving yourself (redacted) for not doing what you need to, to be who you want to. Heads up champion, being dissapointed in yourself causes you to be less productive. Tried your best to have a nonzero day yesterday and it failed? so what. I forgive you previous self. I forgive you. But today? Today is a nonzero masterpiece to the best of my ability for future self. This one’s for you future homes. Forgiveness man, use it. I forgive you. Say it out loud.&lt;/p&gt;
+      &lt;p&gt;Maybe you got all the know-how, money, ability, strength and talent to do whatever is you wanna do. But let’s say you still didn’t do it. Now you’re giving yourself (redacted) for not doing what you need to, to be who you want to. Heads up champion, being disappointed in yourself causes you to be less productive. Tried your best to have a nonzero day yesterday and it failed? so what. I forgive you previous self. I forgive you. But today? Today is a nonzero masterpiece to the best of my ability for future self. This one’s for you future homies. Forgiveness man, use it. I forgive you. Say it out loud.&lt;/p&gt;
     &lt;/blockquote&gt;
   &lt;/li&gt;
   &lt;li&gt;Exercise and Books
@@ -236,10 +241,10 @@ Your three selves refer to the past you, the present you, and the future you.
 
 &lt;h2 id=&quot;prolific-writers-and-updating-readerssupervisors&quot;&gt;Prolific Writers and Updating Readers/Supervisors&lt;/h2&gt;
 
-&lt;p&gt;I like reading fantasy with well throught out magic systems and if we’re talking about prolific writers, one author to aspire to is Brandon Sanderson. This man is a machine and many of his fans joke that he’s cloned himself or is a robot because the sheer amount of well written output (and does a weekly postcast, updates fans on social media, goes on writing tours, and teaches a writing class at BYU). If you check out his &lt;a href=&quot;https://www.brandonsanderson.com/&quot;&gt;website&lt;/a&gt;, he has &lt;em&gt;progress bars&lt;/em&gt; for his works which is updated regularly! If you like fantasy, be sure to check this author out at the risk of being so engrossed by the story you spend the whole week reading instead of writing…&lt;/p&gt;
+&lt;p&gt;I like reading fantasy with well thought out magic systems and if we’re talking about prolific writers, one author to aspire to is Brandon Sanderson. This man is a machine and many of his fans joke that he’s cloned himself or is a robot because the sheer amount of well written output (and does a weekly podcast, updates fans on social media, goes on writing tours, and teaches a writing class at BYU). If you check out his &lt;a href=&quot;https://www.brandonsanderson.com/&quot;&gt;website&lt;/a&gt;, he has &lt;em&gt;progress bars&lt;/em&gt; for his works which is updated regularly! If you like fantasy, be sure to check this author out at the risk of being so engrossed by the story you spend the whole week reading instead of writing…&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Warning: Patrick Rothfuss has some of the best writing I’ve ever read but the third book in the trilogy is no where near completion and, at the time of writing this blog post, I’ve been waiting 9 years since book 2 was published with no updates on progress - &lt;a href=&quot;https://www.newsweek.com/kingkiller-chronicle-editor-believes-author-hasnt-written-anything-years-1520812&quot;&gt;not even his editor knows&lt;/a&gt;. Do &lt;em&gt;not&lt;/em&gt; do this to your supervisor! You do not have the same luxury as a PhD student or academic.&lt;/p&gt;
+  &lt;p&gt;Warning: Patrick Rothfuss has some of the best writing I’ve ever read but the third book in the trilogy is nowhere near completion and, at the time of writing this blog post, I’ve been waiting 9 years since book 2 was published with no updates on progress - &lt;a href=&quot;https://www.newsweek.com/kingkiller-chronicle-editor-believes-author-hasnt-written-anything-years-1520812&quot;&gt;not even his editor knows&lt;/a&gt;. Do &lt;em&gt;not&lt;/em&gt; do this to your supervisor! You do not have the same luxury as a PhD student or academic.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;If you are avoiding your supervisor(s) when they are asking for a draft chapter, that is a sure sign you’re in deep waters.&lt;/p&gt;
@@ -253,7 +258,9 @@ Your three selves refer to the past you, the present you, and the future you.
 
 &lt;p&gt;Although most of the content revolves around writing fiction, many of writing tips and writing prompts are great to get you thinking and motivate you to write. Great for something to listen during your commute.&lt;/p&gt;
 
-&lt;p&gt;I hope you enjoyed reading this and found it useful. To close, I will end on the same injuction used in Writing Excuses:&lt;/p&gt;
+&lt;p&gt;$~$&lt;/p&gt;
+
+&lt;p&gt;I hope you enjoyed reading this and found it useful. To close, I will end on the same injunction used in Writing Excuses:&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;&lt;em&gt;“You’re out of excuses. Now go write.”&lt;/em&gt;&lt;/strong&gt;&lt;/p&gt;
 
