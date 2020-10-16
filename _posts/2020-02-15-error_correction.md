@@ -117,7 +117,7 @@ When there is a distance of 2 between the codes, then a single error will conver
 
 When there is a single error, the error can be corrected because the false code will be closer to the correct code than the others. A more detailed list of actions is summarised in the following table.
 
-| Minimum Hamming Distance | Available Actions |
+| Minimum Hamming Distance | Available Actions &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |
 | --- | --- |
 | 1     | Unique. No redundancy. |
 | 2     | Single error detection |
