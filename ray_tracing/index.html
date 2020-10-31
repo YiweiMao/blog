@@ -3,17 +3,20 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Tags | Yiwei Mao</title>
+<title>Interactive Exploration of Ray Tracing in Julia | Yiwei Mao</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="Interactive Exploration of Ray Tracing in Julia" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Teaching my past self and reminding my future self." />
-<meta property="og:description" content="Teaching my past self and reminding my future self." />
-<link rel="canonical" href="https://yiweimao.github.io/blog/categories/" />
-<meta property="og:url" content="https://yiweimao.github.io/blog/categories/" />
+<meta name="description" content="Summary" />
+<meta property="og:description" content="Summary" />
+<link rel="canonical" href="https://yiweimao.github.io/blog/ray_tracing/" />
+<meta property="og:url" content="https://yiweimao.github.io/blog/ray_tracing/" />
 <meta property="og:site_name" content="Yiwei Mao" />
+<meta property="og:image" content="https://en.wikipedia.org/wiki/Ray_tracing_(graphics)#/media/File:Recursive_raytrace_of_a_sphere.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-01T00:00:00-06:00" />
 <script type="application/ld+json">
-{"headline":"Tags","description":"Teaching my past self and reminding my future self.","@type":"WebPage","url":"https://yiweimao.github.io/blog/categories/","@context":"https://schema.org"}</script>
+{"datePublished":"2020-12-01T00:00:00-06:00","headline":"Interactive Exploration of Ray Tracing in Julia","image":"https://en.wikipedia.org/wiki/Ray_tracing_(graphics)#/media/File:Recursive_raytrace_of_a_sphere.png","description":"Summary","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/ray_tracing/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/ray_tracing/","dateModified":"2020-12-01T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -22,17 +25,20 @@
 <script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-61578211-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
 
 <link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>Tags | Yiwei Mao</title>
+<title>Interactive Exploration of Ray Tracing in Julia | Yiwei Mao</title>
 <meta name="generator" content="Jekyll v4.0.0" />
-<meta property="og:title" content="Tags" />
+<meta property="og:title" content="Interactive Exploration of Ray Tracing in Julia" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Teaching my past self and reminding my future self." />
-<meta property="og:description" content="Teaching my past self and reminding my future self." />
-<link rel="canonical" href="https://yiweimao.github.io/blog/categories/" />
-<meta property="og:url" content="https://yiweimao.github.io/blog/categories/" />
+<meta name="description" content="Summary" />
+<meta property="og:description" content="Summary" />
+<link rel="canonical" href="https://yiweimao.github.io/blog/ray_tracing/" />
+<meta property="og:url" content="https://yiweimao.github.io/blog/ray_tracing/" />
 <meta property="og:site_name" content="Yiwei Mao" />
+<meta property="og:image" content="https://en.wikipedia.org/wiki/Ray_tracing_(graphics)#/media/File:Recursive_raytrace_of_a_sphere.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-12-01T00:00:00-06:00" />
 <script type="application/ld+json">
-{"headline":"Tags","description":"Teaching my past self and reminding my future self.","@type":"WebPage","url":"https://yiweimao.github.io/blog/categories/","@context":"https://schema.org"}</script>
+{"datePublished":"2020-12-01T00:00:00-06:00","headline":"Interactive Exploration of Ray Tracing in Julia","image":"https://en.wikipedia.org/wiki/Ray_tracing_(graphics)#/media/File:Recursive_raytrace_of_a_sphere.png","description":"Summary","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/ray_tracing/"},"@type":"BlogPosting","url":"https://yiweimao.github.io/blog/ray_tracing/","dateModified":"2020-12-01T00:00:00-06:00","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -106,124 +112,120 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <div class="home">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Interactive Exploration of Ray Tracing in Julia</h1><p class="page-description">Summary</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-12-01T00:00:00-06:00" itemprop="datePublished">
+        Dec 1, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      1 min read
+    
+</span></p>
 
-<h2>Contents</h2>
+    
 
-  
-  
-  
+    
+      </header>
 
-  <ul>
-  
-    <li><a href="#atmospheric correction">atmospheric correction</a></li>
-  
-    <li><a href="#DX11">DX11</a></li>
-  
-    <li><a href="#error correction">error correction</a></li>
-  
-    <li><a href="#Hamming code">Hamming code</a></li>
-  
-    <li><a href="#Hamming distance">Hamming distance</a></li>
-  
-    <li><a href="#hyperspectral">hyperspectral</a></li>
-  
-    <li><a href="#imaging">imaging</a></li>
-  
-    <li><a href="#parity">parity</a></li>
-  
-    <li><a href="#PhD">PhD</a></li>
-  
-    <li><a href="#Tessellation">Tessellation</a></li>
-  
-    <li><a href="#visualisation">visualisation</a></li>
-  
-  </ul>
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Introduction">Introduction </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Running-This-Notebook">Running This Notebook </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-11-31-Ray_Tracing.ipynb
+-->
 
-  
-      <h3 id ="atmospheric correction"><i class="fas fa-tags category-tags-icon"></i></i> atmospheric correction</h3>
-      <a name="atmospheric correction"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/6sv/">Introduction to 6SV2.1: A Radiative Transfer Model</a>  • Jun 14, 2020</p>
-      </article>
-      
-  
-      <h3 id ="DX11"><i class="fas fa-tags category-tags-icon"></i></i> DX11</h3>
-      <a name="DX11"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/tessellation/">Understanding GPU Tessellation</a>  • Feb 26, 2020</p>
-      </article>
-      
-  
-      <h3 id ="error correction"><i class="fas fa-tags category-tags-icon"></i></i> error correction</h3>
-      <a name="error correction"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/hamming/">Hamming Code for Error Correction</a>  • Feb 15, 2020</p>
-      </article>
-      
-  
-      <h3 id ="Hamming code"><i class="fas fa-tags category-tags-icon"></i></i> Hamming code</h3>
-      <a name="Hamming code"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/hamming/">Hamming Code for Error Correction</a>  • Feb 15, 2020</p>
-      </article>
-      
-  
-      <h3 id ="Hamming distance"><i class="fas fa-tags category-tags-icon"></i></i> Hamming distance</h3>
-      <a name="Hamming distance"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/hamming/">Hamming Code for Error Correction</a>  • Feb 15, 2020</p>
-      </article>
-      
-  
-      <h3 id ="hyperspectral"><i class="fas fa-tags category-tags-icon"></i></i> hyperspectral</h3>
-      <a name="hyperspectral"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/exploring_hyperspectral/">Exploring an Open Source Hyperspectral Image Dataset</a>  • Apr 18, 2020</p>
-      </article>
-      
-  
-      <h3 id ="imaging"><i class="fas fa-tags category-tags-icon"></i></i> imaging</h3>
-      <a name="imaging"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/mri/">The Mathematics Behind Magnetic Resonance Imaging</a>  • Jun 13, 2020</p>
-      </article>
-      
-  
-      <h3 id ="parity"><i class="fas fa-tags category-tags-icon"></i></i> parity</h3>
-      <a name="parity"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/tessellation/">Understanding GPU Tessellation</a>  • Feb 26, 2020</p>
-      </article>
-      
-  
-      <h3 id ="PhD"><i class="fas fa-tags category-tags-icon"></i></i> PhD</h3>
-      <a name="PhD"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/phd_writing/">Defeating Self-sabotage: An Opinionated Guide to PhD Writing</a>  • Oct 16, 2020</p>
-      </article>
-      
-  
-      <h3 id ="Tessellation"><i class="fas fa-tags category-tags-icon"></i></i> Tessellation</h3>
-      <a name="Tessellation"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/tessellation/">Understanding GPU Tessellation</a>  • Feb 26, 2020</p>
-      </article>
-      
-  
-      <h3 id ="visualisation"><i class="fas fa-tags category-tags-icon"></i></i> visualisation</h3>
-      <a name="visualisation"></a>
-      <article class="archive-item">
-        <p class="post-meta post-meta-title"><a class="page-meta" href="/blog/tessellation/">Understanding GPU Tessellation</a>  • Feb 26, 2020</p>
-      </article>
-      
-  
-
-
-
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
+</h1>
+<p>What is ray tracing?</p>
+<blockquote>
+<p>Ray tracing is a rendering technique that can produce incredibly realistic lighting effects. Essentially, an algorithm can trace the path of light, and then simulate the way that the light interacts with the virtual objects it ultimately hits in the computer-generated world. <a href="https://www.techradar.com/au/news/ray-tracing#:~:text=Ray%20tracing%20is%20a%20rendering,in%20the%20computer%2Dgenerated%20world.">Source</a></p>
+<h2 id="Running-This-Notebook">
+<a class="anchor" href="#Running-This-Notebook" aria-hidden="true"><span class="octicon octicon-link"></span></a>Running This Notebook<a class="anchor-link" href="#Running-This-Notebook"> </a>
+</h2>
+</blockquote>
+<p>This blog post was made entirely in a Jupyter Notebook so you can download it (link to GitHub at top of post) and run it for yourself. I chose to write in Julia as opposed to Python for a number of reasons:</p>
+<ul>
+<li>Julia is compiled and runs as almost as fast as C</li>
+<li>Interactive and can be used in a Jupyter Notebook (the Ju in Jupyter stands for Julia)</li>
+<li>Supports mathematical symbols in code</li>
+<li>Rather similar to use for someone used to <code>numpy</code>
+</li>
+<li>I'm learning Julia right now and the best way to learn a new programming language is to use it!</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="mi">1</span><span class="o">+</span><span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="YiweiMao/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/ray_tracing/" hidden></a>
+</article>
       </div>
     </main><footer class="site-footer h-card">
   <data class="u-url" href="/blog/"></data>
