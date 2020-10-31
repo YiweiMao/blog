@@ -68,12 +68,6 @@
   
 
   
-  
-
-  
-
-  
-  
 
   
   
@@ -87,7 +81,15 @@
   
 
   
-      ,"page9": {
+
+  
+  
+
+  
+  
+
+  
+      ,"page10": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://yiweimao.github.io/blog/robots.txt",
