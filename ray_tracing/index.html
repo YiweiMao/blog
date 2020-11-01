@@ -156,7 +156,13 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Running-This-Notebook">Running This Notebook </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h1"><a href="#Setup">Setup </a></li>
+<li class="toc-entry toc-h1"><a href="#Setup">Setup </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Defining-Types-and-Functions">Defining Types and Functions </a></li>
+<li class="toc-entry toc-h2"><a href="#Flat-Mirror">Flat Mirror </a></li>
+<li class="toc-entry toc-h2"><a href="#Spherical-Mirror">Spherical Mirror </a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h1"><a href="#References">References </a></li>
 </ul><!--
 #################################################
@@ -220,6 +226,9 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Defining-Types-and-Functions">
+<a class="anchor" href="#Defining-Types-and-Functions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Defining Types and Functions<a class="anchor-link" href="#Defining-Types-and-Functions"> </a>
+</h2>
 <p>Let's first define a <code>Ray</code> type which has attributes:</p>
 <ul>
 <li>a velocity (or propagation direction)</li>
@@ -272,7 +281,7 @@ window.onload = wrap_img;
 <span class="sd">"""</span>
 <span class="sd">The equation for a plane ax+by+cz+d=0</span>
 <span class="sd">is given by the normal n̂=(a,b,c) and</span>
-<span class="sd">a point x̂=(x,y,z)</span>
+<span class="sd">a point x̅=(x,y,z)</span>
 <span class="sd">"""</span>
 <span class="n">struct</span> <span class="n">FlatSurface</span> <span class="o">&lt;</span><span class="p">:</span> <span class="n">Surface</span>
     <span class="n">n̂</span><span class="p">::</span><span class="n">Vector</span><span class="p">{</span><span class="n">Float64</span><span class="p">}</span> <span class="c1"># normal vector</span>
@@ -364,7 +373,12 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now I create a reflect function that modifies the ray's direction in place</p>
+<p>Now I create a reflect function that modifies the ray's direction in place
+</p>
+<div class="flash flash-warn">
+    <svg class="octicon octicon-zap" viewbox="0 0 10 16" version="1.1" width="10" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M10 7H6l3-7-9 9h4l-3 7 9-9z"></path></svg>
+    <strong>Important: </strong>The ! symbol means the function can operate on the arguments <em>in-place</em>. As opposed to working on a copy.
+</div>
 
 </div>
 </div>
@@ -409,7 +423,12 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And now we have two intersect functions that work</p>
+<p>And now we have two intersect functions that work in place
+</p>
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 8.5l-6 6-3-3L8.5 10l1.5 1.5L14.5 7 16 8.5zM5.7 12.2l.8.8H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h7c.55 0 1 .45 1 1v6.5l-.8-.8c-.39-.39-1.03-.39-1.42 0L5.7 10.8a.996.996 0 000 1.41v-.01zM4 4h5V3H4v1zm0 2h5V5H4v1zm0 2h3V7H4v1zM3 9H2v1h1V9zm0-2H2v1h1V7zm0-2H2v1h1V5zm0-2H2v1h1V3z"></path></svg>
+    <strong>Tip: </strong>This is an example of Julia’s multiple dispatch feature. It’s really powerful!
+</div>
 
 </div>
 </div>
@@ -512,6 +531,9 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Flat-Mirror">
+<a class="anchor" href="#Flat-Mirror" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flat Mirror<a class="anchor-link" href="#Flat-Mirror"> </a>
+</h2>
 <p>Now to put it all together and plot the ray path as it hits a mirror</p>
 
 </div>
@@ -573,6 +595,9 @@ window.onload = wrap_img;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>that took about 1 min</p>
+<h2 id="Spherical-Mirror">
+<a class="anchor" href="#Spherical-Mirror" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spherical Mirror<a class="anchor-link" href="#Spherical-Mirror"> </a>
+</h2>
 <p>Time to test ray tracing for a sphere target</p>
 
 </div>
@@ -637,10 +662,16 @@ window.onload = wrap_img;
 </p>
 <div class="flash flash-error">
     <svg class="octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
-    <strong>Warning: </strong>Now of this was optimised for parallel computing!
+    <strong>Warning: </strong>None of this was optimised for parallel computing!
 </div>
-<p>Now think about plotting this in 3D. Add transparent materials with different refractive indicies. Deal with coloured spheres (ray will have a RGBA value) and could be possible to do a BRDF.</p>
-<p>This is a fun side project to get me understanding how to write Julia code!</p>
+<ul>
+<li>Now think about plotting this in 3D. </li>
+<li>Add transparent materials with different refractive indicies. </li>
+<li>Deal with coloured spheres (ray will have a RGBA value) and </li>
+<li>could be possible to do a BRDF.</li>
+</ul>
+<p>$~$</p>
+<p><strong>This is a fun side project to get me understanding how to write Julia code!</strong></p>
 
 </div>
 </div>
