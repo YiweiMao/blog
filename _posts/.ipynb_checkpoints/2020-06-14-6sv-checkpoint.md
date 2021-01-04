@@ -15,7 +15,7 @@ permalink: /6sv/
 
 # Introduction
 
-In this blog post, I will cover the basics from the [6SV2.1 manual](http://6s.ltdri.org/pages/manual.html). 6S stands for " **S**econd **S**imulation of a **S**atellite **S**ignal in the **S**olar **S**pectrum" and the V stands for *vectorised* meaning the polarisation of light is taken to account. This radiative transfer (RT) code is used to correct for atmospheric absorption and scattering. It also enables[^1]:
+In this blog post, I will cover the basics from the [6SV2.1 manual](http://6s.ltdri.org/pages/manual.html). 6S stands for " **S**econd **S**imulation of a **S**atellite **S**ignal in the **S**olar **S**pectrum" and the V stands for *vector* meaning the polarisation of light is taken to account. This radiative transfer (RT) code is used to correct for atmospheric absorption and scattering. It also enables[^1]:
 
 - accurate simulations of satellite, aircraft, and UAV observations,
 - accounts for elevated targets,
