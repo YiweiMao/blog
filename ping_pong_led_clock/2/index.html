@@ -200,7 +200,7 @@ window.onload = wrap_img;
 <a class="anchor" href="#led-index-look-up-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>LED Index Look Up Table</h1>
 
 <p>The crux of my animations rely on knowing when LED number along the connected strip of 128 corresponds to a two dimensional position. From Figure 8, I label each LED by it’s strip number which you can see in Figure 9.
-<a href="https://content.instructables.com/ORIG/FPJ/XK9U/JTON6BBX/FPJXK9UJTON6BBX.png" title="Figure 8: Orientation of LED strips." width="100%"></a>
+<img src="/blog/images/2021-01-05-LED_clock_files/led_circuit.png" alt="" title="Figure 8: Orientation of LED strips." width="100%">
 <img src="/blog/images/2021-01-05-LED_clock_files/balls.png" alt="" title="Figure 9: Internal LED index for each ping pong ball." width="100%"></p>
 
 <p>Imagining the display as a parallelogram slanted to the left, I turned Figure 9 into a two dimensional array (look up table) with values corresponding to the strip index. For the positions that don’t exist, I put values of 999.</p>
@@ -242,10 +242,6 @@ window.onload = wrap_img;
 <p>In creating this storm animation, I wanted a fast way to generate random numbers. It just so happens that <code class="highlighter-rouge">FastLED</code> provides <code class="highlighter-rouge">random8</code> which I used liberally to generate a raindrop’s path downward (and the lightning strikes!). 
 <img src="/blog/images/2021-01-05-LED_clock_files/thunder.gif" alt="" title="Figure 12: Storm animation." width="70%"></p>
 
-<blockquote>
-  <p>Note: Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers. \n<code class="highlighter-rouge">random8</code>: Here you go… \nInterviewer: That doesn’t seem random to me… \n<code class="highlighter-rouge">random8</code>: But it was quick! \n<code class="highlighter-rouge">random8</code> is advertised as <em>fast</em> and is not truly random but for me, it is random enough.</p>
-</blockquote>
-
 <ul>
   <li>Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers.</li>
   <li>
@@ -254,6 +250,10 @@ window.onload = wrap_img;
   <li>
 <code class="highlighter-rouge">random8</code>: But it was quick!</li>
 </ul>
+
+<blockquote>
+  <p>Note: <code class="highlighter-rouge">random8</code> is advertised as <em>fast</em> and is not truly random but for me, it is random enough.</p>
+</blockquote>
 
 <p>To make this firey animation, I just used <code class="highlighter-rouge">random8</code> to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange. 
 <img src="/blog/images/2021-01-05-LED_clock_files/campfire.png" alt="" title="Figure 13: Campfire animation." width="70%"></p>
