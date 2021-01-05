@@ -121,7 +121,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      9 min read
     
 </span></p>
 
@@ -144,18 +144,23 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#led-index-look-up-table">LED Index Look Up Table</a></li>
 <li class="toc-entry toc-h1"><a href="#foreground-modes">Foreground Modes</a></li>
 <li class="toc-entry toc-h1"><a href="#background-animations">Background Animations</a></li>
+<li class="toc-entry toc-h1"><a href="#potential-improvements">Potential Improvements</a></li>
 <li class="toc-entry toc-h1"><a href="#conclusion">Conclusion</a></li>
 </ul><h1 id="introduction">
 <a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
 <p><img src="/blog/images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 1: The final product showing the time." width="100%"></p>
 
-<p>This ping pong clock is</p>
+<p>Ping pong balls are great light diffusers and combining them with individually addressable RGB LEDs makes for a pretty display. This ping pong clock can show the time and background animations (more on that later). Since each “pixel” is placed in a hexagonal close packed (single layer though), the typical digits font for standard 7-segement displays can’t be used unless the digits are slanted.</p>
 
-<p>Code can be found at <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
+<p>In this blog post, I will describe how I built the thing and my reasoning behind some design choices. Then I will outline how I created my animations so you can fork my repository and create your own animations. At the end, there will be some animations for you to watch!</p>
+
+<p>My code can be found at <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
 
 <h1 id="materials">
 <a class="anchor" href="#materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Materials</h1>
+
+<p>I ordered all the materials to build this well before the global pandemic but only got to making it recently. The ping pong balls and LED strip took many weeks to arrive shipping from overseas.</p>
 
 <ul>
   <li>At least 128 ping pong balls. I used low cost “glossy” plasticky ping pong balls ~$20. Better to use proper ping pong balls that diffuse the light well.</li>
@@ -163,33 +168,49 @@ window.onload = wrap_img;
   <li>2 m of 3pin wire ~$3. You can use single connection multicore wire as an alternative.</li>
   <li>Some lead-free solder ~$2. Any solder will do really.</li>
   <li>Microcontroller (I used an Arduino Nano Clone ~$3. Not enough RAM for scrolling text animations so consider an ESP32 board?)</li>
+  <li>A Real Time Clock with coin cell battery. I didn’t have one so I used a software implementation instead. That meant I couldn’t keep track of the right time after a powerdown. But hey, a broken clock is right twice a day!</li>
   <li>MDF board to put all LEDs onto ~$4.</li>
   <li>Wood Frame ~$5. You will need a miter saw to cut the frame at 60 degree angles.</li>
   <li>Some screws/nails/epoxy to fit the frame together ~$1.</li>
   <li>Lots of hot glue. I used a 30 cm stick ~$1.</li>
+  <li>A 5 V power supply. I’m using a phone charger which can provide up to 2 A of current. If you plan to turn all the LEDs to max brightness, you’ll need like 8 A but for all intents and purposes, I think 2 A is enough. You can use a <code class="highlighter-rouge">FastLED</code> setting to set a limit to the power draw and the brightness will automatically adjust for you.</li>
 </ul>
+
+<p>The <a href="https://www.instructables.com/Ping-Pong-Ball-LED-Clock/">original instructable</a> which describes how to build and program the LED clock is a great resource so definitely take a look! In it, he/she uses competition quality ping pong balls rather than the cheap ones I used which tended to be glossy and inconsistent in the amount of plastic for each ball. I’m inclined to agree that the higher quality ping pong balls are way better despite being more costly. The cheap plasticky ping pong balls don’t diffuse the light enough and the LED position can seen from behind. If you do choose to use the cheap ping pong balls however, I found that you can recreate the really great light diffusion by <em>stacking</em> two cut halves together. Looking from afar, I can’t notice any blemishes.</p>
 
 <h1 id="the-build">
 <a class="anchor" href="#the-build" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Build</h1>
 
-<p><a href="https://www.instructables.com/Ping-Pong-Ball-LED-Clock/">original instructable</a></p>
+<p>From a bag of 150 ping pong balls,
+<img src="/blog/images/2021-01-05-LED_clock_files/ball_bag.png" alt="" title="Figure 2: Bag of cheap ping pong balls." width="40%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/ball_bag.png" alt="" title="Figure 2: Bag of cheap ping pong balls." width="40%"></p>
+<p>each ball goes into a jig to hold it in place while I used an X-acto knife to slice along the seam. If you don’t slice along the seam, you can see the seam when you shine the LED behind it! This is the most tedious part and took me a whole day.
+<img src="/blog/images/2021-01-05-LED_clock_files/jig.png" alt="" title="Figure 3: Jig to slice each ping pong ball." width="50%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/jig.png" alt="" title="Figure 3: Jig to slice each ping pong ball." width="50%"></p>
+<p>I then used hot glue to double stack each half to improve the diffusion. Once the improved halves are done, I glued two together while aligning it to a flat surface (edge of a tissue box in my case). The instructable used two long lengths of wood to ensure each row is straight - it’s impossible to mess up the straight line gluing two pieces together. Then extend to the final shape shown in Figure 6 (2 rows of 17, 2 rows of 18, 2 rows of 19 and 1 row of 20). I used hot glue quite liberally to make the structure rigid but it still ended up rather fragile - not a problem once it’s in the frame and glued down. 
+<img src="/blog/images/2021-01-05-LED_clock_files/glued.png" alt="" title="Figure 4: Used hot glue to stick halves together." width="40%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/glued.png" alt="" title="Figure 4: Used hot glue to stick halves together." width="40%"></p>
+<p>I cut the LED strips such that the included JST connector both starts and ends the whole thing and these connectors are pulled through a 12 mm diameter hole. This means you can provide 5 V power from both ends. I follwed the wiring shown in Figure 8. Keep in mind the direction shown on the strip! I found that the wiring wasn’t noticible after the ping pong balls were placed so didn’t bother putting them behind the MDF board like the instructable. Sticky tape was used to temporarilly fix the strip positions while I test for light leakage after placing the ping pong balls on top. 
+<img src="/blog/images/2021-01-05-LED_clock_files/fixed_leds.png" alt="" title="Figure 5: Cut strips of WS2128B LEDs." width="100%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/fixed_leds.png" alt="" title="Figure 5: Cut strips of WS2128B LEDs." width="100%"></p>
+<p>The reason why I’m not providing exact dimensions for the frame is that the dimensions will depend on how well you glue all the ping pong ball pieced together. Since each ping pong ball was 40 mm diameter, the row of 20 should be 800 mm long but mine ended up being 810 mm. With the frame, the overall dimensions was roughly 850 mm long and 290 mm tall. 
+<img src="/blog/images/2021-01-05-LED_clock_files/frame.png" alt="" title="Figure 6: Ping pong ball halves aligned to the LED strips." width="100%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/frame.png" alt="" title="Figure 6: Ping pong ball halves aligned to the LED strips." width="100%"></p>
+<blockquote>
+  <p>Tip: Make sure you have some space behind the frame to place the microcontroller and power supply.</p>
+</blockquote>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/rainbow_test.png" alt="" title="Figure 7: Test for light leakage." width="70%"></p>
+<p>Before you fix the LED strips in place with more hot glue, turn on all the LEDs and make sure each LED is underneath a ping pong ball. Look up the <a href="https://github.com/FastLED/FastLED">FastLED library</a> to see how to do this - it’s very simple and there are great example codes to run!
+<img src="/blog/images/2021-01-05-LED_clock_files/rainbow_test.png" alt="" title="Figure 7: Test for light leakage." width="70%"></p>
 
 <h1 id="led-index-look-up-table">
 <a class="anchor" href="#led-index-look-up-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>LED Index Look Up Table</h1>
-<p><a href="/blog/images/2021-01-05-LED_clock_files/led_circuit.png" title="Figure 8: Orientation of LED strips." width="80%"></a>
-<img src="/blog/images/2021-01-05-LED_clock_files/balls.png" alt="" title="Figure 9: Internal LED index for each ping pong ball." width="80%"></p>
+
+<p>The crux of my animations rely on knowing when LED number along the connected strip of 128 corresponds to a two dimensional position. From Figure 8, I label each LED by it’s strip number which you can see in Figure 9.
+<a href="https://content.instructables.com/ORIG/FPJ/XK9U/JTON6BBX/FPJXK9UJTON6BBX.png" title="Figure 8: Orientation of LED strips." width="100%"></a>
+<img src="/blog/images/2021-01-05-LED_clock_files/balls.png" alt="" title="Figure 9: Internal LED index for each ping pong ball." width="100%"></p>
+
+<p>Imagining the display as a parallelogram slanted to the left, I turned Figure 9 into a two dimensional array (look up table) with values corresponding to the strip index. For the positions that don’t exist, I put values of 999.</p>
 
 <div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">led_address</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
   <span class="p">{</span><span class="mi">999</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="mi">124</span><span class="p">},</span>  <span class="c1">// 0th row</span>
@@ -201,28 +222,66 @@ window.onload = wrap_img;
   <span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">33</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">47</span><span class="p">,</span><span class="mi">48</span><span class="p">,</span><span class="mi">61</span><span class="p">,</span><span class="mi">62</span><span class="p">,</span><span class="mi">75</span><span class="p">,</span><span class="mi">76</span><span class="p">,</span><span class="mi">89</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">117</span><span class="p">,</span><span class="mi">118</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">999</span><span class="p">},</span>  <span class="c1">// 6th row</span>
 <span class="p">};</span>
 </code></pre></div></div>
+<p>Now that I have access to the row and coloumn in the ping pong display, I went ahead and added custom animations.</p>
+
+<blockquote>
+  <p>Warning: Using this look up table together with arrays of structs for storing animation state quickly ate up the RAM on my Arduino Nano (which has 2 KB). To add more complex animations and scrolling text, you will need something like a Teensy or ESP32. I haven’t tried it yet, but this <a href="https://www.adafruit.com/product/4600">Qt Py</a> seems like a viable cheap Arduino compatible option with 32 KB of RAM.</p>
+</blockquote>
 
 <h1 id="foreground-modes">
 <a class="anchor" href="#foreground-modes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Foreground Modes</h1>
+<p>When programming the animations, I decided that it would be sensible to segregate the time (and any text?) to the foreground while keeping the rest to the background. The foreground LED colour values will overwrite the background values.</p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 10: Time displayed in rainbow." width="70%"></p>
+<p>Here’s what it looks like displaying the time in rainbow colours with a black background. 
+<img src="/blog/images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 10: Time displayed in rainbow." width="70%"></p>
+
+<blockquote>
+  <p>Warning: <code class="highlighter-rouge">FastLED</code> will turn off interrupts temporarily while updating the LED strip due to the tight timing.</p>
+</blockquote>
+
+<p>I also have an option to make the time appear in slanted mode as well as a no time option. The no time option is great for seeing the background animation. In practice, you can mix and match foreground and background modes.</p>
 
 <h1 id="background-animations">
 <a class="anchor" href="#background-animations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background Animations</h1>
+<p>The rainbow background works well with either the foreground set to <code class="highlighter-rouge">CRGB::White</code> or <code class="highlighter-rouge">CRGB::Black</code> as shown in Figure 11. 
+<img src="/blog/images/2021-01-05-LED_clock_files/rainbow_bg.png" alt="" title="Figure 11: Rainbow background." width="70%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/rainbow_bg.png" alt="" title="Figure 11: Rainbow background." width="70%"></p>
+<p>In creating this storm animation, I wanted a fast way to generate random numbers. It just so happens that <code class="highlighter-rouge">FastLED</code> provides <code class="highlighter-rouge">random8</code> which I used liberally to generate a raindrop’s path downward (and the lightning strikes!). 
+<img src="/blog/images/2021-01-05-LED_clock_files/thunder.gif" alt="" title="Figure 12: Storm animation." width="70%"></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/storm.png" alt="" title="Figure 12: Storm animation." width="70%"></p>
+<blockquote>
+  <p>Note: Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers. \n<code class="highlighter-rouge">random8</code>: Here you go… \nInterviewer: That doesn’t seem random to me… \n<code class="highlighter-rouge">random8</code>: But it was quick! \n<code class="highlighter-rouge">random8</code> is advertised as <em>fast</em> and is not truly random but for me, it is random enough.</p>
+</blockquote>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/campfire.png" alt="" title="Figure 13: Campfire animation." width="70%">
+<p>To make this firey animation, I just used <code class="highlighter-rouge">random8</code> to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange. 
+<img src="/blog/images/2021-01-05-LED_clock_files/campfire.png" alt="" title="Figure 13: Campfire animation." width="70%">
 <code class="highlighter-rouge">random8</code></p>
 
-<p><img src="/blog/images/2021-01-05-LED_clock_files/firework.png" alt="" title="Figure 14: Fireworks animation." width="70%">
-6 directions
-left or right</p>
+<p>The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used <code class="highlighter-rouge">random8</code> to choose Whether the firework rises to the left or the right. More <code class="highlighter-rouge">random8</code> was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away. 
+<img src="/blog/images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 14: Fireworks animation." width="70%"></p>
+
+<h1 id="potential-improvements">
+<a class="anchor" href="#potential-improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Potential Improvements</h1>
+
+<p>Here is a list of improvements I could make to my ping pong LED clock:</p>
+<ul>
+  <li>Use a hardware RTC rather than use software</li>
+  <li>Implement scolling text</li>
+  <li>Use FastLED colour palettes</li>
+  <li>Attach light sensor and auto-adjust FastLED brightness</li>
+  <li>Attach PIR motion sensor and turn on display when there is someone to look at it</li>
+  <li>Attach temperature/humidity/pressure sensor and display stats</li>
+  <li>Connect to Wifi (e.g. using an ESP32)</li>
+</ul>
+
+<p>These improvements will require more hardware that I don’t have right now… but you can totally put them on your shopping list when you order the materials to make your own ping pong LED clock and show me what you make!</p>
 
 <h1 id="conclusion">
 <a class="anchor" href="#conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion</h1>
+
+<p>We saw how I put together a ping pong LED clock inspired by an instructable and some animations. Both my hardware and software design choices were explained and my code is freely available at <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
+
+<p>I hope I inspired you to make your own ping pong LED clock with your own cool animations! Let me know how it goes!</p>
 
 
   </div><!-- from https://github.com/utterance/utterances -->
