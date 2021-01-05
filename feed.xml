@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-01-05T07:12:42-06:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Ping Pong LED Clock</title><link href="https://yiweimao.github.io/blog/ping_pong_led_clock/" rel="alternate" type="text/html" title="Ping Pong LED Clock" /><published>2021-01-05T00:00:00-06:00</published><updated>2021-01-05T00:00:00-06:00</updated><id>https://yiweimao.github.io/blog/led_clock</id><content type="html" xml:base="https://yiweimao.github.io/blog/ping_pong_led_clock/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-01-05T07:30:16-06:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Ping Pong LED Clock 2</title><link href="https://yiweimao.github.io/blog/ping_pong_led_clock/2/" rel="alternate" type="text/html" title="Ping Pong LED Clock 2" /><published>2021-01-05T00:00:00-06:00</published><updated>2021-01-05T00:00:00-06:00</updated><id>https://yiweimao.github.io/blog/ping_pong_led_clock/led_clock</id><content type="html" xml:base="https://yiweimao.github.io/blog/ping_pong_led_clock/2/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/rainbow_time.png&quot; alt=&quot;&quot; title=&quot;Figure 1: The final product showing the time.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
@@ -99,32 +99,12 @@
   &lt;p&gt;Note: Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers. \n&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;: Here you go… \nInterviewer: That doesn’t seem random to me… \n&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;: But it was quick! \n&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt; is advertised as &lt;em&gt;fast&lt;/em&gt; and is not truly random but for me, it is random enough.&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt; &lt;/th&gt;
-      &lt;th&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Interviewer&lt;/td&gt;
-      &lt;td&gt;Your resume says you are quick at generating random numbers. Give me a sequence of random numbers.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;Here you go….&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Interviewer&lt;/td&gt;
-      &lt;td&gt;That doesn’t seem random to me….&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;But it was quick!&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
+&lt;ul&gt;
+  &lt;li&gt;Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;: Here you go….&lt;/li&gt;
+  &lt;li&gt;Interviewer: That doesn’t seem random to me….&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;: But it was quick!&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;p&gt;To make this firey animation, I just used &lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt; to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange. 
 &lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/campfire.png&quot; alt=&quot;&quot; title=&quot;Figure 13: Campfire animation.&quot; width=&quot;70%&quot; /&gt;&lt;/p&gt;
