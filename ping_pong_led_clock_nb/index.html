@@ -137,17 +137,8 @@ window.onload = wrap_img;
     </a>
 </div>
 
-          <div class="px-2">
-    <a href="https://mybinder.org/v2/gh/YiweiMao/blog/master?filepath=_notebooks%2F2021-01-05-led_clock.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/blog/assets/badges/binder.svg" alt="Open In Binder"/>
-    </a>
-</div>
-
-          <div class="px-2">
-    <a href="https://colab.research.google.com/github/YiweiMao/blog/blob/master/_notebooks/2021-01-05-led_clock.ipynb" target="_blank">
-        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
-    </a>
-</div>
+          
+          
         </div>
       </header>
 
@@ -183,7 +174,7 @@ window.onload = wrap_img;
 <h1 id="Introduction">
 <a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
 </h1>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 1: The final product showing the time.">{:width="100%"}</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 1: The final product showing the time."></p>
 <p>Ping pong balls are great light diffusers and combining them with individually addressable RGB LEDs makes for a pretty display. This ping pong clock can show the time and background animations (more on that later). Since each "pixel" is placed in a hexagonal close packed (single layer though), the typical digits font for standard 7-segement displays can't be used unless the digits are slanted.</p>
 <p>In this blog post, I will describe how I built the thing and my reasoning behind some design choices. Then I will outline how I created my animations so you can fork my repository and create your own animations. At the end, there will be some animations for you to watch!</p>
 <p>My code can be found at this <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
@@ -208,16 +199,16 @@ window.onload = wrap_img;
 <h1 id="The-Build">
 <a class="anchor" href="#The-Build" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Build<a class="anchor-link" href="#The-Build"> </a>
 </h1>
-<p>From a bag of 150 ping pong balls,
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/ball_bag.png" alt="" title="Figure 2: Bag of cheap ping pong balls.">{:width="40%"}</p>
-<p>each ball goes into a jig I made using LEGO to hold the ball in place while I used an X-acto knife to slice along the seam. If you don't slice along the seam, you can see the seam when you shine the LED behind it! This is the most tedious part and took me a whole day.
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/jig.png" alt="" title="Figure 3: Jig to slice each ping pong ball along the visible seam.">{:width="50%"}</p>
-<p>I then used hot glue to double stack each half to improve the diffusion. Once the improved halves are done, I glued two together while aligning it to a flat surface (edge of a tissue box in my case). The instructable used two long lengths of wood to ensure each row is straight - it's impossible to mess up the straight line gluing two pieces together. Then extend to the final shape shown in Figure 6 (2 rows of 17, 2 rows of 18, 2 rows of 19 and 1 row of 20). I used hot glue quite liberally to make the structure rigid but it still ended up rather fragile - not a problem once it's in the frame and glued down. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/glued.png" alt="" title="Figure 4: Used hot glue to stick halves together.">{:width="40%"}</p>
-<p>I cut the LED strips such that the included JST connector both starts and ends the whole thing and these connectors are pulled through a 12 mm diameter hole. This means you can provide 5 V power from both ends. I follwed the wiring shown in Figure 8. Keep in mind the direction shown on the strip! I found that the wiring wasn't noticible after the ping pong balls were placed so didn't bother putting them behind the MDF board like the instructable. Sticky tape was used to temporarilly fix the strip positions while I test for light leakage after placing the ping pong balls on top. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fixed_leds.png" alt="" title="Figure 5: Cut strips of WS2128B LEDs wired together.">{:width="100%"}</p>
-<p>The reason why I'm not providing exact dimensions for the frame is that the dimensions will depend on how well you glue all the ping pong ball pieced together. Since each ping pong ball was 40 mm diameter, the row of 20 should be 800 mm long but mine ended up being 810 mm. With the frame, the overall dimensions was roughly 850 mm long and 290 mm tall. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/frame.png" alt="" title="Figure 6: Ping pong ball halves aligned to the LED strips.">{:width="100%"}</p>
+<p>From a bag of 150 ping pong balls,</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/ball_bag.png" alt="" title="Figure 2: Bag of cheap ping pong balls."></p>
+<p>each ball goes into a jig I made using LEGO to hold the ball in place while I used an X-acto knife to slice along the seam. If you don't slice along the seam, you can see the seam when you shine the LED behind it! This is the most tedious part and took me a whole day.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/jig.png" alt="" title="Figure 3: Jig to slice each ping pong ball along the visible seam."></p>
+<p>I then used hot glue to double stack each half to improve the diffusion. Once the improved halves are done, I glued two together while aligning it to a flat surface (edge of a tissue box in my case). The instructable used two long lengths of wood to ensure each row is straight - it's impossible to mess up the straight line gluing two pieces together. Then extend to the final shape shown in Figure 6 (2 rows of 17, 2 rows of 18, 2 rows of 19 and 1 row of 20). I used hot glue quite liberally to make the structure rigid but it still ended up rather fragile - not a problem once it's in the frame and glued down.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/glued.png" alt="" title="Figure 4: Used hot glue to stick halves together."></p>
+<p>I cut the LED strips such that the included JST connector both starts and ends the whole thing and these connectors are pulled through a 12 mm diameter hole. This means you can provide 5 V power from both ends. I follwed the wiring shown in Figure 8. Keep in mind the direction shown on the strip! I found that the wiring wasn't noticible after the ping pong balls were placed so didn't bother putting them behind the MDF board like the instructable. Sticky tape was used to temporarilly fix the strip positions while I test for light leakage after placing the ping pong balls on top.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fixed_leds.png" alt="" title="Figure 5: Cut strips of WS2128B LEDs wired together."></p>
+<p>The reason why I'm not providing exact dimensions for the frame is that the dimensions will depend on how well you glue all the ping pong ball pieced together. Since each ping pong ball was 40 mm diameter, the row of 20 should be 800 mm long but mine ended up being 810 mm. With the frame, the overall dimensions was roughly 850 mm long and 290 mm tall.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/frame.png" alt="" title="Figure 6: Ping pong ball halves aligned to the LED strips."></p>
 
 </div>
 </div>
@@ -237,14 +228,14 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Before you fix the LED strips in place with more hot glue, turn on all the LEDs and make sure each LED is underneath a ping pong ball. Look up the <a href="https://github.com/FastLED/FastLED">FastLED library</a> to see how to do this - it's very simple and there are great example codes to run!
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_test.png" alt="" title="Figure 7: Test for light leakage.">{:width="70%"}</p>
+<p>Before you fix the LED strips in place with more hot glue, turn on all the LEDs and make sure each LED is underneath a ping pong ball. Look up the <a href="https://github.com/FastLED/FastLED">FastLED library</a> to see how to do this - it's very simple and there are great example codes to run!</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_test.png" alt="" title="Figure 7: Test for light leakage."></p>
 <h1 id="LED-Index-Look-Up-Table">
 <a class="anchor" href="#LED-Index-Look-Up-Table" aria-hidden="true"><span class="octicon octicon-link"></span></a>LED Index Look Up Table<a class="anchor-link" href="#LED-Index-Look-Up-Table"> </a>
 </h1>
-<p>The crux of my animations rely on knowing when LED number along the connected strip of 128 corresponds to a two dimensional position. From Figure 8, I label each LED by it's strip number which you can see in Figure 9.
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/led_circuit.png" alt="" title="Figure 8: Orientation of LED strips.">{:width="100%"}
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/balls.png" alt="" title="Figure 9: Internal LED index for each ping pong ball.">{:width="100%"}</p>
+<p>The crux of my animations rely on knowing when LED number along the connected strip of 128 corresponds to a two dimensional position. From Figure 8, I label each LED by it's strip number which you can see in Figure 9.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/led_circuit.png" alt="" title="Figure 8: Orientation of LED strips."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/balls.png" alt="" title="Figure 9: Internal LED index for each ping pong ball."></p>
 <p>Imagining the display as a parallelogram slanted to the left, I turned Figure 9 into a two dimensional array (look up table) with values corresponding to the strip index. For the positions that don't exist, I put values of 999.</p>
 <div class="highlight"><pre><span></span><span class="k">const</span> <span class="kt">int</span> <span class="n">led_address</span><span class="p">[</span><span class="mi">7</span><span class="p">][</span><span class="mi">20</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
   <span class="p">{</span><span class="mi">999</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">999</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">27</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">41</span><span class="p">,</span><span class="mi">54</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">82</span><span class="p">,</span><span class="mi">83</span><span class="p">,</span><span class="mi">96</span><span class="p">,</span><span class="mi">97</span><span class="p">,</span><span class="mi">110</span><span class="p">,</span><span class="mi">111</span><span class="p">,</span><span class="mi">124</span><span class="p">},</span>  <span class="c1">// 0th row</span>
@@ -280,8 +271,8 @@ window.onload = wrap_img;
 <a class="anchor" href="#Foreground-Modes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Foreground Modes<a class="anchor-link" href="#Foreground-Modes"> </a>
 </h1>
 <p>When programming the animations, I decided that it would be sensible to segregate the time (and any text?) to the foreground while keeping the rest to the background. The foreground LED colour values will overwrite the background values.</p>
-<p>Here's what it looks like displaying the time in rainbow colours with a black background. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 10: Time displayed in rainbow.">{:width="70%"}</p>
+<p>Here's what it looks like displaying the time in rainbow colours with a black background.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 10: Time displayed in rainbow."></p>
 
 </div>
 </div>
@@ -305,10 +296,10 @@ window.onload = wrap_img;
 <h1 id="Background-Animations">
 <a class="anchor" href="#Background-Animations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background Animations<a class="anchor-link" href="#Background-Animations"> </a>
 </h1>
-<p>The rainbow background works well with either the foreground set to <code>CRGB::White</code> or <code>CRGB::Black</code> as shown in Figure 11. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_bg.png" alt="" title="Figure 11: Rainbow background.">{:width="70%"}</p>
-<p>In creating this storm animation, I wanted a fast way to generate random numbers. It just so happens that <code>FastLED</code> provides <code>random8</code> which I used liberally to generate a raindrop's path downward (and the lightning strikes!). 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/thunder.gif" alt="" title="Figure 12: Storm animation.">{:width="70%"}</p>
+<p>The rainbow background works well with either the foreground set to <code>CRGB::White</code> or <code>CRGB::Black</code> as shown in Figure 11.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_bg.png" alt="" title="Figure 11: Rainbow background."></p>
+<p>In creating this storm animation, I wanted a fast way to generate random numbers. It just so happens that <code>FastLED</code> provides <code>random8</code> which I used liberally to generate a raindrop's path downward (and the lightning strikes!).</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/thunder.gif" alt="" title="Figure 12: Storm animation."></p>
 
 </div>
 </div>
@@ -316,44 +307,19 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Interviewer</td>
-<td>Your resume says you are quick at generating random numbers. Give me a sequence of random numbers.</td>
-</tr>
-<tr>
-<td><code>random8</code></td>
-<td>Here you go....</td>
-</tr>
-<tr>
-<td>Interviewer</td>
-<td>That doesn't seem random to me....</td>
-</tr>
-<tr>
-<td><code>random8</code></td>
-<td>But it was quick!</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p></p>
+<ul>
+<li>Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers. </li>
+<li>
+<code>random8</code>: Here you go....        </li>
+<li>Interviewer: That doesn't seem random to me....     </li>
+<li>
+<code>random8</code>: But it was quick!<br>
 <div class="flash">
     <svg class="octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
-    <strong>Note: </strong>&gt; Note: Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers. \n<code>random8</code>: Here you go... \nInterviewer: That doesn’t seem random to me... \n<code>random8</code>: But it was quick! \n<code>random8</code> is advertised as <em>fast</em> and is not truly random but for me, it is random enough. 
+    <strong>Note: </strong><code>random8</code> is advertised as <em>fast</em> and is not truly random but for me, it is random enough. 
 </div>
+</li>
+</ul>
 
 </div>
 </div>
@@ -361,10 +327,10 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To make this firey animation, I just used <code>random8</code> to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/campfire.png" alt="" title="Figure 13: Campfire animation.">{:width="70%"}</p>
-<p>The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used <code>random8</code> to choose Whether the firework rises to the left or the right. More <code>random8</code> was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away. 
-<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 14: Fireworks animation. Please excuse my shaky hands.">{:width="70%"}</p>
+<p>To make this firey animation, I just used <code>random8</code> to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/campfire.png" alt="" title="Figure 13: Campfire animation."></p>
+<p>The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used <code>random8</code> to choose Whether the firework rises to the left or the right. More <code>random8</code> was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 14: Fireworks animation. Please excuse my shaky hands."></p>
 <h1 id="Potential-Improvements">
 <a class="anchor" href="#Potential-Improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Potential Improvements<a class="anchor-link" href="#Potential-Improvements"> </a>
 </h1>
