@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-01-05T06:41:32-06:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Ping Pong LED Clock</title><link href="https://yiweimao.github.io/blog/ping_pong_led_clock/" rel="alternate" type="text/html" title="Ping Pong LED Clock" /><published>2021-01-05T00:00:00-06:00</published><updated>2021-01-05T00:00:00-06:00</updated><id>https://yiweimao.github.io/blog/led_clock</id><content type="html" xml:base="https://yiweimao.github.io/blog/ping_pong_led_clock/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://yiweimao.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://yiweimao.github.io/blog/" rel="alternate" type="text/html" /><updated>2021-01-05T07:02:11-06:00</updated><id>https://yiweimao.github.io/blog/feed.xml</id><title type="html">Yiwei Mao</title><subtitle>Teaching my past self and reminding my future self.</subtitle><entry><title type="html">Ping Pong LED Clock</title><link href="https://yiweimao.github.io/blog/ping_pong_led_clock/" rel="alternate" type="text/html" title="Ping Pong LED Clock" /><published>2021-01-05T00:00:00-06:00</published><updated>2021-01-05T00:00:00-06:00</updated><id>https://yiweimao.github.io/blog/led_clock</id><content type="html" xml:base="https://yiweimao.github.io/blog/ping_pong_led_clock/">&lt;h1 id=&quot;introduction&quot;&gt;Introduction&lt;/h1&gt;
 
 &lt;p&gt;&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/rainbow_time.png&quot; alt=&quot;&quot; title=&quot;Figure 1: The final product showing the time.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
@@ -6,7 +6,7 @@
 
 &lt;p&gt;In this blog post, I will describe how I built the thing and my reasoning behind some design choices. Then I will outline how I created my animations so you can fork my repository and create your own animations. At the end, there will be some animations for you to watch!&lt;/p&gt;
 
-&lt;p&gt;My code can be found at &lt;a href=&quot;https://github.com/YiweiMao/pingPongClock&quot;&gt;repo link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;My code can be found at this &lt;a href=&quot;https://github.com/YiweiMao/pingPongClock&quot;&gt;repo link&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h1 id=&quot;materials&quot;&gt;Materials&lt;/h1&gt;
 
@@ -33,14 +33,14 @@
 &lt;p&gt;From a bag of 150 ping pong balls,
 &lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/ball_bag.png&quot; alt=&quot;&quot; title=&quot;Figure 2: Bag of cheap ping pong balls.&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;each ball goes into a jig to hold it in place while I used an X-acto knife to slice along the seam. If you don’t slice along the seam, you can see the seam when you shine the LED behind it! This is the most tedious part and took me a whole day.
-&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/jig.png&quot; alt=&quot;&quot; title=&quot;Figure 3: Jig to slice each ping pong ball.&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;each ball goes into a jig I made using LEGO to hold the ball in place while I used an X-acto knife to slice along the seam. If you don’t slice along the seam, you can see the seam when you shine the LED behind it! This is the most tedious part and took me a whole day.
+&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/jig.png&quot; alt=&quot;&quot; title=&quot;Figure 3: Jig to slice each ping pong ball along the visible seam.&quot; width=&quot;50%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I then used hot glue to double stack each half to improve the diffusion. Once the improved halves are done, I glued two together while aligning it to a flat surface (edge of a tissue box in my case). The instructable used two long lengths of wood to ensure each row is straight - it’s impossible to mess up the straight line gluing two pieces together. Then extend to the final shape shown in Figure 6 (2 rows of 17, 2 rows of 18, 2 rows of 19 and 1 row of 20). I used hot glue quite liberally to make the structure rigid but it still ended up rather fragile - not a problem once it’s in the frame and glued down. 
 &lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/glued.png&quot; alt=&quot;&quot; title=&quot;Figure 4: Used hot glue to stick halves together.&quot; width=&quot;40%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;I cut the LED strips such that the included JST connector both starts and ends the whole thing and these connectors are pulled through a 12 mm diameter hole. This means you can provide 5 V power from both ends. I follwed the wiring shown in Figure 8. Keep in mind the direction shown on the strip! I found that the wiring wasn’t noticible after the ping pong balls were placed so didn’t bother putting them behind the MDF board like the instructable. Sticky tape was used to temporarilly fix the strip positions while I test for light leakage after placing the ping pong balls on top. 
-&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/fixed_leds.png&quot; alt=&quot;&quot; title=&quot;Figure 5: Cut strips of WS2128B LEDs.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/fixed_leds.png&quot; alt=&quot;&quot; title=&quot;Figure 5: Cut strips of WS2128B LEDs wired together.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The reason why I’m not providing exact dimensions for the frame is that the dimensions will depend on how well you glue all the ping pong ball pieced together. Since each ping pong ball was 40 mm diameter, the row of 20 should be 800 mm long but mine ended up being 810 mm. With the frame, the overall dimensions was roughly 850 mm long and 290 mm tall. 
 &lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/frame.png&quot; alt=&quot;&quot; title=&quot;Figure 6: Ping pong ball halves aligned to the LED strips.&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
@@ -73,7 +73,7 @@
 &lt;p&gt;Now that I have access to the row and coloumn in the ping pong display, I went ahead and added custom animations.&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Warning: Using this look up table together with arrays of structs for storing animation state quickly ate up the RAM on my Arduino Nano (which has 2 KB). To add more complex animations and scrolling text, you will need something like a Teensy or ESP32. I haven’t tried it yet, but this &lt;a href=&quot;https://www.adafruit.com/product/4600&quot;&gt;Qt Py&lt;/a&gt; seems like a viable cheap Arduino compatible option with 32 KB of RAM.&lt;/p&gt;
+  &lt;p&gt;Important: Using this look up table together with arrays of structs for storing animation state quickly ate up the RAM on my Arduino Nano (which has 2 KB). To add more complex animations and scrolling text, you will need something like a Teensy or ESP32. I haven’t tried it yet, but this &lt;a href=&quot;https://www.adafruit.com/product/4600&quot;&gt;Qt Py&lt;/a&gt; seems like a viable cheap Arduino compatible option with 32 KB of RAM.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h1 id=&quot;foreground-modes&quot;&gt;Foreground Modes&lt;/h1&gt;
@@ -99,17 +99,43 @@
   &lt;p&gt;Note: Interviewer: Your resume says you are quick at generating random numbers. Give me a sequence of random numbers. \n&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;: Here you go… \nInterviewer: That doesn’t seem random to me… \n&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;: But it was quick! \n&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt; is advertised as &lt;em&gt;fast&lt;/em&gt; and is not truly random but for me, it is random enough.&lt;/p&gt;
 &lt;/blockquote&gt;
 
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt; &lt;/th&gt;
+      &lt;th&gt; &lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Interviewer&lt;/td&gt;
+      &lt;td&gt;Your resume says you are quick at generating random numbers. Give me a sequence of random numbers.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Here you go….&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Interviewer&lt;/td&gt;
+      &lt;td&gt;That doesn’t seem random to me….&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;But it was quick!&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
 &lt;p&gt;To make this firey animation, I just used &lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt; to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange. 
-&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/campfire.png&quot; alt=&quot;&quot; title=&quot;Figure 13: Campfire animation.&quot; width=&quot;70%&quot; /&gt;
-&lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/campfire.png&quot; alt=&quot;&quot; title=&quot;Figure 13: Campfire animation.&quot; width=&quot;70%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used &lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt; to choose Whether the firework rises to the left or the right. More &lt;code class=&quot;highlighter-rouge&quot;&gt;random8&lt;/code&gt; was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away. 
-&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/fireworks.gif&quot; alt=&quot;&quot; title=&quot;Figure 14: Fireworks animation.&quot; width=&quot;70%&quot; /&gt;&lt;/p&gt;
+&lt;img src=&quot;/blog/images/2021-01-05-LED_clock_files/fireworks.gif&quot; alt=&quot;&quot; title=&quot;Figure 14: Fireworks animation. Please excuse my shaky hands.&quot; width=&quot;70%&quot; /&gt;&lt;/p&gt;
 
 &lt;h1 id=&quot;potential-improvements&quot;&gt;Potential Improvements&lt;/h1&gt;
 
 &lt;p&gt;Here is a list of improvements I could make to my ping pong LED clock:&lt;/p&gt;
-&lt;ul&gt;
+&lt;ol&gt;
   &lt;li&gt;Use a hardware RTC rather than use software&lt;/li&gt;
   &lt;li&gt;Implement scolling text&lt;/li&gt;
   &lt;li&gt;Use FastLED colour palettes&lt;/li&gt;
@@ -117,7 +143,7 @@
   &lt;li&gt;Attach PIR motion sensor and turn on display when there is someone to look at it&lt;/li&gt;
   &lt;li&gt;Attach temperature/humidity/pressure sensor and display stats&lt;/li&gt;
   &lt;li&gt;Connect to Wifi (e.g. using an ESP32)&lt;/li&gt;
-&lt;/ul&gt;
+&lt;/ol&gt;
 
 &lt;p&gt;These improvements will require more hardware that I don’t have right now… but you can totally put them on your shopping list when you order the materials to make your own ping pong LED clock and show me what you make!&lt;/p&gt;
 
