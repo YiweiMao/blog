@@ -121,25 +121,13 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      9 min read
+      12 min read
     
 </span></p>
 
     
 
     
-      
-        <div class="pb-5 d-flex flex-wrap flex-justify-end">
-          <div class="px-2">
-
-    <a href="https://github.com/YiweiMao/blog/tree/master/_notebooks/2021-01-05-led_clock.ipynb" role="button" target="_blank">
-<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
-    </a>
-</div>
-
-          
-          
-        </div>
       </header>
 
   <div class="post-content e-content" itemprop="articleBody">
@@ -147,9 +135,31 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#Introduction">Introduction </a></li>
 <li class="toc-entry toc-h1"><a href="#Materials">Materials </a></li>
 <li class="toc-entry toc-h1"><a href="#The-Build">The Build </a></li>
-<li class="toc-entry toc-h1"><a href="#LED-Index-Look-Up-Table">LED Index Look Up Table </a></li>
-<li class="toc-entry toc-h1"><a href="#Foreground-Modes">Foreground Modes </a></li>
-<li class="toc-entry toc-h1"><a href="#Background-Animations">Background Animations </a></li>
+<li class="toc-entry toc-h1"><a href="#LED-Index-Look-Up-Table">LED Index Look Up Table </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#FastLED-Frame-Buffer">FastLED Frame Buffer </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Setting-Colours">Setting Colours </a></li>
+<li class="toc-entry toc-h3"><a href="#Power-consumption">Power consumption </a></li>
+<li class="toc-entry toc-h3"><a href="#Timing">Timing </a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Foreground-Modes">Foreground Modes </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Slanted-Digits">Slanted Digits </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Background-Animations">Background Animations </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Rolling-Rainbow">Rolling Rainbow </a></li>
+<li class="toc-entry toc-h2"><a href="#Twinkle">Twinkle </a></li>
+<li class="toc-entry toc-h2"><a href="#Storm">Storm </a></li>
+<li class="toc-entry toc-h2"><a href="#Campfire">Campfire </a></li>
+<li class="toc-entry toc-h2"><a href="#Fireworks">Fireworks </a></li>
+</ul>
+</li>
 <li class="toc-entry toc-h1"><a href="#Potential-Improvements">Potential Improvements </a></li>
 <li class="toc-entry toc-h1"><a href="#Conclusion">Conclusion </a></li>
 </ul><!--
@@ -174,7 +184,7 @@ window.onload = wrap_img;
 <h1 id="Introduction">
 <a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
 </h1>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 1: The final product showing the time."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.gif" alt="" title="Figure 1: The final product showing the time."></p>
 <p>Ping pong balls are great light diffusers and combining them with individually addressable RGB LEDs makes for a pretty display. This ping pong clock can show the time and background animations (more on that later). Since each "pixel" is placed in a hexagonal close packed (single layer though), the typical digits font for standard 7-segement displays can't be used unless the digits are slanted.</p>
 <p>In this blog post, I will describe how I built the thing and my reasoning behind some design choices. Then I will outline how I created my animations so you can fork my repository and create your own animations. At the end, there will be some animations for you to watch!</p>
 <p>My code can be found at this <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
@@ -195,7 +205,7 @@ window.onload = wrap_img;
 <li>Lots of hot glue. I used a 30 cm stick ~$1.</li>
 <li>A 5 V power supply. I'm using a phone charger which can provide up to 2 A of current. If you plan to turn all the LEDs to max brightness, you'll need like 8 A but for all intents and purposes, I think 2 A is enough. You can use a <code>FastLED</code> setting to set a limit to the power draw and the brightness will automatically adjust for you. </li>
 </ul>
-<p>The <a href="https://www.instructables.com/Ping-Pong-Ball-LED-Clock/">original instructable</a> which describes how to build and program the LED clock is a great resource so definitely take a look! In it, he/she uses competition quality ping pong balls rather than the cheap ones I used which tended to be glossy and inconsistent in the amount of plastic for each ball. I'm inclined to agree that the higher quality ping pong balls are way better despite being more costly. The cheap plasticky ping pong balls don't diffuse the light enough and the LED position can seen from behind. If you do choose to use the cheap ping pong balls however, I found that you can recreate the really great light diffusion by <em>stacking</em> two cut halves together. Looking from afar, I can't notice any blemishes.</p>
+<p>The <a href="https://www.instructables.com/Ping-Pong-Ball-LED-Clock/">original instructable</a> which describes how to build and program the LED clock is a great resource so definitely take a look! In it, he/she uses competition quality ping pong balls rather than the cheap ones I used which tended to be glossy and inconsistent in the amount of plastic for each ball. I'm inclined to agree that the higher quality ping pong balls are way better despite being more costly. The cheap plasticky ping pong balls don't diffuse the light enough and the LED position can seen from behind. If you do choose to use the cheap ping pong balls however, I found that you can recreate the really great light diffusion by <em>stacking</em> two cut halves together. Looking from afar, I can't notice any blemishes (or at least, my mind won't let me).</p>
 <h1 id="The-Build">
 <a class="anchor" href="#The-Build" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Build<a class="anchor-link" href="#The-Build"> </a>
 </h1>
@@ -267,12 +277,38 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Foreground-Modes">
-<a class="anchor" href="#Foreground-Modes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Foreground Modes<a class="anchor-link" href="#Foreground-Modes"> </a>
-</h1>
-<p>When programming the animations, I decided that it would be sensible to segregate the time (and any text?) to the foreground while keeping the rest to the background. The foreground LED colour values will overwrite the background values.</p>
-<p>Here's what it looks like displaying the time in rainbow colours with a black background.</p>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.png" alt="" title="Figure 10: Time displayed in rainbow."></p>
+<h2 id="FastLED-Frame-Buffer">
+<a class="anchor" href="#FastLED-Frame-Buffer" aria-hidden="true"><span class="octicon octicon-link"></span></a>FastLED Frame Buffer<a class="anchor-link" href="#FastLED-Frame-Buffer"> </a>
+</h2>
+<p>I use the <a href="https://github.com/FastLED/FastLED">FastLED library</a> for controlling all 128 RGB LEDs. After connecting 5 V and GND, the remaining data pin can be connected to any digital pin (I used pin 6). This made the hardware really easy to interface and minimsed mistakes with soldering and wiring. (Imagine controlling all the LEDs with its own digital pin!)</p>
+<p>The state of all the LEDs are stored in an array that holds the red, green, and blue values for each LED.</p>
+<div class="highlight"><pre><span></span><span class="n">CRGB</span> <span class="n">leds</span><span class="p">[</span><span class="n">NUM_LEDS</span><span class="p">];</span>
+<span class="n">FastLED</span><span class="p">.</span><span class="n">addLeds</span><span class="o">&lt;</span><span class="n">WS2812</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GRB</span><span class="o">&gt;</span><span class="p">(</span><span class="n">leds</span><span class="p">,</span> <span class="n">NUM_LEDS</span><span class="p">).</span><span class="n">setCorrection</span><span class="p">(</span> <span class="n">TypicalLEDStrip</span> <span class="p">);</span>
+</pre></div>
+<h3 id="Setting-Colours">
+<a class="anchor" href="#Setting-Colours" aria-hidden="true"><span class="octicon octicon-link"></span></a>Setting Colours<a class="anchor-link" href="#Setting-Colours"> </a>
+</h3>
+<p>Updating this frame buffer does not update the LEDs until you call <code>FastLED.show()</code>. Before writing to the frame buffer, I first use <code>FastLED.clear()</code> to zero all the LEDs to <code>CRGB::Black</code>.
+</p>
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 8.5l-6 6-3-3L8.5 10l1.5 1.5L14.5 7 16 8.5zM5.7 12.2l.8.8H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h7c.55 0 1 .45 1 1v6.5l-.8-.8c-.39-.39-1.03-.39-1.42 0L5.7 10.8a.996.996 0 000 1.41v-.01zM4 4h5V3H4v1zm0 2h5V5H4v1zm0 2h3V7H4v1zM3 9H2v1h1V9zm0-2H2v1h1V7zm0-2H2v1h1V5zm0-2H2v1h1V3z"></path></svg>
+    <strong>Tip: </strong>Standard HTML colours can be accessed via <code>CRGB::colour_name</code>. Some examples are <code>CRGB::White</code>, <code>CRGB::Yellow</code>, <code>CRGB::Teal</code>, and <code>CRGB::Gray</code>. 
+</div>
+You can also use the HSV colour space and set the hue, saturation, and value using <code>CHSV(unit8_t hue,unit8_t sat,unit8_t val)</code> which will automatically convert to an RGB value to be stored. <code>FastLED</code> has two rainbow spectrums - I used the default which spaces out the oranges and yellows more and is visually more "rainbow-like".
+<h3 id="Power-consumption">
+<a class="anchor" href="#Power-consumption" aria-hidden="true"><span class="octicon octicon-link"></span></a>Power consumption<a class="anchor-link" href="#Power-consumption"> </a>
+</h3>
+<p>Each RGB LED can draw 60 mA and since there are 128 of them, that's 7.68 A. In all my applications, I do not need to turn all the LEDs white on max brightness anyway. I found full brightness too bright and that even half brightness is good enough. I used a 5 V, 2 A phone charger. <code>FastLED</code> provides as function to limit the power consumption automatically so that LED brightnesses are modified before writing out the frame buffer. This means you can code your animations assuming full power while testing on a smaller power supply, then change a setting for deployment.</p>
+<div class="highlight"><pre><span></span><span class="n">FastLED</span><span class="p">.</span><span class="n">setMaxPowerInVoltsAndMilliamps</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">500</span><span class="p">);</span> 
+<span class="c1">// Also, see this function</span>
+<span class="c1">// FastLED.setBrightness(  BRIGHTNESS );</span>
+</pre></div>
+<p>For example, if the value is 11.5 after <code>FastLED</code> adjusts the value, <code>FastLED</code> will use temporal dithering to make it appear as 11.5 by quickly switching between 11 and 12. Neat!</p>
+<h3 id="Timing">
+<a class="anchor" href="#Timing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Timing<a class="anchor-link" href="#Timing"> </a>
+</h3>
+<p>Each RGB LED takes around 30 us to be written. To update the whole clock display, the whole process takes 3.84 ms. Theoretically, that means the max refresh rate is 260 Hz but it takes time to clear the frame buffer, cycle through the look up table, compute colour values and write the new animations. In practice, I found a 20 Hz refresh rate was plenty for smooth animations.</p>
+<p>Instead of using the Arduino <code>delay()</code> function for timing, I used <code>FastLED.delay()</code> instead as it allows for temporal dithering as described above.</p>
 
 </div>
 </div>
@@ -283,7 +319,7 @@ window.onload = wrap_img;
 <p></p>
 <div class="flash flash-error">
     <svg class="octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
-    <strong>Warning: </strong><code>FastLED</code> will turn off interrupts temporarily while updating the LED strip due to the tight timing. 
+    <strong>Warning: </strong><code>FastLED</code> will turn off interrupts temporarily while updating the LED strip due to the tight timing needed to write to the LEDs. 
 </div>
 
 </div>
@@ -292,14 +328,41 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Foreground-Modes">
+<a class="anchor" href="#Foreground-Modes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Foreground Modes<a class="anchor-link" href="#Foreground-Modes"> </a>
+</h1>
+<p>When programming the animations, I decided that it would be sensible to segregate the time (and any text?) to the foreground while keeping the rest to the background. The foreground LED colour values will overwrite the background values.</p>
+<p>Here's what it looks like displaying the time in rainbow colours with a black background.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.gif" alt="" title="Figure 10: Time displayed in rainbow."></p>
+<h2 id="Slanted-Digits">
+<a class="anchor" href="#Slanted-Digits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slanted Digits<a class="anchor-link" href="#Slanted-Digits"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>I also have an option to make the time appear in slanted mode as well as a no time option. The no time option is great for seeing the background animation. In practice, you can mix and match foreground and background modes.</p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/slant.gif" alt="" title="Figure 11: Time displayed using slanted digits."></p>
 <h1 id="Background-Animations">
 <a class="anchor" href="#Background-Animations" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background Animations<a class="anchor-link" href="#Background-Animations"> </a>
 </h1>
+<h2 id="Rolling-Rainbow">
+<a class="anchor" href="#Rolling-Rainbow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rolling Rainbow<a class="anchor-link" href="#Rolling-Rainbow"> </a>
+</h2>
 <p>The rainbow background works well with either the foreground set to <code>CRGB::White</code> or <code>CRGB::Black</code> as shown in Figure 11.</p>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_bg.png" alt="" title="Figure 11: Rainbow background."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_bg.gif" alt="" title="Figure 12: Rainbow background."></p>
+<h2 id="Twinkle">
+<a class="anchor" href="#Twinkle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Twinkle<a class="anchor-link" href="#Twinkle"> </a>
+</h2>
+<p>In this one, I randomly chose LEDs to flash white and fade away. 
+<img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/twinkle.gif" alt="" title="Figure 13: Twinkle animation."></p>
+<h2 id="Storm">
+<a class="anchor" href="#Storm" aria-hidden="true"><span class="octicon octicon-link"></span></a>Storm<a class="anchor-link" href="#Storm"> </a>
+</h2>
 <p>In creating this storm animation, I wanted a fast way to generate random numbers. It just so happens that <code>FastLED</code> provides <code>random8</code> which I used liberally to generate a raindrop's path downward (and the lightning strikes!).</p>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/thunder.gif" alt="" title="Figure 12: Storm animation."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/thunder.gif" alt="" title="Figure 14: Storm animation."></p>
 
 </div>
 </div>
@@ -327,10 +390,16 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Campfire">
+<a class="anchor" href="#Campfire" aria-hidden="true"><span class="octicon octicon-link"></span></a>Campfire<a class="anchor-link" href="#Campfire"> </a>
+</h2>
 <p>To make this firey animation, I just used <code>random8</code> to generate brightness values for the bottom four rows. Each row up is slightly less bright. I also randomly shifted the red hue towards orange.</p>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/campfire.png" alt="" title="Figure 13: Campfire animation."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/campfire.gif" alt="" title="Figure 15: Campfire animation."></p>
+<h2 id="Fireworks">
+<a class="anchor" href="#Fireworks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fireworks<a class="anchor-link" href="#Fireworks"> </a>
+</h2>
 <p>The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used <code>random8</code> to choose Whether the firework rises to the left or the right. More <code>random8</code> was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away.</p>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 14: Fireworks animation. Please excuse my shaky hands."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 16: Fireworks animation. Please excuse my shaky hands."></p>
 <h1 id="Potential-Improvements">
 <a class="anchor" href="#Potential-Improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Potential Improvements<a class="anchor-link" href="#Potential-Improvements"> </a>
 </h1>
