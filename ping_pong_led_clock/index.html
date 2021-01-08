@@ -294,7 +294,7 @@ window.onload = wrap_img;
     <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 8.5l-6 6-3-3L8.5 10l1.5 1.5L14.5 7 16 8.5zM5.7 12.2l.8.8H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h7c.55 0 1 .45 1 1v6.5l-.8-.8c-.39-.39-1.03-.39-1.42 0L5.7 10.8a.996.996 0 000 1.41v-.01zM4 4h5V3H4v1zm0 2h5V5H4v1zm0 2h3V7H4v1zM3 9H2v1h1V9zm0-2H2v1h1V7zm0-2H2v1h1V5zm0-2H2v1h1V3z"></path></svg>
     <strong>Tip: </strong>Standard HTML colours can be accessed via <code>CRGB::colour_name</code>. Some examples are <code>CRGB::White</code>, <code>CRGB::Yellow</code>, <code>CRGB::Teal</code>, and <code>CRGB::Gray</code>. 
 </div>
-You can also use the HSV colour space and set the hue, saturation, and value using <code>CHSV(unit8_t hue,unit8_t sat,unit8_t val)</code> which will automatically convert to an RGB value to be stored. <code>FastLED</code> has two rainbow spectrums - I used the default which spaces out the oranges and yellows more and is visually more "rainbow-like".
+<p>You can also use the HSV colour space and set the hue, saturation, and value using <code>CHSV(unit8_t hue,unit8_t sat,unit8_t val)</code> which will automatically convert to an RGB value to be stored. <code>FastLED</code> has two rainbow spectrums - I used the default which spaces out the oranges and yellows more and is visually more "rainbow-like".</p>
 <h3 id="Power-consumption">
 <a class="anchor" href="#Power-consumption" aria-hidden="true"><span class="octicon octicon-link"></span></a>Power consumption<a class="anchor-link" href="#Power-consumption"> </a>
 </h3>
@@ -351,7 +351,7 @@ You can also use the HSV colour space and set the hue, saturation, and value usi
 <h2 id="Rolling-Rainbow">
 <a class="anchor" href="#Rolling-Rainbow" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rolling Rainbow<a class="anchor-link" href="#Rolling-Rainbow"> </a>
 </h2>
-<p>The rainbow background works well with either the foreground set to <code>CRGB::White</code> or <code>CRGB::Black</code> as shown in Figure 11.</p>
+<p>The rainbow background works well with either the foreground set to <code>CRGB::White</code> (as shown in Figure 12) or <code>CRGB::Black</code>.</p>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_bg.gif" alt="" title="Figure 12: Rainbow background."></p>
 <h2 id="Twinkle">
 <a class="anchor" href="#Twinkle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Twinkle<a class="anchor-link" href="#Twinkle"> </a>
@@ -399,7 +399,7 @@ You can also use the HSV colour space and set the hue, saturation, and value usi
 <a class="anchor" href="#Fireworks" aria-hidden="true"><span class="octicon octicon-link"></span></a>Fireworks<a class="anchor-link" href="#Fireworks"> </a>
 </h2>
 <p>The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used <code>random8</code> to choose Whether the firework rises to the left or the right. More <code>random8</code> was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away.</p>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 16: Fireworks animation. Please excuse my shaky hands."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 16: Fireworks animation."></p>
 <h1 id="Potential-Improvements">
 <a class="anchor" href="#Potential-Improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Potential Improvements<a class="anchor-link" href="#Potential-Improvements"> </a>
 </h1>
@@ -418,7 +418,7 @@ You can also use the HSV colour space and set the hue, saturation, and value usi
 <a class="anchor" href="#Conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion<a class="anchor-link" href="#Conclusion"> </a>
 </h1>
 <p>We saw how I put together a ping pong LED clock inspired by an instructable and some animations. Both my hardware and software design choices were explained and my code is freely available at <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
-<p>I hope I inspired you to make your own ping pong LED clock with your own cool animations! Let me know how it goes!</p>
+<p>I hope I inspired you to make your own ping pong LED clock with your own cool animations! Let me know how it goes in the comments below!</p>
 
 </div>
 </div>
