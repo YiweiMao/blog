@@ -12,11 +12,11 @@
 <link rel="canonical" href="https://yiweimao.github.io/blog/ping_pong_led_clock/" />
 <meta property="og:url" content="https://yiweimao.github.io/blog/ping_pong_led_clock/" />
 <meta property="og:site_name" content="Yiwei Mao" />
-<meta property="og:image" content="https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/rainbow_time.png" />
+<meta property="og:image" content="https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/bright_clock.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-01-05T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2021-01-05T00:00:00-06:00","dateModified":"2021-01-05T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/ping_pong_led_clock/"},"description":"How I built and programmed my own Ping Pong LED clock with firework animations.","image":"https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/rainbow_time.png","@type":"BlogPosting","url":"https://yiweimao.github.io/blog/ping_pong_led_clock/","headline":"Ping Pong LED Clock","@context":"https://schema.org"}</script>
+{"datePublished":"2021-01-05T00:00:00-06:00","dateModified":"2021-01-05T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/ping_pong_led_clock/"},"description":"How I built and programmed my own Ping Pong LED clock with firework animations.","image":"https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/bright_clock.png","@type":"BlogPosting","url":"https://yiweimao.github.io/blog/ping_pong_led_clock/","headline":"Ping Pong LED Clock","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
 
@@ -34,11 +34,11 @@
 <link rel="canonical" href="https://yiweimao.github.io/blog/ping_pong_led_clock/" />
 <meta property="og:url" content="https://yiweimao.github.io/blog/ping_pong_led_clock/" />
 <meta property="og:site_name" content="Yiwei Mao" />
-<meta property="og:image" content="https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/rainbow_time.png" />
+<meta property="og:image" content="https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/bright_clock.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2021-01-05T00:00:00-06:00" />
 <script type="application/ld+json">
-{"datePublished":"2021-01-05T00:00:00-06:00","dateModified":"2021-01-05T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/ping_pong_led_clock/"},"description":"How I built and programmed my own Ping Pong LED clock with firework animations.","image":"https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/rainbow_time.png","@type":"BlogPosting","url":"https://yiweimao.github.io/blog/ping_pong_led_clock/","headline":"Ping Pong LED Clock","@context":"https://schema.org"}</script>
+{"datePublished":"2021-01-05T00:00:00-06:00","dateModified":"2021-01-05T00:00:00-06:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/ping_pong_led_clock/"},"description":"How I built and programmed my own Ping Pong LED clock with firework animations.","image":"https://yiweimao.github.io/blog/images/2021-01-05-LED_clock_files/bright_clock.png","@type":"BlogPosting","url":"https://yiweimao.github.io/blog/ping_pong_led_clock/","headline":"Ping Pong LED Clock","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 <link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
@@ -184,7 +184,7 @@ window.onload = wrap_img;
 <h1 id="Introduction">
 <a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
 </h1>
-<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/rainbow_time.gif" alt="" title="Figure 1: The final product showing the time."></p>
+<p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/bright_clock.png" alt="" title="Figure 1: The final product showing the time."></p>
 <p>Ping pong balls are great light diffusers and combining them with individually addressable RGB LEDs makes for a pretty display. This ping pong clock can show the time and background animations (more on that later). Since each "pixel" is placed in a hexagonal close packed (single layer though), the typical digits font for standard 7-segement displays can't be used unless the digits are slanted.</p>
 <p>In this blog post, I will describe how I built the thing and my reasoning behind some design choices. Then I will outline how I created my animations so you can fork my repository and create your own animations. At the end, there will be some animations for you to watch!</p>
 <p>My code can be found at this <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
@@ -217,7 +217,7 @@ window.onload = wrap_img;
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/glued.png" alt="" title="Figure 4: Used hot glue to stick halves together."></p>
 <p>I cut the LED strips such that the included JST connector both starts and ends the whole thing and these connectors are pulled through a 12 mm diameter hole. This means you can provide 5 V power from both ends. I follwed the wiring shown in Figure 8. Keep in mind the direction shown on the strip! I found that the wiring wasn't noticible after the ping pong balls were placed so didn't bother putting them behind the MDF board like the instructable. Sticky tape was used to temporarilly fix the strip positions while I test for light leakage after placing the ping pong balls on top.</p>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fixed_leds.png" alt="" title="Figure 5: Cut strips of WS2128B LEDs wired together."></p>
-<p>The reason why I'm not providing exact dimensions for the frame is that the dimensions will depend on how well you glue all the ping pong ball pieced together. Since each ping pong ball was 40 mm diameter, the row of 20 should be 800 mm long but mine ended up being 810 mm. With the frame, the overall dimensions was roughly 850 mm long and 290 mm tall.</p>
+<p>The reason why I'm not providing exact dimensions for the frame is that the dimensions will depend on how well you glue all the ping pong ball pieces together. Since each ping pong ball was 40 mm diameter, the row of 20 should be 800 mm long but mine ended up being 810 mm. With the frame, the overall dimensions was roughly 850 mm long and 290 mm tall.</p>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/frame.png" alt="" title="Figure 6: Ping pong ball halves aligned to the LED strips."></p>
 
 </div>
@@ -280,7 +280,7 @@ window.onload = wrap_img;
 <h2 id="FastLED-Frame-Buffer">
 <a class="anchor" href="#FastLED-Frame-Buffer" aria-hidden="true"><span class="octicon octicon-link"></span></a>FastLED Frame Buffer<a class="anchor-link" href="#FastLED-Frame-Buffer"> </a>
 </h2>
-<p>I use the <a href="https://github.com/FastLED/FastLED">FastLED library</a> for controlling all 128 RGB LEDs. After connecting 5 V and GND, the remaining data pin can be connected to any digital pin (I used pin 6). This made the hardware really easy to interface and minimsed mistakes with soldering and wiring. (Imagine controlling all the LEDs with its own digital pin!)</p>
+<p>I used the <a href="https://github.com/FastLED/FastLED">FastLED library</a> for controlling all 128 RGB LEDs. After connecting 5 V and GND, the remaining data pin can be connected to any digital pin (I used pin 6). This made the hardware really easy to interface and minimsed mistakes with soldering and wiring. (Imagine controlling all the LEDs with its own digital pin!)</p>
 <p>The state of all the LEDs are stored in an array that holds the red, green, and blue values for each LED.</p>
 <div class="highlight"><pre><span></span><span class="n">CRGB</span> <span class="n">leds</span><span class="p">[</span><span class="n">NUM_LEDS</span><span class="p">];</span>
 <span class="n">FastLED</span><span class="p">.</span><span class="n">addLeds</span><span class="o">&lt;</span><span class="n">WS2812</span><span class="p">,</span> <span class="n">LED_PIN</span><span class="p">,</span> <span class="n">GRB</span><span class="o">&gt;</span><span class="p">(</span><span class="n">leds</span><span class="p">,</span> <span class="n">NUM_LEDS</span><span class="p">).</span><span class="n">setCorrection</span><span class="p">(</span> <span class="n">TypicalLEDStrip</span> <span class="p">);</span>
@@ -298,7 +298,7 @@ window.onload = wrap_img;
 <h3 id="Power-consumption">
 <a class="anchor" href="#Power-consumption" aria-hidden="true"><span class="octicon octicon-link"></span></a>Power consumption<a class="anchor-link" href="#Power-consumption"> </a>
 </h3>
-<p>Each RGB LED can draw 60 mA and since there are 128 of them, that's 7.68 A. In all my applications, I do not need to turn all the LEDs white on max brightness anyway. I found full brightness too bright and that even half brightness is good enough. I used a 5 V, 2 A phone charger. <code>FastLED</code> provides as function to limit the power consumption automatically so that LED brightnesses are modified before writing out the frame buffer. This means you can code your animations assuming full power while testing on a smaller power supply, then change a setting for deployment.</p>
+<p>Each RGB LED can draw 60 mA and since there are 128 of them, that's 7.68 A. In all my applications, I do not need to turn all the LEDs white on max brightness anyway. I found full brightness too bright and that half brightness was good enough. I used a 5 V, 2 A phone charger. <code>FastLED</code> provides as function to limit the power consumption automatically so that LED brightnesses are modified before writing out the frame buffer. This means you can code your animations assuming full power while testing on a smaller power supply, then change a setting for deployment.</p>
 <div class="highlight"><pre><span></span><span class="n">FastLED</span><span class="p">.</span><span class="n">setMaxPowerInVoltsAndMilliamps</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">500</span><span class="p">);</span> 
 <span class="c1">// Also, see this function</span>
 <span class="c1">// FastLED.setBrightness(  BRIGHTNESS );</span>
