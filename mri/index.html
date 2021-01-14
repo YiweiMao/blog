@@ -121,7 +121,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      3 min read
     
 </span></p>
 
@@ -139,7 +139,15 @@ window.onload = wrap_img;
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
 <li class="toc-entry toc-h1"><a href="#introduction">Introduction</a></li>
-<li class="toc-entry toc-h1"><a href="#background">Background</a></li>
+<li class="toc-entry toc-h1"><a href="#background">Background</a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#spin">Spin</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#precesion">Precesion</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toc-entry toc-h1"><a href="#the-bloch-equation">The Bloch Equation</a></li>
 <li class="toc-entry toc-h1"><a href="#the-rf-field">The RF Field</a></li>
 <li class="toc-entry toc-h1"><a href="#rf-pulse-sequences-t_1-and-t_2">RF Pulse Sequences: $T_1$ and $T_2$</a></li>
@@ -148,11 +156,25 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h1"><a href="#references">References</a></li>
 </ul><h1 id="introduction">
 <a class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
-<p>Magnetic Resonance Imaging (MRI) is one of the most imaging technique</p>
+<p>Magnetic Resonance Imaging (MRI) is a well known medical imaging technique alongside Computed Tomography (CT) and Positron Emission Tomography (PET). 
+Unlike CT and PET which use ionising radiation, MRI uses magnetic fields instead and is thus clinically safer.</p>
+
+<p>Most people know that MRI uses the property of hydrogen’s nuclear spin but how do you use this property for imaging? More precisely, MRI relies on generating precisely controlled magnetic fields that fluctuate and overlap. If you’ve ever taken an MRI scan, you would have heard loud sounds like they are coming from a bizarre radio station - this is a clue that the frequencies involved are in the radio band frequency.</p>
+
+<p>In this blog post, we will explore how exactly to control these magnetic fields for image reconstruction.</p>
 
 <h1 id="background">
 <a class="anchor" href="#background" aria-hidden="true"><span class="octicon octicon-link"></span></a>Background</h1>
-<p>Hydrogen</p>
+
+<p>In 1946, Felix Bloch and Edward Purcell’s research group published two descriptions of Nuclear Magnetic Resonance (NMR). One based on classical physics looking at net magnetisation of aggregate atoms, and one based on quantum physics looking at the behaviour of single nuclei. Both Bloch and Purcell were jointly awarded the Nobel prize in physics in 1952. (CT and PET generated their own Nobel laureates as well.) But this Nobel prize story does not end there. The main application for NMR was chemical spectroscopy and it wasn’t until 1970 that Paul Lauterbur introduced the idea of using gradient magnetic fields to get spatial resolution and obtain images that could distinguish heavy water from ordinary water. Peter Mansfield then developed mathematic techniques to speed up the imaging process now called echo-planar imaging. Lauterbur and Mansfield jointly received the 2003 Nobel Prize for Medicine and Physiology. In this blog post, we will take the classical approach to understanding MRI.</p>
+
+<h2 id="spin">
+<a class="anchor" href="#spin" aria-hidden="true"><span class="octicon octicon-link"></span></a>Spin</h2>
+<p>The nucleus of a hydrogen atom (a proton) has a fundamental property known as spin. It is often compared to a spinning top which can rotate about an axis. This spin behaves similar to a compass in that the orientation of this spin likes to align with an external magnetic field. The spins can be parallel or anti-parallel (same direction as magnetic field or opposite direction respectively) but with a preference towards aligning in the same direction (it is a lower energy level) and this difference can be measured. Without an external magnetic field, the spins are randomly aligned and in aggregate, the net effect is zero.</p>
+
+<h3 id="precesion">
+<a class="anchor" href="#precesion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Precesion</h3>
+<p>Not align exactly but precess or wobble about the magnetic field lines just like a spinning top doesn’t fall over but wobbles as it spins.</p>
 
 <h1 id="the-bloch-equation">
 <a class="anchor" href="#the-bloch-equation" aria-hidden="true"><span class="octicon octicon-link"></span></a>The Bloch Equation</h1>
@@ -195,6 +217,8 @@ where $\omega_o = -\gamma B_0$.</p>
 <h1 id="references">
 <a class="anchor" href="#references" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
 
+<p>Pretty much the entirety of this post can be found in greater detail here:
+[Ch 10. pg 163–175] Wendt, R., 2010. The mathematics of medical imaging: a beginner’s guide.</p>
 
   </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"

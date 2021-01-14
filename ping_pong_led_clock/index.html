@@ -186,21 +186,21 @@ window.onload = wrap_img;
 <a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
 </h1>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/bright_clock.png" alt="" title="Figure 1: The final product showing the time."></p>
-<p>Ping pong balls are great light diffusers and combining them with individually addressable RGB LEDs makes for a pretty display. This ping pong clock can show the time and background animations (more on that later). Since each "pixel" is placed in a hexagonal close packed (single layer though), the typical digits font for standard 7-segement displays can't be used unless the digits are slanted.</p>
+<p>Ping pong balls are great light diffusers and combining them with individually addressable RGB LEDs makes for a pretty display. This ping pong clock can show the time and background animations (more on that later). Since each "pixel" is placed in a hexagonal lattice, the typical digits font for standard 7-segement displays can't be used unless the digits are slanted.</p>
 <p>In this blog post, I will describe how I built the thing and my reasoning behind some design choices. Then I will outline how I created my animations so you can fork my repository and create your own animations. At the end, there will be some animations for you to watch!</p>
 <p>My code can be found at this <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
 <h1 id="Materials">
 <a class="anchor" href="#Materials" aria-hidden="true"><span class="octicon octicon-link"></span></a>Materials<a class="anchor-link" href="#Materials"> </a>
 </h1>
-<p>I ordered all the materials to build this well before the global pandemic but only got to making it recently. The ping pong balls and LED strip took many weeks to arrive shipping from overseas.</p>
+<p>I ordered all the materials to build this well before the global pandemic but only got to making it recently. The ping pong balls and LED strip took many weeks to arrive from overseas.</p>
 <ul>
-<li>At least 128 ping pong balls. I used low cost "glossy" plasticky ping pong balls ~$20. Better to use proper ping pong balls that diffuse the light well.</li>
-<li>5 m of WS2128B LED strip at 30 LEDS/m. (This gives you 150 RGB LEDS which is more than the required 128. ~$20)</li>
+<li>At least 128 ping pong balls. I used low cost "glossy" plasticky ping pong balls ~$20. Better to use proper ping pong balls that can diffuse the light more efficiently.</li>
+<li>5 m of WS2128B LED strip at 30 LEDs/m. (This gives you 150 RGB LEDS which is more than the required 128. ~$20)</li>
 <li>2 m of 3pin wire ~$3. You can use single connection multicore wire as an alternative. </li>
 <li>Some lead-free solder ~$2. Any solder will do really. </li>
 <li>Microcontroller (I used an Arduino Nano Clone ~$3. Not enough RAM for scrolling text animations so consider an ESP32 board?) </li>
 <li>A Real Time Clock with coin cell battery. I didn't have one so I used a software implementation instead. That meant I couldn't keep track of the right time after a powerdown. But hey, a broken clock is right twice a day!</li>
-<li>MDF board to put all LEDs onto ~$4.</li>
+<li>MDF board to attach all the LEDs onto ~$4.</li>
 <li>Wood Frame ~$5. You will need a miter saw to cut the frame at 60 degree angles.</li>
 <li>Some screws/nails/epoxy to fit the frame together ~$1.</li>
 <li>Lots of hot glue. I used a 30 cm stick ~$1.</li>
@@ -244,7 +244,7 @@ window.onload = wrap_img;
 <h1 id="LED-Index-Look-Up-Table">
 <a class="anchor" href="#LED-Index-Look-Up-Table" aria-hidden="true"><span class="octicon octicon-link"></span></a>LED Index Look Up Table<a class="anchor-link" href="#LED-Index-Look-Up-Table"> </a>
 </h1>
-<p>The crux of my animations rely on knowing when LED number along the connected strip of 128 corresponds to a two dimensional position. From Figure 8, I label each LED by it's strip number which you can see in Figure 9.</p>
+<p>The crux of my animations rely on knowing which LED number along the connected strip of 128 corresponds to a two dimensional position. From Figure 8, I label each LED by it's strip index which you can see in Figure 9.</p>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/led_circuit.png" alt="" title="Figure 8: Orientation of LED strips."></p>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/balls.png" alt="" title="Figure 9: Internal LED index for each ping pong ball."></p>
 <p>Imagining the display as a parallelogram slanted to the left, I turned Figure 9 into a two dimensional array (look up table) with values corresponding to the strip index. For the positions that don't exist, I put values of 999.</p>
@@ -404,7 +404,7 @@ window.onload = wrap_img;
 <h2 id="General-Animation-Method">
 <a class="anchor" href="#General-Animation-Method" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Animation Method<a class="anchor-link" href="#General-Animation-Method"> </a>
 </h2>
-<p>For each style of animation, I used a struct to define a type that defines the state of the animation. For example, let's look at the fireworks animation. In the code snippet below, the firework type holds the starting $x$ position in bottom row, the direction going north-west or north-east in the hexagon lattice, the stage or the current step in the animation sequence, the randomly generated hue, and the height offset that determines if it explodes in the top or one below row. I then create an array of these struct with size defined by <code>MAX_FIREWORKS</code>.</p>
+<p>For each style of animation, I used a struct to define a type that defines the state of the animation. For example, let's look at the fireworks animation. In the code snippet below, the firework type holds the starting $x$ position in the bottom row, the direction going north-west or north-east in the hexagon lattice, the stage or the current step in the animation sequence, the randomly generated hue, and the height offset that determines which row to explode. I then create an array of these struct with size defined by <code>MAX_FIREWORKS</code>.</p>
 <div class="highlight"><pre><span></span><span class="cp">#define MAX_FIREWORKS     12</span>
 <span class="k">struct</span> <span class="n">firework_t</span> <span class="p">{</span>
   <span class="kt">int</span> <span class="n">pos</span>       <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="c1">// LED number in last row</span>
@@ -438,7 +438,7 @@ window.onload = wrap_img;
 <h1 id="Conclusion">
 <a class="anchor" href="#Conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion<a class="anchor-link" href="#Conclusion"> </a>
 </h1>
-<p>We saw how I put together a ping pong LED clock inspired by an instructable and some animations. Both my hardware and software design choices were explained and my code is freely available at <a href="https://github.com/YiweiMao/pingPongClock">repo link</a>.</p>
+<p>We saw how I put together a ping pong LED clock inspired by an <a href="https://www.instructables.com/Ping-Pong-Ball-LED-Clock/">instructable</a> and some animations. Both my hardware and software design choices were explained and my code is freely available at <a href="https://github.com/YiweiMao/pingPongClock">this GitHub repo</a>.</p>
 <p>I hope I inspired you to make your own ping pong LED clock with your own cool animations! Let me know how it goes in the comments below!</p>
 
 </div>
