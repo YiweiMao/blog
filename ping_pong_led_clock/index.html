@@ -121,7 +121,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      13 min read
+      14 min read
     
 </span></p>
 
@@ -158,7 +158,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Storm">Storm </a></li>
 <li class="toc-entry toc-h2"><a href="#Campfire">Campfire </a></li>
 <li class="toc-entry toc-h2"><a href="#Fireworks">Fireworks </a></li>
-<li class="toc-entry toc-h2"><a href="#General-Method">General Method </a></li>
+<li class="toc-entry toc-h2"><a href="#General-Animation-Method">General Animation Method </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h1"><a href="#Potential-Improvements">Potential Improvements </a></li>
@@ -401,8 +401,8 @@ window.onload = wrap_img;
 </h2>
 <p>The fireworks animation was by far the most difficult but it looks really impressive (at least to me). The hexagonal pattern to the LEDs naturally lent itself to show an explosion of light in 6 directions. Since each LED has two LEDs directly above, I used <code>random8</code> to choose Whether the firework rises to the left or the right. More <code>random8</code> was used to change the explosion height to two different rows and the hue. Finally, I then dim the LEDs to similate the fireworks fading away.</p>
 <p><img src="/blog/images/copied_from_nb/../images/2021-01-05-LED_clock_files/fireworks.gif" alt="" title="Figure 16: Fireworks animation."></p>
-<h2 id="General-Method">
-<a class="anchor" href="#General-Method" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Method<a class="anchor-link" href="#General-Method"> </a>
+<h2 id="General-Animation-Method">
+<a class="anchor" href="#General-Animation-Method" aria-hidden="true"><span class="octicon octicon-link"></span></a>General Animation Method<a class="anchor-link" href="#General-Animation-Method"> </a>
 </h2>
 <p>For each style of animation, I used a struct to define a type that defines the state of the animation. For example, let's look at the fireworks animation. In the code snippet below, the firework type holds the starting $x$ position in bottom row, the direction going north-west or north-east in the hexagon lattice, the stage or the current step in the animation sequence, the randomly generated hue, and the height offset that determines if it explodes in the top or one below row. I then create an array of these struct with size defined by <code>MAX_FIREWORKS</code>.</p>
 <div class="highlight"><pre><span></span><span class="cp">#define MAX_FIREWORKS     12</span>
@@ -414,12 +414,12 @@ window.onload = wrap_img;
   <span class="kt">int</span> <span class="n">height_offset</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// sometimes lower by one. </span>
 <span class="p">};</span>
 </pre></div>
-<p>The next frame as defined by the user's <code>REFRESH_RATE</code> steps through the animation stages and sometimes randomly starts a new firework should the number of current fireworks be less then <code>MAX_FIREWORKS</code>. I then loop through all the array and redraw the LED states into the frame buffer according to each fireworks' current animation stage. All that's left is to define what each stage or step looks like and I used <code>if/else if</code> statements to do the job. The same method is applied for the twinkle and storm animation.</p>
-<p>Together with the LED index look up table defined by a left-ward sloping parallelogram in Figure 9, and this struct based rasteriser, it is relatively straightforward to generate your own neat animations! 
+<p>The next frame as defined by the user's <code>REFRESH_RATE</code> steps through the animation stages and sometimes randomly starts a new firework should the number of current fireworks be less then <code>MAX_FIREWORKS</code> with some probability. I then loop through all the array and redraw the LED states into the frame buffer according to each fireworks' current animation stage. All that's left is to define what each stage or step looks like and I used <code>if/else if</code> statements to do the job. The same method is applied for the twinkle and storm animation.</p>
+<p>Together with the LED index look up table defined by a left-ward sloping parallelogram in Figure 9, and this struct based rasteriser method, it is relatively straightforward to generate your own neat animations! 
 </p>
 <div class="flash flash-error">
     <svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
-    <strong>Warning: </strong>With the limited RAM in an Arduino Nano (2 KB), I found it really hard to fit more than two types of animations on chip. When the compiler gives you the warning <code>Low memory available, stability problems may occur</code> and the RAM usage is &gt;90%, be wary that your animations may freeze as it did for me. 
+    <strong>Warning: </strong>With the limited RAM in an Arduino Nano (2 KB), I found it really hard to fit more than two types of animations on chip. When the compiler gives you the warning <code>Low memory available, stability problems may occur</code> and the RAM usage is &gt;90%, be wary that your animations may freeze as it did for me. I made it work by lowering <code>MAX_FIREWORKS</code> and <code>MAX_RAINDROPS</code> until the freezing disappeared but it’ll be better to use a microcontroller with more RAM. 
 </div>
 <h1 id="Potential-Improvements">
 <a class="anchor" href="#Potential-Improvements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Potential Improvements<a class="anchor-link" href="#Potential-Improvements"> </a>
