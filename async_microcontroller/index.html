@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Make Your Microcontroller Multi-task With Asynchronous Programming | Yiwei Mao</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Make Your Microcontroller Multi-task With Asynchronous Programming" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython’s asyncio library for Raspberry Pi Pico." />
+<meta property="og:description" content="An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython’s asyncio library for Raspberry Pi Pico." />
+<link rel="canonical" href="https://yiweimao.github.io/blog/async_microcontroller/" />
+<meta property="og:url" content="https://yiweimao.github.io/blog/async_microcontroller/" />
+<meta property="og:site_name" content="Yiwei Mao" />
+<meta property="og:image" content="https://yiweimao.github.io/blog/images/2021-07-22_Microcontroller_Task_Scheduler_files/arduino_scheduler_pic.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-21T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython’s asyncio library for Raspberry Pi Pico.","@type":"BlogPosting","headline":"Make Your Microcontroller Multi-task With Asynchronous Programming","dateModified":"2021-07-21T00:00:00-05:00","url":"https://yiweimao.github.io/blog/async_microcontroller/","datePublished":"2021-07-21T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2021-07-22_Microcontroller_Task_Scheduler_files/arduino_scheduler_pic.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/async_microcontroller/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-61578211-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Make Your Microcontroller Multi-task With Asynchronous Programming | Yiwei Mao</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Make Your Microcontroller Multi-task With Asynchronous Programming" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython’s asyncio library for Raspberry Pi Pico." />
+<meta property="og:description" content="An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython’s asyncio library for Raspberry Pi Pico." />
+<link rel="canonical" href="https://yiweimao.github.io/blog/async_microcontroller/" />
+<meta property="og:url" content="https://yiweimao.github.io/blog/async_microcontroller/" />
+<meta property="og:site_name" content="Yiwei Mao" />
+<meta property="og:image" content="https://yiweimao.github.io/blog/images/2021-07-22_Microcontroller_Task_Scheduler_files/arduino_scheduler_pic.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-07-21T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython’s asyncio library for Raspberry Pi Pico.","@type":"BlogPosting","headline":"Make Your Microcontroller Multi-task With Asynchronous Programming","dateModified":"2021-07-21T00:00:00-05:00","url":"https://yiweimao.github.io/blog/async_microcontroller/","datePublished":"2021-07-21T00:00:00-05:00","image":"https://yiweimao.github.io/blog/images/2021-07-22_Microcontroller_Task_Scheduler_files/arduino_scheduler_pic.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://yiweimao.github.io/blog/async_microcontroller/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://yiweimao.github.io/blog/feed.xml" title="Yiwei Mao" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-61578211-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Yiwei Mao</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Make Your Microcontroller Multi-task With Asynchronous Programming</h1><p class="page-description">An exploration of a simple cooperative task scheduler written in C for Arduino and MicroPython&#39;s asyncio library for Raspberry Pi Pico.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-07-21T00:00:00-05:00" itemprop="datePublished">
+        Jul 21, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      9 min read
+    
+</span></p>
+
+    
+
+    
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h1"><a href="#Introduction">Introduction </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Why-Consider-Asynchronous-Programming?">Why Consider Asynchronous Programming? </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Terminology">Terminology </a></li>
+<li class="toc-entry toc-h1"><a href="#A-Cooperative-Scheduler-for-Arduino">A Cooperative Scheduler for Arduino </a></li>
+<li class="toc-entry toc-h1"><a href="#Micropython's-Asyncio-Approach-for-Raspberry-Pi-Pico">Micropython&#39;s Asyncio Approach for Raspberry Pi Pico </a>
+<ul>
+<li class="toc-entry toc-h2"><a href="#Asynchronous-Functions-/-Coroutines">Asynchronous Functions / Coroutines </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#Exception-Handling">Exception Handling </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Event-Loop">Event Loop </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h1"><a href="#Conclusion">Conclusion </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-07-22_Microcontroller_Task_Scheduler.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Introduction">
+<a class="anchor" href="#Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction<a class="anchor-link" href="#Introduction"> </a>
+</h1>
+<p>You paused your previous task to read this blog post. Once you finish reading, you will move on to your next task. Whether you know it or not, you have learned to embrace asynchonous programming in your daily life. Take cooking for example - say you need to make a noodle soup, a roast, and a fruit salad. These activities involve waiting between tasks and in order to finish the cook efficiently, you need to arrange the timing of tasks. A possible solution is to first put a pot of water to boil, then prepare the vegetables and meat to oven, then spice up the soup and add dry noodles, then cut up the fruit into a bowl (done), then serve the noodle soup (done), then take out the roast from the oven (done). If you did each task sequentially (or synchronously), then you would have wasted lots of time waiting doing nothing!</p>
+<p>In the context of microcontrollers, they live in an environment which they need to respond to hardware events such as data available on UART, buttons, etc (I/O bound tasks) which involve waiting for an input. Your program needs to respond to these asynchronous events but may also have time dependent tasks running. Asynchronous means these events do not happen at the same time.</p>
+<h2 id="Why-Consider-Asynchronous-Programming?">
+<a class="anchor" href="#Why-Consider-Asynchronous-Programming?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why Consider Asynchronous Programming?<a class="anchor-link" href="#Why-Consider-Asynchronous-Programming?"> </a>
+</h2>
+<p>Consider the following; the controller in an 16x2 LCD display requires small wait times between commands. If we naively wrote a routine that sent a string to the LCD inserting delays when needed, our code will not be able to respond to other events while it is waiting. The presence of blocking delays to manage timing (which prevents other code from being run), is inefficient. So what are our options? We can try writing an event loop that checks the system time and lump many <code>if</code> statements together checking if certain tasks need to be run and run them during the wait time. This quickly becomes unwieldy for a large number of tasks and increases the cognitive load to manage it all. What we want is some way of submit tasks to a scheduler which can then manage which tasks need to be run at which time for you without the hassles of managing it yourself. In effect, we want to be able to multi-task, be efficient at utilising the CPU's available clock cycles, and produce code that is responsive to events. Enter asynchronous programming. 
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>For those of you wondering why not threading or multiprocessing? Asynchronous programming offers lower overhead and resources making it preferred for low power microcontrollers. If you are interested, the Raspberry Pi Pico has <code>uasyncio</code> which we will see later and <code>_thread</code> that can run tasks on the second core. 
+</div>
+In this blog post, I will introduce some terminalogy and discuss the advantages of asynchronous programming. At the end, I will show you how you can write asynchronous programs for your Arduino (using C) and Raspberry Pi Pico (using MicroPython). You may want to find an Arduino or Raspberry Pi Pico (with optional extra LEDs and resistors to try blinking multiple LEDs asynchronously), and give the example a go. The example will use the builtin LED. If you are reading this then I think it's safe to say you have some experience in either C/C++ writing code for Arduino or writing MicroPython code for the Raspberry Pi Pico. 
+<div class="flash flash-error">
+    <svg class="octicon octicon-alert octicon octicon-alert octicon octicon-alert octicon octicon-alert" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 000 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 00.01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
+    <strong>Warning: </strong>There is no <code>asyncio</code>-like library for Arduino so my implementation is an attempt at making something similar. 
+</div>
+The MicroPython content part of this blog posts was inspired by <a href="https://hackernoon.com/a-simple-introduction-to-pythons-asyncio-595d9c9ecf8c">this intro to Python's asyncio</a>] and <a href="https://github.com/peterhinch/micropython-async/blob/master/v3/docs/TUTORIAL.md">Application of uasyncio to hardware interfaces</a>.
+<h1 id="Terminology">
+<a class="anchor" href="#Terminology" aria-hidden="true"><span class="octicon octicon-link"></span></a>Terminology<a class="anchor-link" href="#Terminology"> </a>
+</h1>
+<ul>
+<li>Parallelism: The ability to perform multiple operations simultaneously. Multiprocessing is an example that spreads tasks over multiple CPU cores. </li>
+<li>Concurrency: The ability to execute more than one program or task simultaneously. Tasks can run in an overlapping manner and need not be parallel. </li>
+<li>I/O bound task: A task dominated by waiting for input/output to complete.</li>
+<li>Coroutine (coro): A specialised function (co-operative routine) that is intended to run concurrently with other coros. Concurrency is achieved by periodically yielding to the scheduler, enabling other coros to run. </li>
+<li>Event loop: A loop that monitors tasks to run. For microcontrollers, we have this running on a single CPU core and single thread.</li>
+<li>Scheduler: An event loop that facilitates asynchronous programming. </li>
+<li>Pre-emptive scheduling: A scheduling technique that temporarily interrupts an running task without cooperation from the task, for it to be resumed at a later time. </li>
+<li>Cooperative scheduling: A scheduling technique that never initiates a context switch between tasks. It has lower overhead compared to pre-emptive scheduling and requires tasks to periodically yield to the scheduler. </li>
+</ul>
+<p>Now that we know about the terminology involved, how can we actually write asynchonous code?</p>
+<h1 id="A-Cooperative-Scheduler-for-Arduino">
+<a class="anchor" href="#A-Cooperative-Scheduler-for-Arduino" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Cooperative Scheduler for Arduino<a class="anchor-link" href="#A-Cooperative-Scheduler-for-Arduino"> </a>
+</h1>
+<p>Every beginner starts out with the <code>Blink</code> sketch and eventually learns that there are limitations in using <code>delay</code>. Suppose we have <code>n</code> LEDs that require blinking at different rates. (Instead of LEDs, we may have sensors we want to read from at different rates and actuators to update.) There's no easy way to do this using <code>delay</code> and it certainly will not be very customisable. To solve this, the next sketch is <code>BlinkWithoutDelay</code> which uses <code>if</code> statements to check timing against the system time. The cooperative scheduler I introduce here is much like using <code>BlinkWithoutDelay</code> with the <code>if</code> statement part abstracted away.</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">currentMillis</span> <span class="o">-</span> <span class="n">previousMillis</span> <span class="o">&gt;=</span> <span class="n">interval</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Let's abstract this part away using a scheduler!</span>
+    <span class="c1">// save the last time you blinked the LED</span>
+    <span class="n">previousMillis</span> <span class="o">=</span> <span class="n">currentMillis</span><span class="p">;</span>
+    <span class="p">...</span>
+</pre></div>
+<p>At the core, the scheduler consists of a queue of tasks implemented as an array of void function pointers and scheduled run times. Clone my respository (<a href="https://github.com/YiweiMao/scheduler">https://github.com/YiweiMao/scheduler</a>) or copy the <code>.cpp</code> and <code>.h</code> file to your project. This implementation is very lightweight and is designed to be easy to use. There is only one function to remember which is the <code>run_later</code> function and the scheduler handles the timing for you. Functions that can be submitted into the queue needs to be of type void and accept no arguments. For example, to schedule a callback function called <code>blinkLED</code> to run 500 ms later, simply write
+<code>run_later(blinkLED,500);</code>
+and to place a task that automatically reschedules itself, use <code>run_later</code> within the task. This is how a <code>blinkLED</code> function can be written so the builtin LED will blink in the background.</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">blinkLED</span><span class="p">(){</span>
+    <span class="kt">short</span> <span class="n">toggle_delay</span> <span class="o">=</span> <span class="mi">250</span><span class="p">;</span> <span class="c1">// ms</span>
+    <span class="n">run_later</span><span class="p">(</span><span class="n">blinkLED</span><span class="p">,</span> <span class="n">toggle_delay</span><span class="p">);</span> <span class="c1">// reschedules itself!</span>
+
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="n">OUTPUT</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">,</span><span class="o">!</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">LED_BUILTIN</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+<p>After you call <code>blinkLED</code>, the builtin LED will continue to blink in the background and you will have clock cycles to run other code using <code>run_later</code>.</p>
+<p>Fill up the scheduler before you run the even loop; for example, within the <code>void setup()</code> block.</p>
+<p>To run the event loop, end your sketch with</p>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">run</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+<blockquote>
+<p>Hint:There are other schedulers for Arduino. See <a href="https://all3dp.com/2/best-arduino-operating-system/">a list of five</a> including <a href="https://freertos.org/">FreeRTOS</a> and <a href="https://github.com/pstolarz/CoopThreads">CoopThreads</a>. The closest implementation to what is present here is probably <a href="https://github.com/davetcc/TaskManagerIO">TaskManagerIO</a>.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Micropython's-Asyncio-Approach-for-Raspberry-Pi-Pico">
+<a class="anchor" href="#Micropython's-Asyncio-Approach-for-Raspberry-Pi-Pico" aria-hidden="true"><span class="octicon octicon-link"></span></a>Micropython's Asyncio Approach for Raspberry Pi Pico<a class="anchor-link" href="#Micropython's-Asyncio-Approach-for-Raspberry-Pi-Pico"> </a>
+</h1>
+<p>There is no doubt that Python is a very popular programming language widely used in many disciplines. If you already know python, you don't need to learn a foreign syntax to imediately begin writing code for microcontrollers using <a href="https://micropython.org/">Micropython</a>. The Raspberry Pi Pico is a cheap accessible microcontroller than can be programmed using Microcontroller and has access to most of Python's <code>asyncio</code> functionality builtin. I personally use Visual Studio Code with the Pico-Go extension to upload/run code on the Pico and access the REPL.</p>
+<p>The example here will use the builtin LED but you can add an additional LED to try multitasking using the event loop. First we important the relevant libraries and define some LEDs before moving onto defining asynchronous functions.</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+<span class="kn">import</span> <span class="nn">uasyncio</span> <span class="k">as</span> <span class="nn">asyncio</span>
+
+<span class="c1"># create LED objects</span>
+<span class="n">builtin_led</span> <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="n">LED_TOGGLE_TIME_MS</span> <span class="o">=</span> <span class="mi">50</span>
+
+<span class="n">second_led</span>  <span class="o">=</span> <span class="n">Pin</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="n">Pin</span><span class="o">.</span><span class="n">OUT</span><span class="p">)</span>
+<span class="n">SECOND_LED_TOGGLE_TIME_MS</span> <span class="o">=</span> <span class="mi">200</span>
+</pre></div>
+<h2 id="Asynchronous-Functions-/-Coroutines">
+<a class="anchor" href="#Asynchronous-Functions-/-Coroutines" aria-hidden="true"><span class="octicon octicon-link"></span></a>Asynchronous Functions / Coroutines<a class="anchor-link" href="#Asynchronous-Functions-/-Coroutines"> </a>
+</h2>
+<p>To make our lives easier, here is a decorator to convert an ordinary Python function into one that will run repeatedly with a specified wait time. This decorator basically places your functions into a loop and wraps the loop with <code>async def</code>. When the <code>await</code> keyword is reached, your code will yield to the scheduler allowing other async functions to run until the await time is over. 
+</p>
+<div class="flash">
+    <svg class="octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info octicon octicon-info" viewbox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 01-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 01-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg>
+    <strong>Note: </strong>Decorators are a way to modify the behaviour of functions. They are functions that take other functions as inputs and return the modified function.  
+</div>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reschedule_every_ms</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="sd">"""Decorator for a callback that will keep rescheduling itself."""</span>
+    <span class="k">def</span> <span class="nf">inner_decorator</span><span class="p">(</span><span class="n">cb</span><span class="p">):</span>
+        <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapped</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+                <span class="n">cb</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">wrapped</span> 
+    <span class="k">return</span> <span class="n">inner_decorator</span>
+</pre></div>
+<p>Now let's use this decorator to create coroutines or coro for short.</p>
+<div class="highlight"><pre><span></span><span class="nd">@reschedule_every_ms</span><span class="p">(</span><span class="n">LED_TOGGLE_TIME_MS</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">blink_deco</span><span class="p">():</span>
+    <span class="n">builtin_led</span><span class="o">.</span><span class="n">toggle</span><span class="p">()</span>
+
+<span class="nd">@reschedule_every_ms</span><span class="p">(</span><span class="n">SECOND_LED_TOGGLE_TIME_MS</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">second_blink_deco</span><span class="p">():</span>
+    <span class="n">second_led</span><span class="o">.</span><span class="n">toggle</span><span class="p">()</span>
+</pre></div>
+<p><code>blink_deco</code> and <code>second_blink_deco</code> are now coros that we can insert into the event loop.</p>
+<h3 id="Exception-Handling">
+<a class="anchor" href="#Exception-Handling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Exception Handling<a class="anchor-link" href="#Exception-Handling"> </a>
+</h3>
+<p>In case we want to stop our code running on the Pico with a <code>KeyboardInterrupt</code> and enter the REPL, we need to exit gracefully. This is provided by the following code snippet.</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">set_global_exception</span><span class="p">():</span>
+    <span class="sd">"""Allow for exception handling in event loop."""</span>
+    <span class="k">def</span> <span class="nf">handle_exception</span><span class="p">(</span><span class="n">loop</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">sys</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">print_exception</span><span class="p">(</span><span class="n">context</span><span class="p">[</span><span class="s2">"exception"</span><span class="p">])</span>
+        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+    <span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+    <span class="n">loop</span><span class="o">.</span><span class="n">set_exception_handler</span><span class="p">(</span><span class="n">handle_exception</span><span class="p">)</span>
+</pre></div>
+<h2 id="Event-Loop">
+<a class="anchor" href="#Event-Loop" aria-hidden="true"><span class="octicon octicon-link"></span></a>Event Loop<a class="anchor-link" href="#Event-Loop"> </a>
+</h2>
+<p>Similar to how we added tasks into the scheduler using <code>run_later</code> in Arduino's <code>void setup()</code> function, we can need to add tasks using <code>asyncio.create_task</code> in an <code>async def main()</code> function like so. 
+</p>
+<div class="flash flash-success">
+    <svg class="octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist octicon octicon-checklist" viewbox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16 8.5l-6 6-3-3L8.5 10l1.5 1.5L14.5 7 16 8.5zM5.7 12.2l.8.8H2c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h7c.55 0 1 .45 1 1v6.5l-.8-.8c-.39-.39-1.03-.39-1.42 0L5.7 10.8a.996.996 0 000 1.41v-.01zM4 4h5V3H4v1zm0 2h5V5H4v1zm0 2h3V7H4v1zM3 9H2v1h1V9zm0-2H2v1h1V7zm0-2H2v1h1V5zm0-2H2v1h1V3z"></path></svg>
+    <strong>Tip: </strong><code>asyncio.create_task</code> submits a task to the event loop to run concurrently with other tasks.
+</div>
+<div class="highlight"><pre><span></span><span class="c1"># Add Coros into the Event Loop</span>
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">set_global_exception</span><span class="p">()</span> <span class="c1"># Debug aid</span>
+
+    <span class="c1"># insert coros into queue!</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">blink_deco</span><span class="p">())</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">create_task</span><span class="p">(</span><span class="n">second_blink_deco</span><span class="p">())</span>
+
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span> <span class="c1"># run forever</span>
+        <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep_ms</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Run the Event Loop</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+<span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Keyboard Interrupted"</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">TimeoutError</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Timed out"</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">new_event_loop</span><span class="p">()</span>  <span class="c1"># Clear retained state</span>
+</pre></div>
+<p>We now have two LEDs blinking asynchronously!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Conclusion">
+<a class="anchor" href="#Conclusion" aria-hidden="true"><span class="octicon octicon-link"></span></a>Conclusion<a class="anchor-link" href="#Conclusion"> </a>
+</h1>
+<p>We explored what asynchronous programming may look like for Arduino using <a href="https://github.com/YiweiMao/scheduler">a task scheduler written in C</a> and also for a Raspberry Pi Pico using the builtin <code>uasyncio</code> library. The asynchronous programming methodology presented here may at first glance look overcomplicated for what is just blinking LEDs but remember that using this framework, we have avoided all blocking delays and our code will still be responsive while waiting for I/O. Automatically rescheduling functions also allows us to "set and forget" and focus on writing one task at a time without worrying about how the timing of other functions are affected for the most part. In other words, it allows us to more easily write programs at scale and make the most of a microcontroller's limited clock cycles.</p>
+<p>Give it a go and let me know of any success (or fail) stories in the comments below!</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="YiweiMao/blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/blog/async_microcontroller/" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Teaching my past self and reminding my future self.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/YiweiMao" title="YiweiMao"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/ewaymao" title="ewaymao"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
